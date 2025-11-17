@@ -280,6 +280,18 @@
                     <span class="feature-card-icon">📗</span>
                     <span class="feature-card-text">Cüz Takibi</span>
                 </button>
+                <button class="feature-card" id="libraryBtn">
+                    <span class="feature-card-icon">📚</span>
+                    <span class="feature-card-text">Kütüphane</span>
+                </button>
+                <button class="feature-card" id="radioBtn">
+                    <span class="feature-card-icon">📻</span>
+                    <span class="feature-card-text">Radyo</span>
+                </button>
+                <button class="feature-card" id="adhanSoundsBtn">
+                    <span class="feature-card-icon">🎵</span>
+                    <span class="feature-card-text">Ezan Sesi</span>
+                </button>
                 <button class="feature-card" id="locationBtn">
                     <span class="feature-card-icon">📍</span>
                     <span class="feature-card-text">Konum</span>
@@ -300,6 +312,113 @@
         <footer class="footer">
             <p>Namaz vakitleri bilgileri Diyanet İşleri Başkanlığı verilerine dayanmaktadır.</p>
         </footer>
+    </div>
+
+    <!-- Islamic Library Modal -->
+    <div class="modal" id="libraryModal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h2>📚 İslami Kütüphane</h2>
+                <button class="close-btn" onclick="closeModal('libraryModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="prayer-tabs">
+                    <button class="prayer-tab active" data-library="books">📗 Kitaplar</button>
+                    <button class="prayer-tab" data-library="articles">📰 Makaleler</button>
+                    <button class="prayer-tab" data-library="videos">🎥 Videolar</button>
+                    <button class="prayer-tab" data-library="podcasts">🎙️ Podcast</button>
+                </div>
+                <div id="libraryContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Radio Modal -->
+    <div class="modal" id="radioModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📻 Canlı Radyo Yayınları</h2>
+                <button class="close-btn" onclick="closeModal('radioModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="radioStationsList"></div>
+                <div id="radioPlayer" class="radio-player" style="display: none;">
+                    <div class="radio-player-info">
+                        <span class="radio-icon">📻</span>
+                        <div class="radio-details">
+                            <div class="radio-name" id="currentRadioName">-</div>
+                            <div class="radio-desc" id="currentRadioDesc">-</div>
+                        </div>
+                    </div>
+                    <div class="radio-controls">
+                        <button class="radio-btn" id="radioPlayPauseBtn">▶️</button>
+                        <button class="radio-btn" id="radioStopBtn">⏹️</button>
+                        <input type="range" id="radioVolumeSlider" min="0" max="100" value="70" class="volume-slider">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Adhan Sounds Modal -->
+    <div class="modal" id="adhanSoundsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🎵 Ezan Sesleri</h2>
+                <button class="close-btn" onclick="closeModal('adhanSoundsModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="info-box">
+                    <p>🕌 Farklı ülkelerin ezan seslerinden birini seçin.</p>
+                </div>
+                <div id="adhanSoundsList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Settings Enhanced Modal -->
+    <div class="modal" id="notificationEnhancedModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🔔 Gelişmiş Bildirim Ayarları</h2>
+                <button class="close-btn" onclick="closeModal('notificationEnhancedModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="settings-section">
+                    <h3>📋 Hazır Profiller</h3>
+                    <div id="notificationPresetsList"></div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>🌙 Rahatsız Etme Modu</h3>
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>DND Modu</span>
+                            <p class="setting-description">Belirli saatler arası bildirimleri kapat</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="dndMode">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div id="dndSettings" style="display: none;">
+                        <div class="setting-item">
+                            <label>Başlangıç Saati:</label>
+                            <input type="time" id="dndStartTime" value="22:00">
+                        </div>
+                        <div class="setting-item">
+                            <label>Bitiş Saati:</label>
+                            <input type="time" id="dndEndTime" value="07:00">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>📜 Bildirim Geçmişi</h3>
+                    <div id="notificationHistory"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Modal Container (will be dynamically populated) -->

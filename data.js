@@ -709,7 +709,324 @@ const islamicEvents = [
     }
 ];
 
+// ========== ADHAN SOUNDS ==========
+const adhanSounds = [
+    {
+        id: 1,
+        name: "Türkiye Ezan (Hafız Yaşar Şekerci)",
+        url: "https://www.islamcan.com/audio/ezan/ezan-1.mp3",
+        duration: "3:45",
+        country: "Türkiye"
+    },
+    {
+        id: 2,
+        name: "Mısır Ezan (Şeyh Muhammed Refat)",
+        url: "https://www.islamcan.com/audio/ezan/ezan-2.mp3",
+        duration: "4:12",
+        country: "Mısır"
+    },
+    {
+        id: 3,
+        name: "Suudi Arabistan Ezan",
+        url: "https://www.islamcan.com/audio/ezan/ezan-3.mp3",
+        duration: "3:30",
+        country: "Suudi Arabistan"
+    },
+    {
+        id: 4,
+        name: "Medine Ezan (Mescid-i Nebevi)",
+        url: "https://www.islamcan.com/audio/ezan/medina.mp3",
+        duration: "4:05",
+        country: "Suudi Arabistan"
+    },
+    {
+        id: 5,
+        name: "Mekke Ezan (Mescid-i Haram)",
+        url: "https://www.islamcan.com/audio/ezan/makkah.mp3",
+        duration: "3:52",
+        country: "Suudi Arabistan"
+    }
+];
+
+// ========== ISLAMIC LIBRARY ==========
+const libraryBooks = [
+    {
+        id: 1,
+        title: "Riyazü's-Salihin",
+        author: "İmam Nevevi",
+        category: "hadis",
+        pages: 450,
+        language: "Türkçe",
+        cover: "📗",
+        description: "Salih kulların bahçeleri - Hadis-i şerif kitabı",
+        url: "#"
+    },
+    {
+        id: 2,
+        title: "Kimya-i Saadet",
+        author: "İmam Gazali",
+        category: "tasavvuf",
+        pages: 380,
+        language: "Türkçe",
+        cover: "📘",
+        description: "Mutluluk formülü - Tasavvuf klasiği",
+        url: "#"
+    },
+    {
+        id: 3,
+        title: "Münacaat",
+        author: "İmam Gazali",
+        category: "dua",
+        pages: 120,
+        language: "Türkçe/Arapça",
+        cover: "📙",
+        description: "Allah'a yalvarma sanatı",
+        url: "#"
+    },
+    {
+        id: 4,
+        title: "Muhtasar İlmihal",
+        author: "Ömer Nasuhi Bilmen",
+        category: "fıkıh",
+        pages: 550,
+        language: "Türkçe",
+        cover: "📕",
+        description: "İslam hukuku özet kitabı",
+        url: "#"
+    },
+    {
+        id: 5,
+        title: "Siyeru A'lami'n-Nübela",
+        author: "İmam Zehebî",
+        category: "siyer",
+        pages: 620,
+        language: "Türkçe",
+        cover: "📔",
+        description: "Büyük İslam şahsiyetleri",
+        url: "#"
+    }
+];
+
+const libraryArticles = [
+    {
+        id: 1,
+        title: "Namazın Manevi Boyutu",
+        author: "Prof. Dr. Mehmet Okuyan",
+        category: "ibadet",
+        readTime: "8 dk",
+        date: "2024-01-15",
+        excerpt: "Namazın sadece fiziksel değil, manevi ve psikolojik faydaları...",
+        content: "Namaz, İslam'ın beş şartından biri olup..."
+    },
+    {
+        id: 2,
+        title: "Kur'an'da Sabır Kavramı",
+        author: "Dr. Ali Ünal",
+        category: "ahlak",
+        readTime: "12 dk",
+        date: "2024-01-10",
+        excerpt: "Sabır nedir ve Kur'an'da nasıl anlatılır?",
+        content: "Sabır, İslam'da önemli bir erdem..."
+    },
+    {
+        id: 3,
+        title: "Modern Çağda İslami Yaşam",
+        author: "Prof. Dr. Yaşar Nuri Öztürk",
+        category: "güncel",
+        readTime: "15 dk",
+        date: "2024-01-05",
+        excerpt: "Teknoloji çağında İslami değerleri korumak",
+        content: "Günümüz dünyasında bir Müslüman olarak..."
+    }
+];
+
+const libraryVideos = [
+    {
+        id: 1,
+        title: "Namaz Nasıl Kılınır? (Görsel Anlatım)",
+        speaker: "Diyanet İşleri Başkanlığı",
+        category: "eğitim",
+        duration: "12:30",
+        views: "2.5M",
+        thumbnail: "🎥",
+        url: "#"
+    },
+    {
+        id: 2,
+        title: "Kur'an Tefsiri - Fatiha Suresi",
+        speaker: "Prof. Dr. Mehmet Okuyan",
+        category: "tefsir",
+        duration: "45:20",
+        views: "850K",
+        thumbnail: "🎥",
+        url: "#"
+    },
+    {
+        id: 3,
+        title: "Ramazan Sohbetleri",
+        speaker: "Şeyh Nazım Kıbrısî",
+        category: "sohbet",
+        duration: "35:15",
+        views: "1.2M",
+        thumbnail: "🎥",
+        url: "#"
+    },
+    {
+        id: 4,
+        title: "Peygamber Efendimizin Hayatı",
+        speaker: "Dr. Ali Ünal",
+        category: "siyer",
+        duration: "52:40",
+        views: "3.1M",
+        thumbnail: "🎥",
+        url: "#"
+    }
+];
+
+const libraryPodcasts = [
+    {
+        id: 1,
+        title: "İslam ve Bilim Podcast",
+        host: "Dr. Mustafa Öztürk",
+        category: "bilim",
+        episodes: 45,
+        duration: "25-40 dk",
+        cover: "🎙️",
+        description: "İslam ve modern bilimin buluşma noktaları",
+        url: "#"
+    },
+    {
+        id: 2,
+        title: "Günlük Hadis Dersleri",
+        host: "Hafız Ahmet Yılmaz",
+        category: "hadis",
+        episodes: 120,
+        duration: "10-15 dk",
+        cover: "🎙️",
+        description: "Her gün bir hadis ve açıklaması",
+        url: "#"
+    },
+    {
+        id: 3,
+        title: "Tasavvuf Sohbetleri",
+        host: "Şeyh Mahmud Efendi",
+        category: "tasavvuf",
+        episodes: 78,
+        duration: "30-45 dk",
+        cover: "🎙️",
+        description: "Kalp arındırma ve maneviyat",
+        url: "#"
+    }
+];
+
+// ========== RADIO STATIONS ==========
+const radioStations = [
+    {
+        id: 1,
+        name: "Kur'an Radyo",
+        description: "24 saat Kur'an-ı Kerim dinleyin",
+        category: "kuran",
+        url: "https://stream.example.com/quran",
+        icon: "📻"
+    },
+    {
+        id: 2,
+        name: "Diyanet Radyo",
+        description: "Diyanet İşleri resmi radyosu",
+        category: "genel",
+        url: "https://stream.example.com/diyanet",
+        icon: "📻"
+    },
+    {
+        id: 3,
+        name: "İlahi Radyo",
+        description: "İlahi ve dini müzik yayını",
+        category: "ilahi",
+        url: "https://stream.example.com/ilahi",
+        icon: "📻"
+    },
+    {
+        id: 4,
+        name: "Hadis Radyo",
+        description: "Hadis-i şerif anlatımları",
+        category: "hadis",
+        url: "https://stream.example.com/hadith",
+        icon: "📻"
+    }
+];
+
+// ========== NOTIFICATION PRESETS ==========
+const notificationPresets = [
+    {
+        id: "default",
+        name: "Varsayılan",
+        description: "Tüm vakit bildirimleri aktif",
+        settings: {
+            imsak: true,
+            ogle: true,
+            ikindi: true,
+            aksam: true,
+            yatsi: true,
+            earlyWarning: 5
+        }
+    },
+    {
+        id: "work",
+        name: "İş Modu",
+        description: "Sadece öğle, ikindi ve akşam",
+        settings: {
+            imsak: false,
+            ogle: true,
+            ikindi: true,
+            aksam: true,
+            yatsi: false,
+            earlyWarning: 10
+        }
+    },
+    {
+        id: "silent",
+        name: "Sessiz Mod",
+        description: "Bildirimler kapalı",
+        settings: {
+            imsak: false,
+            ogle: false,
+            ikindi: false,
+            aksam: false,
+            yatsi: false,
+            earlyWarning: 0
+        }
+    },
+    {
+        id: "ramadan",
+        name: "Ramazan Modu",
+        description: "İmsak ve akşam odaklı",
+        settings: {
+            imsak: true,
+            ogle: false,
+            ikindi: false,
+            aksam: true,
+            yatsi: true,
+            earlyWarning: 15
+        }
+    }
+];
+
 // Export data
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { esmaUlHusna, prayers, shortSurahs, dailyHadiths, fortyHadiths, prophetStories, islamicEvents };
+    module.exports = {
+        esmaUlHusna,
+        prayers,
+        shortSurahs,
+        dailyHadiths,
+        fortyHadiths,
+        prophetStories,
+        islamicEvents,
+        adhanSounds,
+        libraryBooks,
+        libraryArticles,
+        libraryVideos,
+        libraryPodcasts,
+        radioStations,
+        notificationPresets
+    };
 }
