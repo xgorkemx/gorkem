@@ -1264,3 +1264,373 @@ input:checked + .slider:before {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
+/* ========== ESMA-UL HUSNA STYLES ========== */
+.search-box {
+    margin-bottom: 20px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 15px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    font-size: 1rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-box input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+.search-box input:focus {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 2px rgba(240, 147, 251, 0.3);
+}
+
+.esma-list {
+    display: grid;
+    gap: 15px;
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.esma-item {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.esma-item:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.esma-item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.esma-number {
+    background: rgba(240, 147, 251, 0.3);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.esma-arabic {
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-align: right;
+    flex: 1;
+    margin: 0 15px;
+    direction: rtl;
+}
+
+.esma-turkish {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 5px;
+}
+
+.esma-meaning {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    opacity: 0.9;
+}
+
+/* ========== PRAYER BOOK STYLES ========== */
+.prayer-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.prayer-tab {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 100px;
+}
+
+.prayer-tab:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.prayer-tab.active {
+    background: linear-gradient(135deg, var(--accent-color) 0%, rgba(240, 147, 251, 0.8) 100%);
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.prayer-book-list {
+    display: grid;
+    gap: 20px;
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.prayer-item {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.prayer-item:hover {
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.prayer-item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.prayer-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.prayer-category {
+    background: rgba(240, 147, 251, 0.3);
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.prayer-arabic {
+    font-size: 1.6rem;
+    line-height: 2.2;
+    text-align: right;
+    direction: rtl;
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.prayer-turkish {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+.prayer-latin {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    opacity: 0.8;
+    font-style: italic;
+}
+
+/* ========== SURAH STYLES ========== */
+.surah-list {
+    display: grid;
+    gap: 20px;
+    max-height: 600px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.surah-item {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.surah-item:hover {
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.surah-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(240, 147, 251, 0.3);
+}
+
+.surah-info {
+    flex: 1;
+}
+
+.surah-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 5px;
+}
+
+.surah-meta {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+
+.surah-number {
+    background: linear-gradient(135deg, var(--accent-color) 0%, rgba(240, 147, 251, 0.8) 100%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.surah-arabic {
+    font-size: 1.5rem;
+    line-height: 2.5;
+    text-align: right;
+    direction: rtl;
+    margin: 20px 0;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    white-space: pre-line;
+}
+
+.surah-turkish {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    border-left: 3px solid var(--accent-color);
+}
+
+/* Custom Scrollbar for Lists */
+.esma-list::-webkit-scrollbar,
+.prayer-book-list::-webkit-scrollbar,
+.surah-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.esma-list::-webkit-scrollbar-track,
+.prayer-book-list::-webkit-scrollbar-track,
+.surah-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.esma-list::-webkit-scrollbar-thumb,
+.prayer-book-list::-webkit-scrollbar-thumb,
+.surah-list::-webkit-scrollbar-thumb {
+    background: rgba(240, 147, 251, 0.4);
+    border-radius: 10px;
+}
+
+.esma-list::-webkit-scrollbar-thumb:hover,
+.prayer-book-list::-webkit-scrollbar-thumb:hover,
+.surah-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(240, 147, 251, 0.6);
+}
+
+/* Responsive for new features */
+@media (max-width: 768px) {
+    .esma-arabic {
+        font-size: 1.5rem;
+    }
+
+    .prayer-arabic {
+        font-size: 1.4rem;
+        line-height: 2;
+    }
+
+    .surah-arabic {
+        font-size: 1.3rem;
+        line-height: 2.2;
+    }
+
+    .prayer-tabs {
+        gap: 5px;
+    }
+
+    .prayer-tab {
+        padding: 10px 15px;
+        font-size: 0.85rem;
+        min-width: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    .esma-item {
+        padding: 15px;
+    }
+
+    .esma-arabic {
+        font-size: 1.3rem;
+    }
+
+    .prayer-item,
+    .surah-item {
+        padding: 20px 15px;
+    }
+
+    .prayer-arabic {
+        font-size: 1.2rem;
+        padding: 10px;
+    }
+
+    .surah-arabic {
+        font-size: 1.2rem;
+        padding: 15px;
+    }
+
+    .prayer-tabs {
+        gap: 5px;
+    }
+
+    .prayer-tab {
+        flex: auto;
+        padding: 8px 10px;
+        font-size: 0.8rem;
+        min-width: 70px;
+    }
+}

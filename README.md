@@ -4,13 +4,39 @@ Modern ve kullanıcı dostu bir namaz vakitleri uygulaması. Türkiye'deki 10 b�
 
 ## Özellikler
 
+### Ana Özellikler
 - **Gerçek Zamanlı Namaz Vakitleri**: Diyanet İşleri Başkanlığı verilerine dayalı güncel namaz vakitleri
 - **Geri Sayım**: Bir sonraki namaz vaktine kalan süreyi gösterir
 - **Şehir Seçimi**: 10 farklı şehir için namaz vakitleri
+- **Otomatik Konum**: GPS ile otomatik şehir tespiti
+- **Hicri Takvim**: Güncel Hicri tarih görüntüleme
+
+### İbadet Araçları
+- **Kıble Yönü**: Dijital pusula ile Kabe yönünü bulma
+- **Dijital Tesbih**: Hedef sayaçlı zikir sayacı (33, 99, 100)
+- **Esmâ-ül Hüsnâ**: Allah'ın 99 ismi (Arapça, Türkçe, anlam)
+- **Dua Kitabı**: Kategorize edilmiş günlük dualar
+- **Kısa Sureler**: 7 sıkça okunan sure (Fatiha, İhlas, Felak, Nas, Nasr, Kevser, Kafirun)
+- **Namaz Takibi**: Günlük, haftalık ve aylık namaz istatistikleri
+
+### Bildirim ve Ses
+- **Akıllı Bildirimler**: Namaz vakti bildirimleri
+- **Ezan Sesi**: Otomatik ezan çalma özelliği
+- **Erken Uyarı**: 5-15 dakika önceden bildirim seçeneği
+
+### Görünüm ve Tema
+- **Dark/Light Mode**: Karanlık ve aydınlık tema seçeneği
+- **Widget Modu**: Sadece bir sonraki namaz vakti gösterimi
 - **Modern Tasarım**: Gradient renkler ve glassmorphism efektleri
 - **Responsive**: Mobil, tablet ve masaüstü cihazlarda mükemmel görünüm
 - **Animasyonlar**: Yumuşak geçişler ve hover efektleri
-- **Yerel Depolama**: Seçilen şehir bilgisi kaydedilir
+
+### PWA Özellikleri
+- **Offline Çalışma**: İnternet bağlantısı olmadan kullanım
+- **Ana Ekrana Ekleme**: Uygulama gibi kullanım
+- **Hızlı Yükleme**: Önbellekleme sistemi
+- **Otomatik Güncelleme**: Yeni sürüm bildirimleri
+- **Responsive**: Tüm cihazlarda native app deneyimi
 
 ## Desteklenen Şehirler
 
@@ -28,17 +54,34 @@ Modern ve kullanıcı dostu bir namaz vakitleri uygulaması. Türkiye'deki 10 b�
 ## Teknolojiler
 
 - **HTML5**: Semantik ve erişilebilir yapı
+  - PWA manifest integration
+  - Offline-ready struktur
+  - Meta tags for mobile optimization
 - **CSS3**: Modern stil özellikleri
   - CSS Grid & Flexbox
   - Gradient arka planlar
   - Glassmorphism efektleri
   - Animasyonlar ve geçişler
+  - Dark/Light tema desteği
   - Responsive tasarım
 - **JavaScript (Vanilla)**: API entegrasyonu ve dinamik içerik
   - Aladhan API kullanımı
-  - LocalStorage yönetimi
+  - LocalStorage & SessionStorage yönetimi
+  - Service Worker & Cache API
+  - DeviceOrientation API (pusula)
+  - Geolocation API (konum)
+  - Notification API
+  - Audio API (ezan sesi)
   - Gerçek zamanlı güncelleme
   - Geri sayım sayacı
+  - Hicri takvim hesaplama
+- **PWA (Progressive Web App)**:
+  - Service Worker (offline çalışma)
+  - Web App Manifest
+  - Cache-First stratejisi
+  - Background Sync
+  - Push Notifications
+  - Install prompts
 
 ## Kullanım
 

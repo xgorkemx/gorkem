@@ -1015,3 +1015,108 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update hijri date daily
     setInterval(updateHijriDate, 60000); // Update every minute to catch day change
 });
+
+// ========== ESMA-UL HUSNA ==========
+function loadEsmaUlHusna(searchTerm = '') {
+    const esmaList = document.getElementById('esmaList');
+    if (!esmaList) return;
+
+    const filtered = esmaUlHusna.filter(item => {
+        const search = searchTerm.toLowerCase();
+        return item.turkish.toLowerCase().includes(search) ||
+               item.meaning.toLowerCase().includes(search) ||
+               item.arabic.includes(search);
+    });
+
+    esmaList.innerHTML = filtered.map(item => `
+        <div class="esma-item">
+            <div class="esma-item-header">
+                <div class="esma-number">${item.id}</div>
+                <div class="esma-arabic">${item.arabic}</div>
+            </div>
+            <div class="esma-turkish">${item.turkish}</div>
+            <div class="esma-meaning">${item.meaning}</div>
+        </div>
+    `).join('');
+}
+
+// Esma button click
+document.getElementById('esmaBtn')?.addEventListener('click', () => {
+    openModal('esmaModal');
+    loadEsmaUlHusna();
+});
+
+// Esma search
+document.getElementById('esmaSearch')?.addEventListener('input', (e) => {
+    loadEsmaUlHusna(e.target.value);
+});
+
+// ========== PRAYER BOOK ==========
+let currentPrayerCategory = 'daily';
+
+function loadPrayerBook(category = 'daily') {
+    const prayerBookList = document.getElementById('prayerBookList');
+    if (!prayerBookList) return;
+
+    const categoryPrayers = prayers[category] || [];
+
+    prayerBookList.innerHTML = categoryPrayers.map(prayer => `
+        <div class="prayer-item">
+            <div class="prayer-item-header">
+                <div class="prayer-name">${prayer.name}</div>
+                <div class="prayer-category">${prayer.category}</div>
+            </div>
+            <div class="prayer-arabic">${prayer.arabic}</div>
+            <div class="prayer-turkish">${prayer.turkish}</div>
+            <div class="prayer-latin">${prayer.latin}</div>
+        </div>
+    `).join('');
+}
+
+// Prayer book button click
+document.getElementById('prayerBookBtn')?.addEventListener('click', () => {
+    openModal('prayerBookModal');
+    loadPrayerBook(currentPrayerCategory);
+});
+
+// Prayer tabs
+document.querySelectorAll('.prayer-tab').forEach(tab => {
+    tab.addEventListener('click', (e) => {
+        // Remove active class from all tabs
+        document.querySelectorAll('.prayer-tab').forEach(t => t.classList.remove('active'));
+
+        // Add active class to clicked tab
+        e.target.classList.add('active');
+
+        // Load prayers for selected category
+        const category = e.target.dataset.category;
+        currentPrayerCategory = category;
+        loadPrayerBook(category);
+    });
+});
+
+// ========== SHORT SURAHS ==========
+function loadShortSurahs() {
+    const surahList = document.getElementById('surahList');
+    if (!surahList) return;
+
+    surahList.innerHTML = shortSurahs.map(surah => `
+        <div class="surah-item">
+            <div class="surah-header">
+                <div class="surah-info">
+                    <div class="surah-name">${surah.name} Suresi</div>
+                    <div class="surah-meta">Sure No: ${surah.number} | ${surah.ayah_count} Ayet</div>
+                </div>
+                <div class="surah-number">${surah.number}</div>
+            </div>
+            <div class="surah-arabic">${surah.arabic}</div>
+            <div class="surah-turkish">${surah.turkish}</div>
+        </div>
+    `).join('');
+}
+
+// Surah button click
+document.getElementById('surahBtn')?.addEventListener('click', () => {
+    openModal('surahModal');
+    loadShortSurahs();
+});
