@@ -1579,3 +1579,533 @@ function loadWidgetCustomization() {
 document.addEventListener('DOMContentLoaded', () => {
     applyWidgetCustomization();
 });
+
+// ========== CATEGORY A: ADVANCED FEATURES ==========
+
+// ========== RAMADAN CALENDAR ==========
+const RAMADAN_KEY = 'ezanvakti_ramadan_data';
+
+// Check if today is in Ramadan
+function isRamadan() {
+    const hijriDate = getCurrentHijriDate();
+    return hijriDate.month === 9; // Ramadan is 9th month
+}
+
+// Get Ramadan day (1-30)
+function getRamadanDay() {
+    if (!isRamadan()) return 0;
+    const hijriDate = getCurrentHijriDate();
+    return hijriDate.day;
+}
+
+// Calculate Ramadan times
+function loadRamadanCalendar() {
+    const container = document.getElementById('ramadanCalendar');
+    if (!container) return;
+
+    const hijriDate = getCurrentHijriDate();
+    const isRamadanMonth = hijriDate.month === 9;
+
+    if (!isRamadanMonth) {
+        container.innerHTML = `
+            <div class="ramadan-info-box">
+                <div class="ramadan-icon">🌙</div>
+                <h3>Ramazan Ayı Değil</h3>
+                <p>Şu anda Ramazan ayında değiliz.</p>
+                <p class="hijri-info">Hicri Tarih: ${hijriDate.day} ${getHijriMonthName(hijriDate.month)} ${hijriDate.year}</p>
+            </div>
+        `;
+        return;
+    }
+
+    const ramadanDay = hijriDate.day;
+    const daysLeft = 30 - ramadanDay;
+
+    // Get today's prayer times for iftar and sahur
+    const imsak = document.getElementById('imsak')?.textContent || '--:--';
+    const aksam = document.getElementById('aksam')?.textContent || '--:--';
+
+    container.innerHTML = `
+        <div class="ramadan-header">
+            <div class="ramadan-day-circle">
+                <span class="ramadan-day-number">${ramadanDay}</span>
+                <span class="ramadan-day-label">/30</span>
+            </div>
+            <div class="ramadan-title">
+                <h3>🌙 Ramazan Mübarek</h3>
+                <p>${daysLeft} gün kaldı</p>
+            </div>
+        </div>
+
+        <div class="ramadan-times">
+            <div class="ramadan-time-card iftar-card">
+                <div class="time-icon">🌆</div>
+                <div class="time-info">
+                    <div class="time-label">İftar Vakti</div>
+                    <div class="time-value">${aksam}</div>
+                    <div class="time-countdown" id="iftarCountdown">--:--:--</div>
+                </div>
+            </div>
+
+            <div class="ramadan-time-card sahur-card">
+                <div class="time-icon">🌅</div>
+                <div class="time-info">
+                    <div class="time-label">İmsak (Sahur Sonu)</div>
+                    <div class="time-value">${imsak}</div>
+                    <div class="time-note">Sahur yemeği imsak vaktinden önce bitirilmelidir</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ramadan-progress">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: ${(ramadanDay/30)*100}%"></div>
+            </div>
+            <div class="progress-label">${ramadanDay}. Gün tamamlandı</div>
+        </div>
+    `;
+
+    // Start iftar countdown
+    startIftarCountdown();
+}
+
+// Iftar countdown
+function startIftarCountdown() {
+    const countdownEl = document.getElementById('iftarCountdown');
+    if (!countdownEl) return;
+
+    setInterval(() => {
+        const aksam = document.getElementById('aksam')?.textContent;
+        if (!aksam || aksam === '--:--') return;
+
+        const [hours, minutes] = aksam.split(':').map(Number);
+        const now = new Date();
+        const target = new Date(now);
+        target.setHours(hours, minutes, 0);
+
+        // If target is past, set to tomorrow
+        if (target < now) {
+            target.setDate(target.getDate() + 1);
+        }
+
+        const diff = target - now;
+        const h = Math.floor(diff / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        const s = Math.floor((diff % 60000) / 1000);
+
+        countdownEl.textContent = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }, 1000);
+}
+
+// ========== FRIDAY REMINDER ==========
+function checkFridayReminder() {
+    const now = new Date();
+    const day = now.getDay();
+
+    // Check if it's Friday (5)
+    if (day === 5) {
+        const jumuah = document.getElementById('ogle')?.textContent;
+        if (!jumuah || jumuah === '--:--') return;
+
+        const [hours, minutes] = jumuah.split(':').map(Number);
+        const currentHours = now.getHours();
+        const currentMinutes = now.getMinutes();
+        const currentTime = currentHours * 60 + currentMinutes;
+        const jumuahTime = hours * 60 + minutes;
+
+        // Remind 1 hour before Jumuah
+        const diff = jumuahTime - currentTime;
+
+        const fridayReminderShown = sessionStorage.getItem('fridayReminderShown');
+
+        if (diff <= 60 && diff > 0 && !fridayReminderShown) {
+            showFridayReminder();
+            sessionStorage.setItem('fridayReminderShown', 'true');
+        }
+    }
+}
+
+function showFridayReminder() {
+    if (!('Notification' in window)) return;
+
+    if (Notification.permission === 'granted') {
+        vibrate('triple');
+        new Notification('🕌 Cuma Namazı Hatırlatma', {
+            body: 'Cuma namazına 1 saatten az kaldı. Hazırlıklarınızı yapabilirsiniz.',
+            icon: '/icon-192.png',
+            badge: '/icon-192.png',
+            tag: 'friday-reminder'
+        });
+    }
+
+    showMessage('🕌 Cuma namazına 1 saatten az kaldı!', 'info');
+}
+
+// Check Friday reminder every minute
+setInterval(checkFridayReminder, 60000);
+checkFridayReminder(); // Check immediately
+
+// ========== PRAYER TIME ALARMS ==========
+const ALARMS_KEY = 'ezanvakti_alarms';
+
+// Get alarm settings
+function getAlarmSettings() {
+    const stored = localStorage.getItem(ALARMS_KEY);
+    return stored ? JSON.parse(stored) : {
+        imsak: { enabled: false, beforeMinutes: 0 },
+        gunes: { enabled: false, beforeMinutes: 0 },
+        ogle: { enabled: false, beforeMinutes: 0 },
+        ikindi: { enabled: false, beforeMinutes: 0 },
+        aksam: { enabled: false, beforeMinutes: 0 },
+        yatsi: { enabled: false, beforeMinutes: 0 }
+    };
+}
+
+// Save alarm settings
+function saveAlarmSettings(settings) {
+    localStorage.setItem(ALARMS_KEY, JSON.stringify(settings));
+}
+
+// Load alarm settings UI
+function loadAlarmSettings() {
+    const container = document.getElementById('alarmSettings');
+    if (!container) return;
+
+    const settings = getAlarmSettings();
+    const prayers = [
+        { key: 'imsak', name: 'İmsak', icon: '🌅' },
+        { key: 'gunes', name: 'Güneş', icon: '☀️' },
+        { key: 'ogle', name: 'Öğle', icon: '🌞' },
+        { key: 'ikindi', name: 'İkindi', icon: '🌤️' },
+        { key: 'aksam', name: 'Akşam', icon: '🌆' },
+        { key: 'yatsi', name: 'Yatsı', icon: '🌙' }
+    ];
+
+    container.innerHTML = prayers.map(prayer => {
+        const setting = settings[prayer.key];
+        return `
+            <div class="alarm-item">
+                <div class="alarm-header">
+                    <span class="alarm-icon">${prayer.icon}</span>
+                    <span class="alarm-name">${prayer.name}</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox"
+                               ${setting.enabled ? 'checked' : ''}
+                               onchange="toggleAlarm('${prayer.key}', this.checked)">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                ${setting.enabled ? `
+                    <div class="alarm-options">
+                        <label>
+                            <span>Kaç dakika önce:</span>
+                            <select onchange="setAlarmBefore('${prayer.key}', this.value)" class="alarm-select">
+                                <option value="0" ${setting.beforeMinutes === 0 ? 'selected' : ''}>Tam vaktinde</option>
+                                <option value="5" ${setting.beforeMinutes === 5 ? 'selected' : ''}>5 dk önce</option>
+                                <option value="10" ${setting.beforeMinutes === 10 ? 'selected' : ''}>10 dk önce</option>
+                                <option value="15" ${setting.beforeMinutes === 15 ? 'selected' : ''}>15 dk önce</option>
+                                <option value="30" ${setting.beforeMinutes === 30 ? 'selected' : ''}>30 dk önce</option>
+                            </select>
+                        </label>
+                    </div>
+                ` : ''}
+            </div>
+        `;
+    }).join('');
+}
+
+function toggleAlarm(prayer, enabled) {
+    vibrate('short');
+    const settings = getAlarmSettings();
+    settings[prayer].enabled = enabled;
+    saveAlarmSettings(settings);
+    loadAlarmSettings();
+}
+
+function setAlarmBefore(prayer, minutes) {
+    const settings = getAlarmSettings();
+    settings[prayer].beforeMinutes = parseInt(minutes);
+    saveAlarmSettings(settings);
+    showMessage('Alarm ayarlandı', 'success');
+}
+
+// Check alarms every minute
+function checkAlarms() {
+    const settings = getAlarmSettings();
+    const now = new Date();
+    const currentTime = now.getHours() * 60 + now.getMinutes();
+
+    Object.keys(settings).forEach(prayer => {
+        const setting = settings[prayer];
+        if (!setting.enabled) return;
+
+        const prayerTimeEl = document.getElementById(prayer);
+        if (!prayerTimeEl) return;
+
+        const prayerTime = prayerTimeEl.textContent;
+        if (!prayerTime || prayerTime === '--:--') return;
+
+        const [hours, minutes] = prayerTime.split(':').map(Number);
+        const prayerMinutes = hours * 60 + minutes;
+        const alarmTime = prayerMinutes - setting.beforeMinutes;
+
+        // Check if it's alarm time (within this minute)
+        if (currentTime === alarmTime) {
+            triggerAlarm(prayer, setting.beforeMinutes);
+        }
+    });
+}
+
+function triggerAlarm(prayer, beforeMinutes) {
+    const alarmKey = `alarm_${prayer}_${new Date().toDateString()}`;
+    if (sessionStorage.getItem(alarmKey)) return; // Already triggered today
+
+    sessionStorage.setItem(alarmKey, 'true');
+
+    vibrate('triple');
+
+    const prayerNames = {
+        imsak: 'İmsak',
+        gunes: 'Güneş',
+        ogle: 'Öğle',
+        ikindi: 'İkindi',
+        aksam: 'Akşam',
+        yatsi: 'Yatsı'
+    };
+
+    const message = beforeMinutes > 0
+        ? `${prayerNames[prayer]} namazına ${beforeMinutes} dakika kaldı!`
+        : `${prayerNames[prayer]} namazı vakti girdi!`;
+
+    if (Notification.permission === 'granted') {
+        new Notification('⏰ Namaz Vakti Alarmı', {
+            body: message,
+            icon: '/icon-192.png',
+            badge: '/icon-192.png',
+            tag: `alarm-${prayer}`,
+            vibrate: [200, 100, 200]
+        });
+    }
+
+    showMessage(message, 'info');
+
+    // Play alarm sound
+    const audio = document.getElementById('adhanAudio');
+    if (audio && beforeMinutes === 0) {
+        audio.play().catch(e => console.log('Audio play failed:', e));
+    }
+}
+
+setInterval(checkAlarms, 60000);
+
+// ========== AR QIBLA COMPASS ==========
+let arMode = false;
+let videoStream = null;
+
+async function toggleARQibla() {
+    const arContainer = document.getElementById('arContainer');
+    const arButton = document.getElementById('arToggleBtn');
+
+    if (!arContainer || !arButton) return;
+
+    if (!arMode) {
+        try {
+            // Request camera access
+            videoStream = await navigator.mediaDevices.getUserMedia({
+                video: { facingMode: 'environment' }
+            });
+
+            const video = document.getElementById('arVideo');
+            video.srcObject = videoStream;
+
+            arContainer.style.display = 'flex';
+            arButton.textContent = '📷 AR Modunu Kapat';
+            arMode = true;
+
+            vibrate('short');
+            showMessage('AR modu aktif', 'success');
+        } catch (err) {
+            console.error('Camera access denied:', err);
+            showMessage('Kamera erişimi reddedildi', 'error');
+        }
+    } else {
+        stopARMode();
+    }
+}
+
+function stopARMode() {
+    if (videoStream) {
+        videoStream.getTracks().forEach(track => track.stop());
+        videoStream = null;
+    }
+
+    const arContainer = document.getElementById('arContainer');
+    const arButton = document.getElementById('arToggleBtn');
+
+    if (arContainer) arContainer.style.display = 'none';
+    if (arButton) arButton.textContent = '📷 AR Modunu Aç';
+
+    arMode = false;
+}
+
+// ========== VOICE ADHAN SETTINGS ==========
+const ADHAN_SETTINGS_KEY = 'ezanvakti_adhan_settings';
+
+function getAdhanSettings() {
+    const stored = localStorage.getItem(ADHAN_SETTINGS_KEY);
+    return stored ? JSON.parse(stored) : {
+        enabled: true,
+        volume: 0.7,
+        prayers: {
+            imsak: true,
+            gunes: false,
+            ogle: true,
+            ikindi: true,
+            aksam: true,
+            yatsi: true
+        },
+        sound: 'default'
+    };
+}
+
+function saveAdhanSettings(settings) {
+    localStorage.setItem(ADHAN_SETTINGS_KEY, JSON.stringify(settings));
+}
+
+function loadAdhanSettings() {
+    const container = document.getElementById('adhanSettingsContainer');
+    if (!container) return;
+
+    const settings = getAdhanSettings();
+
+    container.innerHTML = `
+        <div class="adhan-settings-section">
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span>Otomatik Ezan</span>
+                    <p class="setting-description">Vakit girdiğinde ezan okunsun</p>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="adhanEnabled"
+                           ${settings.enabled ? 'checked' : ''}
+                           onchange="updateAdhanEnabled(this.checked)">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span>Ses Seviyesi</span>
+                    <p class="setting-description">Ezan ses yüksekliği</p>
+                </div>
+                <input type="range" id="adhanVolume"
+                       min="0" max="100" value="${settings.volume * 100}"
+                       onchange="updateAdhanVolume(this.value)"
+                       class="volume-slider">
+            </div>
+        </div>
+
+        <div class="adhan-prayers-section">
+            <h4>Hangi Vakitlerde Ezan Okusun?</h4>
+            <div class="adhan-prayers-list">
+                ${Object.keys(settings.prayers).map(prayer => {
+                    const names = {
+                        imsak: '🌅 İmsak',
+                        gunes: '☀️ Güneş',
+                        ogle: '🌞 Öğle',
+                        ikindi: '🌤️ İkindi',
+                        aksam: '🌆 Akşam',
+                        yatsi: '🌙 Yatsı'
+                    };
+                    return `
+                        <div class="adhan-prayer-item">
+                            <span>${names[prayer]}</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox"
+                                       ${settings.prayers[prayer] ? 'checked' : ''}
+                                       onchange="updateAdhanPrayer('${prayer}', this.checked)">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        </div>
+    `;
+}
+
+function updateAdhanEnabled(enabled) {
+    const settings = getAdhanSettings();
+    settings.enabled = enabled;
+    saveAdhanSettings(settings);
+    vibrate('short');
+    showMessage(enabled ? 'Otomatik ezan açıldı' : 'Otomatik ezan kapatıldı', 'success');
+}
+
+function updateAdhanVolume(value) {
+    const settings = getAdhanSettings();
+    settings.volume = value / 100;
+    saveAdhanSettings(settings);
+
+    const audio = document.getElementById('adhanAudio');
+    if (audio) audio.volume = settings.volume;
+}
+
+function updateAdhanPrayer(prayer, enabled) {
+    const settings = getAdhanSettings();
+    settings.prayers[prayer] = enabled;
+    saveAdhanSettings(settings);
+    vibrate('short');
+}
+
+// Auto-play adhan at prayer time
+function checkAdhanTime() {
+    const settings = getAdhanSettings();
+    if (!settings.enabled) return;
+
+    const now = new Date();
+    const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+    Object.keys(settings.prayers).forEach(prayer => {
+        if (!settings.prayers[prayer]) return;
+
+        const prayerTimeEl = document.getElementById(prayer);
+        if (!prayerTimeEl) return;
+
+        const prayerTime = prayerTimeEl.textContent;
+        if (prayerTime === currentTime) {
+            const adhanKey = `adhan_${prayer}_${new Date().toDateString()}`;
+            if (!sessionStorage.getItem(adhanKey)) {
+                playAdhan();
+                sessionStorage.setItem(adhanKey, 'true');
+            }
+        }
+    });
+}
+
+function playAdhan() {
+    const settings = getAdhanSettings();
+    const audio = document.getElementById('adhanAudio');
+    if (audio) {
+        audio.volume = settings.volume;
+        audio.play().catch(e => console.log('Adhan play failed:', e));
+    }
+}
+
+setInterval(checkAdhanTime, 60000);
+
+// Button handlers for advanced features
+document.getElementById('ramadanBtn')?.addEventListener('click', () => {
+    openModal('ramadanModal');
+    loadRamadanCalendar();
+});
+
+document.getElementById('alarmBtn')?.addEventListener('click', () => {
+    openModal('alarmModal');
+    loadAlarmSettings();
+});
+
+document.getElementById('adhanSettingsBtn')?.addEventListener('click', () => {
+    openModal('adhanModal');
+    loadAdhanSettings();
+});

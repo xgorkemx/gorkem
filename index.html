@@ -190,6 +190,18 @@
                 <span class="feature-icon">📜</span>
                 <span class="feature-text">Sureler</span>
             </button>
+            <button class="feature-btn" id="ramadanBtn" title="Ramazan İmsakiyesi">
+                <span class="feature-icon">🌙</span>
+                <span class="feature-text">Ramazan</span>
+            </button>
+            <button class="feature-btn" id="alarmBtn" title="Namaz Vakti Alarmları">
+                <span class="feature-icon">⏰</span>
+                <span class="feature-text">Alarmlar</span>
+            </button>
+            <button class="feature-btn" id="adhanSettingsBtn" title="Ezan Ayarları">
+                <span class="feature-icon">🕌</span>
+                <span class="feature-text">Ezan</span>
+            </button>
         </div>
 
         <!-- Prayer Times -->
@@ -284,6 +296,17 @@
                     <p class="qibla-angle" id="qiblaAngle">Kıble Açısı: <strong>--°</strong></p>
                     <p class="qibla-distance" id="qiblaDistance">Kabe'ye Uzaklık: <strong>-- km</strong></p>
                     <p class="qibla-note">📱 Cihazınızı yatay tutun ve pusulanın kırmızı oku Kabe ikonuna gelecek şekilde yönlendirin.</p>
+                    <button class="primary-btn" id="arToggleBtn" onclick="toggleARQibla()">📷 AR Modunu Aç</button>
+                </div>
+                <div class="ar-container" id="arContainer">
+                    <video id="arVideo" autoplay playsinline></video>
+                    <div class="ar-overlay">
+                        <div class="ar-compass" id="arCompassNeedle"></div>
+                        <div class="ar-qibla-indicator">
+                            <div class="ar-kaaba">🕋</div>
+                            <div class="ar-arrow">↓</div>
+                        </div>
+                    </div>
                 </div>
                 <button class="btn-primary" id="calibrateBtn">🔄 Pusulayı Kalibre Et</button>
             </div>
@@ -617,6 +640,48 @@
                 <div class="settings-actions">
                     <button class="primary-btn" onclick="saveSettings()">💾 Ayarları Kaydet</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ramadan Calendar Modal -->
+    <div class="modal" id="ramadanModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🌙 Ramazan İmsakiyesi</h2>
+                <button class="close-btn" onclick="closeModal('ramadanModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="ramadanCalendar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Prayer Alarms Modal -->
+    <div class="modal" id="alarmModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>⏰ Namaz Vakti Alarmları</h2>
+                <button class="close-btn" onclick="closeModal('alarmModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="alarm-description">
+                    <p>Her namaz için alarm ayarlayabilir ve vakit girmeden önce hatırlatma alabilirsiniz.</p>
+                </div>
+                <div id="alarmSettings"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Adhan Settings Modal -->
+    <div class="modal" id="adhanModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🕌 Ezan Ayarları</h2>
+                <button class="close-btn" onclick="closeModal('adhanModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="adhanSettingsContainer"></div>
             </div>
         </div>
     </div>
