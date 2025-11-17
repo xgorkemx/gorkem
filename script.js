@@ -733,3 +733,285 @@ document.getElementById('locationBtn')?.addEventListener('click', async () => {
 
 // Initialize on load
 loadNotificationSettings();
+
+// ========== HIJRI CALENDAR ==========
+function getHijriDate() {
+    // Simple Hijri date calculation (approximation)
+    const gregorianDate = new Date();
+    const gregorianYear = gregorianDate.getFullYear();
+    const gregorianMonth = gregorianDate.getMonth() + 1;
+    const gregorianDay = gregorianDate.getDate();
+
+    // Convert Gregorian to Julian Day Number
+    const a = Math.floor((14 - gregorianMonth) / 12);
+    const y = gregorianYear + 4800 - a;
+    const m = gregorianMonth + 12 * a - 3;
+
+    const julianDay = gregorianDay + Math.floor((153 * m + 2) / 5) +
+                      365 * y + Math.floor(y / 4) -
+                      Math.floor(y / 100) + Math.floor(y / 400) - 32045;
+
+    // Convert Julian Day Number to Hijri
+    const l = julianDay - 1948440 + 10632;
+    const n = Math.floor((l - 1) / 10631);
+    const l2 = l - 10631 * n + 354;
+    const j = Math.floor((10985 - l2) / 5316) * Math.floor((50 * l2) / 17719) +
+              Math.floor(l2 / 5670) * Math.floor((43 * l2) / 15238);
+    const l3 = l2 - Math.floor((30 - j) / 15) * Math.floor((17719 * j) / 50) -
+               Math.floor(j / 16) * Math.floor((15238 * j) / 43) + 29;
+
+    const hijriMonth = Math.floor((24 * l3) / 709);
+    const hijriDay = l3 - Math.floor((709 * hijriMonth) / 24);
+    const hijriYear = 30 * n + j - 30;
+
+    const hijriMonthNames = [
+        'Muharrem', 'Safer', 'Rebiülevvel', 'Rebiülahir',
+        'Cemaziyelevvel', 'Cemaziyelahir', 'Recep', 'Şaban',
+        'Ramazan', 'Şevval', 'Zilkade', 'Zilhicce'
+    ];
+
+    return `${hijriDay} ${hijriMonthNames[hijriMonth - 1]} ${hijriYear}`;
+}
+
+// Update Hijri date
+function updateHijriDate() {
+    const hijriDateElement = document.getElementById('hijriDate');
+    if (hijriDateElement) {
+        hijriDateElement.textContent = `Hicri: ${getHijriDate()}`;
+    }
+}
+
+// ========== DARK/LIGHT THEME ==========
+let currentTheme = localStorage.getItem('theme') || 'light';
+
+function toggleTheme() {
+    currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+    applyTheme();
+    localStorage.setItem('theme', currentTheme);
+}
+
+function applyTheme() {
+    if (currentTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        document.getElementById('themeIcon').textContent = '☀️';
+    } else {
+        document.body.classList.remove('dark-theme');
+        document.getElementById('themeIcon').textContent = '🌙';
+    }
+}
+
+// Theme toggle button
+document.getElementById('themeToggle')?.addEventListener('click', toggleTheme);
+
+// ========== WIDGET MODE ==========
+let widgetMode = false;
+
+function toggleWidgetMode() {
+    widgetMode = !widgetMode;
+    if (widgetMode) {
+        document.body.classList.add('widget-mode');
+    } else {
+        document.body.classList.remove('widget-mode');
+    }
+}
+
+// Widget toggle button
+document.getElementById('widgetToggle')?.addEventListener('click', toggleWidgetMode);
+
+// ========== PRAYER TRACKING SYSTEM ==========
+let prayerTracking = JSON.parse(localStorage.getItem('prayerTracking') || '{}');
+
+function getTodayKey() {
+    const today = new Date();
+    return `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+}
+
+function initPrayerTracking() {
+    const todayKey = getTodayKey();
+    if (!prayerTracking[todayKey]) {
+        prayerTracking[todayKey] = {
+            imsak: false,
+            ogle: false,
+            ikindi: false,
+            aksam: false,
+            yatsi: false
+        };
+    }
+}
+
+function savePrayerTracking() {
+    localStorage.setItem('prayerTracking', JSON.stringify(prayerTracking));
+}
+
+function togglePrayerCheck(prayer) {
+    const todayKey = getTodayKey();
+    initPrayerTracking();
+
+    prayerTracking[todayKey][prayer] = !prayerTracking[todayKey][prayer];
+    savePrayerTracking();
+    updatePrayerTrackingUI();
+    updateTrackingStats();
+
+    // Haptic feedback
+    if (navigator.vibrate) {
+        navigator.vibrate(30);
+    }
+}
+
+function updatePrayerTrackingUI() {
+    const todayKey = getTodayKey();
+    initPrayerTracking();
+
+    const prayers = ['imsak', 'ogle', 'ikindi', 'aksam', 'yatsi'];
+    prayers.forEach(prayer => {
+        const button = document.querySelector(`[data-prayer="${prayer}"] .check-btn`);
+        const item = document.querySelector(`.prayer-track-item[data-prayer="${prayer}"]`);
+        const icon = button?.querySelector('.check-icon');
+
+        if (prayerTracking[todayKey][prayer]) {
+            button?.classList.add('checked');
+            item?.classList.add('completed');
+            if (icon) icon.textContent = '✅';
+        } else {
+            button?.classList.remove('checked');
+            item?.classList.remove('completed');
+            if (icon) icon.textContent = '⭕';
+        }
+    });
+
+    // Update prayer times in tracking modal
+    if (currentPrayerTimes && Object.keys(currentPrayerTimes).length > 0) {
+        document.getElementById('trackImsakTime').textContent = formatTime(currentPrayerTimes.Fajr);
+        document.getElementById('trackOgleTime').textContent = formatTime(currentPrayerTimes.Dhuhr);
+        document.getElementById('trackIkindiTime').textContent = formatTime(currentPrayerTimes.Asr);
+        document.getElementById('trackAksamTime').textContent = formatTime(currentPrayerTimes.Maghrib);
+        document.getElementById('trackYatsiTime').textContent = formatTime(currentPrayerTimes.Isha);
+    }
+}
+
+function updateTrackingStats() {
+    const todayKey = getTodayKey();
+    initPrayerTracking();
+
+    // Today's count
+    const todayPrayers = Object.values(prayerTracking[todayKey]).filter(v => v).length;
+    document.getElementById('todayCount').textContent = `${todayPrayers}/5`;
+
+    // Week count
+    const today = new Date();
+    let weekCount = 0;
+    for (let i = 0; i < 7; i++) {
+        const date = new Date(today);
+        date.setDate(date.getDate() - i);
+        const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+        if (prayerTracking[key]) {
+            weekCount += Object.values(prayerTracking[key]).filter(v => v).length;
+        }
+    }
+    document.getElementById('weekCount').textContent = `${weekCount}/35`;
+
+    // Month count
+    const year = today.getFullYear();
+    const month = today.getMonth();
+    let monthCount = 0;
+    Object.keys(prayerTracking).forEach(key => {
+        const [y, m] = key.split('-').map(Number);
+        if (y === year && m === month + 1) {
+            monthCount += Object.values(prayerTracking[key]).filter(v => v).length;
+        }
+    });
+    document.getElementById('monthCount').textContent = monthCount;
+
+    // Update motivation message
+    updateMotivationMessage(todayPrayers);
+
+    // Update weekly calendar
+    updateWeeklyCalendar();
+}
+
+function updateMotivationMessage(count) {
+    const messages = [
+        '💪 Allah kabul etsin! Namazlarınızı işaretleyerek takip edin.',
+        '🌟 Harika! Bir namaz daha kıldınız. Devam edin!',
+        '🎯 Yarı yoldasınız! Allah kabul etsin.',
+        '🔥 Neredeyse tamam! Bir kaç namaz kaldı.',
+        '✨ Mükemmel! Bugünkü tüm namazlar tamamlandı. Allah razı olsun!',
+        '🏆 Muhteşem! Bugünün tüm namazlarını kıldınız!'
+    ];
+
+    const messageElement = document.getElementById('motivationMessage');
+    if (messageElement) {
+        messageElement.textContent = messages[Math.min(count, 5)];
+    }
+}
+
+function updateWeeklyCalendar() {
+    const calendar = document.getElementById('weeklyCalendar');
+    if (!calendar) return;
+
+    calendar.innerHTML = '';
+    const today = new Date();
+    const dayNames = ['Paz', 'Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt'];
+
+    for (let i = 6; i >= 0; i--) {
+        const date = new Date(today);
+        date.setDate(date.getDate() - i);
+        const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+
+        const dayCard = document.createElement('div');
+        dayCard.className = 'day-card';
+        if (i === 0) dayCard.classList.add('today');
+
+        const dayName = document.createElement('div');
+        dayName.className = 'day-name';
+        dayName.textContent = dayNames[date.getDay()];
+
+        const dayDate = document.createElement('div');
+        dayDate.className = 'day-date';
+        dayDate.textContent = date.getDate();
+
+        const dayProgress = document.createElement('div');
+        dayProgress.className = 'day-progress';
+
+        const prayers = ['imsak', 'ogle', 'ikindi', 'aksam', 'yatsi'];
+        prayers.forEach(prayer => {
+            const dot = document.createElement('div');
+            dot.className = 'prayer-dot';
+            if (prayerTracking[key] && prayerTracking[key][prayer]) {
+                dot.classList.add('completed');
+            }
+            dayProgress.appendChild(dot);
+        });
+
+        dayCard.appendChild(dayName);
+        dayCard.appendChild(dayDate);
+        dayCard.appendChild(dayProgress);
+        calendar.appendChild(dayCard);
+    }
+}
+
+// Prayer tracking button click
+document.getElementById('prayerTrackBtn')?.addEventListener('click', () => {
+    openModal('prayerTrackModal');
+    updatePrayerTrackingUI();
+    updateTrackingStats();
+});
+
+// Check button click handlers
+document.querySelectorAll('.check-btn').forEach(button => {
+    button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const prayer = button.closest('.prayer-track-item').dataset.prayer;
+        togglePrayerCheck(prayer);
+    });
+});
+
+// Initialize theme and hijri date on page load
+document.addEventListener('DOMContentLoaded', () => {
+    applyTheme();
+    updateHijriDate();
+    initPrayerTracking();
+
+    // Update hijri date daily
+    setInterval(updateHijriDate, 60000); // Update every minute to catch day change
+});

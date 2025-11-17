@@ -26,7 +26,19 @@
             </div>
             <div class="date-time">
                 <div class="current-date" id="currentDate"></div>
+                <div class="hijri-date" id="hijriDate">Hicri: --</div>
                 <div class="current-time" id="currentTime"></div>
+            </div>
+            <div class="header-controls">
+                <button class="control-btn" id="themeToggle" title="Tema Değiştir">
+                    <span id="themeIcon">🌙</span>
+                </button>
+                <button class="control-btn" id="widgetToggle" title="Widget Modu">
+                    <span>📱</span>
+                </button>
+                <button class="control-btn" id="prayerTrackBtn" title="Namaz Takibi">
+                    <span>✅</span>
+                </button>
             </div>
         </header>
 
@@ -299,6 +311,107 @@
                 </div>
 
                 <button class="btn-primary" id="requestNotificationBtn">🔔 Bildirimleri Etkinleştir</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Prayer Tracking Modal -->
+    <div class="modal" id="prayerTrackModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>✅ Namaz Takibi</h2>
+                <button class="close-btn" onclick="closeModal('prayerTrackModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="track-stats">
+                    <div class="stat-card">
+                        <div class="stat-value" id="todayCount">0/5</div>
+                        <div class="stat-label">Bugün</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="weekCount">0/35</div>
+                        <div class="stat-label">Bu Hafta</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="monthCount">0</div>
+                        <div class="stat-label">Bu Ay</div>
+                    </div>
+                </div>
+
+                <div class="track-section">
+                    <h3>Bugünkü Namazlar</h3>
+                    <div class="prayer-track-list" id="prayerTrackList">
+                        <div class="prayer-track-item" data-prayer="imsak">
+                            <div class="prayer-track-info">
+                                <span class="prayer-track-icon">🌙</span>
+                                <div>
+                                    <div class="prayer-track-name">İmsak</div>
+                                    <div class="prayer-track-time" id="trackImsakTime">--:--</div>
+                                </div>
+                            </div>
+                            <button class="check-btn" data-prayer="imsak">
+                                <span class="check-icon">⭕</span>
+                            </button>
+                        </div>
+                        <div class="prayer-track-item" data-prayer="ogle">
+                            <div class="prayer-track-info">
+                                <span class="prayer-track-icon">☀️</span>
+                                <div>
+                                    <div class="prayer-track-name">Öğle</div>
+                                    <div class="prayer-track-time" id="trackOgleTime">--:--</div>
+                                </div>
+                            </div>
+                            <button class="check-btn" data-prayer="ogle">
+                                <span class="check-icon">⭕</span>
+                            </button>
+                        </div>
+                        <div class="prayer-track-item" data-prayer="ikindi">
+                            <div class="prayer-track-info">
+                                <span class="prayer-track-icon">🌤️</span>
+                                <div>
+                                    <div class="prayer-track-name">İkindi</div>
+                                    <div class="prayer-track-time" id="trackIkindiTime">--:--</div>
+                                </div>
+                            </div>
+                            <button class="check-btn" data-prayer="ikindi">
+                                <span class="check-icon">⭕</span>
+                            </button>
+                        </div>
+                        <div class="prayer-track-item" data-prayer="aksam">
+                            <div class="prayer-track-info">
+                                <span class="prayer-track-icon">🌆</span>
+                                <div>
+                                    <div class="prayer-track-name">Akşam</div>
+                                    <div class="prayer-track-time" id="trackAksamTime">--:--</div>
+                                </div>
+                            </div>
+                            <button class="check-btn" data-prayer="aksam">
+                                <span class="check-icon">⭕</span>
+                            </button>
+                        </div>
+                        <div class="prayer-track-item" data-prayer="yatsi">
+                            <div class="prayer-track-info">
+                                <span class="prayer-track-icon">🌃</span>
+                                <div>
+                                    <div class="prayer-track-name">Yatsı</div>
+                                    <div class="prayer-track-time" id="trackYatsiTime">--:--</div>
+                                </div>
+                            </div>
+                            <button class="check-btn" data-prayer="yatsi">
+                                <span class="check-icon">⭕</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="motivation-message" id="motivationMessage">
+                    💪 Allah kabul etsin! Namazlarınızı işaretleyerek takip edin.
+                </div>
+
+                <div class="track-section">
+                    <h3>Haftalık Geçmiş</h3>
+                    <div class="weekly-calendar" id="weeklyCalendar"></div>
+                </div>
             </div>
         </div>
     </div>
