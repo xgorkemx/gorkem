@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ezan Vakti Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <svg class="mosque-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L10 6H14L12 2Z" fill="currentColor"/>
+                    <path d="M20 9C20 7.34315 18.6569 6 17 6C16.3439 6 15.7412 6.23093 15.2676 6.61803C15.0935 5.12369 13.8284 4 12.5 4C11.1716 4 9.90646 5.12369 9.73244 6.61803C9.25884 6.23093 8.65606 6 8 6C6.34315 6 5 7.34315 5 9V10H20V9Z" fill="currentColor"/>
+                    <rect x="6" y="10" width="12" height="10" rx="1" fill="currentColor"/>
+                    <rect x="10" y="14" width="4" height="6" fill="white"/>
+                    <circle cx="8.5" cy="13" r="0.5" fill="white"/>
+                    <circle cx="15.5" cy="13" r="0.5" fill="white"/>
+                </svg>
+                <h1>Ezan Vakti Pro</h1>
+            </div>
+            <div class="date-time">
+                <div class="current-date" id="currentDate"></div>
+                <div class="current-time" id="currentTime"></div>
+            </div>
+        </header>
+
+        <!-- City Selection -->
+        <div class="city-selection">
+            <div class="select-wrapper">
+                <svg class="location-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" fill="currentColor"/>
+                </svg>
+                <select id="citySelect" class="city-select">
+                    <option value="">Şehir Seçiniz...</option>
+                    <option value="Istanbul">İstanbul</option>
+                    <option value="Ankara">Ankara</option>
+                    <option value="Izmir">İzmir</option>
+                    <option value="Bursa">Bursa</option>
+                    <option value="Antalya">Antalya</option>
+                    <option value="Adana">Adana</option>
+                    <option value="Konya">Konya</option>
+                    <option value="Gaziantep">Gaziantep</option>
+                    <option value="Kayseri">Kayseri</option>
+                    <option value="Mersin">Mersin</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Next Prayer -->
+        <div class="next-prayer-card" id="nextPrayerCard">
+            <div class="next-prayer-label">Bir Sonraki Namaz</div>
+            <div class="next-prayer-name" id="nextPrayerName">-</div>
+            <div class="countdown" id="countdown">--:--:--</div>
+            <div class="next-prayer-time" id="nextPrayerTime">--:--</div>
+        </div>
+
+        <!-- Prayer Times -->
+        <div class="prayer-times" id="prayerTimes">
+            <div class="prayer-card" data-prayer="imsak">
+                <div class="prayer-icon">🌙</div>
+                <div class="prayer-info">
+                    <div class="prayer-name">İmsak</div>
+                    <div class="prayer-time" id="imsak">--:--</div>
+                </div>
+            </div>
+
+            <div class="prayer-card" data-prayer="gunes">
+                <div class="prayer-icon">🌅</div>
+                <div class="prayer-info">
+                    <div class="prayer-name">Güneş</div>
+                    <div class="prayer-time" id="gunes">--:--</div>
+                </div>
+            </div>
+
+            <div class="prayer-card" data-prayer="ogle">
+                <div class="prayer-icon">☀️</div>
+                <div class="prayer-info">
+                    <div class="prayer-name">Öğle</div>
+                    <div class="prayer-time" id="ogle">--:--</div>
+                </div>
+            </div>
+
+            <div class="prayer-card" data-prayer="ikindi">
+                <div class="prayer-icon">🌤️</div>
+                <div class="prayer-info">
+                    <div class="prayer-name">İkindi</div>
+                    <div class="prayer-time" id="ikindi">--:--</div>
+                </div>
+            </div>
+
+            <div class="prayer-card" data-prayer="aksam">
+                <div class="prayer-icon">🌆</div>
+                <div class="prayer-info">
+                    <div class="prayer-name">Akşam</div>
+                    <div class="prayer-time" id="aksam">--:--</div>
+                </div>
+            </div>
+
+            <div class="prayer-card" data-prayer="yatsi">
+                <div class="prayer-icon">🌃</div>
+                <div class="prayer-info">
+                    <div class="prayer-name">Yatsı</div>
+                    <div class="prayer-time" id="yatsi">--:--</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading -->
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Namaz vakitleri yükleniyor...</p>
+        </div>
+
+        <!-- Error Message -->
+        <div class="error-message" id="errorMessage"></div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Namaz vakitleri bilgileri Diyanet İşleri Başkanlığı verilerine dayanmaktadır.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
