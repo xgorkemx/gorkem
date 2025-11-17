@@ -60,6 +60,26 @@
             <div class="next-prayer-time" id="nextPrayerTime">--:--</div>
         </div>
 
+        <!-- Feature Buttons -->
+        <div class="feature-buttons">
+            <button class="feature-btn" id="qiblaBtn" title="Kıble Yönü">
+                <span class="feature-icon">🧭</span>
+                <span class="feature-text">Kıble</span>
+            </button>
+            <button class="feature-btn" id="tasbihBtn" title="Tesbih">
+                <span class="feature-icon">📿</span>
+                <span class="feature-text">Tesbih</span>
+            </button>
+            <button class="feature-btn" id="notificationBtn" title="Bildirimler">
+                <span class="feature-icon">🔔</span>
+                <span class="feature-text">Bildirim</span>
+            </button>
+            <button class="feature-btn" id="locationBtn" title="Konumumu Bul">
+                <span class="feature-icon">📍</span>
+                <span class="feature-text">Konum</span>
+            </button>
+        </div>
+
         <!-- Prayer Times -->
         <div class="prayer-times" id="prayerTimes">
             <div class="prayer-card" data-prayer="imsak">
@@ -125,6 +145,168 @@
             <p>Namaz vakitleri bilgileri Diyanet İşleri Başkanlığı verilerine dayanmaktadır.</p>
         </footer>
     </div>
+
+    <!-- Qibla Modal -->
+    <div class="modal" id="qiblaModal">
+        <div class="modal-content qibla-content">
+            <div class="modal-header">
+                <h2>🧭 Kıble Yönü</h2>
+                <button class="close-btn" onclick="closeModal('qiblaModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="qibla-compass" id="qiblaCompass">
+                    <div class="compass-outer">
+                        <div class="compass-needle" id="compassNeedle">
+                            <div class="needle-north"></div>
+                        </div>
+                        <div class="compass-direction qibla-direction" id="qiblaDirection">
+                            <div class="kaaba-icon">🕋</div>
+                        </div>
+                        <div class="compass-label north">K</div>
+                        <div class="compass-label east">D</div>
+                        <div class="compass-label south">G</div>
+                        <div class="compass-label west">B</div>
+                    </div>
+                </div>
+                <div class="qibla-info">
+                    <p class="qibla-angle" id="qiblaAngle">Kıble Açısı: <strong>--°</strong></p>
+                    <p class="qibla-distance" id="qiblaDistance">Kabe'ye Uzaklık: <strong>-- km</strong></p>
+                    <p class="qibla-note">📱 Cihazınızı yatay tutun ve pusulanın kırmızı oku Kabe ikonuna gelecek şekilde yönlendirin.</p>
+                </div>
+                <button class="btn-primary" id="calibrateBtn">🔄 Pusulayı Kalibre Et</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tasbih Modal -->
+    <div class="modal" id="tasbihModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📿 Dijital Tesbih</h2>
+                <button class="close-btn" onclick="closeModal('tasbihModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="tasbih-counter">
+                    <div class="count-display" id="tasbihCount">0</div>
+                    <div class="count-label">/ 33</div>
+                </div>
+                <button class="tasbih-btn" id="tasbihClickBtn">
+                    <span class="tasbih-btn-icon">📿</span>
+                    <span>Zikir</span>
+                </button>
+                <div class="tasbih-controls">
+                    <button class="btn-secondary" id="tasbihReset">🔄 Sıfırla</button>
+                    <button class="btn-secondary" id="tasbihTarget">🎯 Hedef: 33</button>
+                </div>
+                <div class="tasbih-prayers">
+                    <h3>Namaz Sonrası Zikirler</h3>
+                    <div class="prayer-text-card">
+                        <p class="arabic">سُبْحَانَ اللهِ</p>
+                        <p class="turkish">Subhanallah (33 defa)</p>
+                    </div>
+                    <div class="prayer-text-card">
+                        <p class="arabic">اَلْحَمْدُ لِلّٰهِ</p>
+                        <p class="turkish">Elhamdülillah (33 defa)</p>
+                    </div>
+                    <div class="prayer-text-card">
+                        <p class="arabic">اَللّٰهُ اَكْبَرُ</p>
+                        <p class="turkish">Allahu Ekber (33 defa)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Settings Modal -->
+    <div class="modal" id="notificationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🔔 Bildirim Ayarları</h2>
+                <button class="close-btn" onclick="closeModal('notificationModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="notification-status" id="notificationStatus">
+                    <p>Bildirim izni bekleniyor...</p>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Ezan Vakti Bildirimleri</h3>
+                    <div class="setting-item">
+                        <label class="switch">
+                            <input type="checkbox" id="notifyImsak">
+                            <span class="slider"></span>
+                        </label>
+                        <span>İmsak</span>
+                    </div>
+                    <div class="setting-item">
+                        <label class="switch">
+                            <input type="checkbox" id="notifyOgle" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <span>Öğle</span>
+                    </div>
+                    <div class="setting-item">
+                        <label class="switch">
+                            <input type="checkbox" id="notifyIkindi" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <span>İkindi</span>
+                    </div>
+                    <div class="setting-item">
+                        <label class="switch">
+                            <input type="checkbox" id="notifyAksam" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <span>Akşam</span>
+                    </div>
+                    <div class="setting-item">
+                        <label class="switch">
+                            <input type="checkbox" id="notifyYatsi" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <span>Yatsı</span>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Ezan Sesi</h3>
+                    <div class="setting-item">
+                        <label class="switch">
+                            <input type="checkbox" id="playAdhan" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <span>Ezan sesini çal</span>
+                    </div>
+                    <div class="volume-control">
+                        <label>Ses Seviyesi</label>
+                        <input type="range" id="volumeSlider" min="0" max="100" value="70">
+                        <span id="volumeValue">70%</span>
+                    </div>
+                    <button class="btn-secondary" id="testAdhanBtn">🔊 Ezan Sesini Dene</button>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Erken Uyarı</h3>
+                    <div class="setting-item">
+                        <label>Namaz vaktinden önce bildir:</label>
+                        <select id="earlyWarning">
+                            <option value="0">Vakti geldiğinde</option>
+                            <option value="5">5 dakika önce</option>
+                            <option value="10">10 dakika önce</option>
+                            <option value="15">15 dakika önce</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="btn-primary" id="requestNotificationBtn">🔔 Bildirimleri Etkinleştir</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio element for Adhan -->
+    <audio id="adhanAudio" preload="none">
+        <source src="https://www.islamcan.com/audio/ezan/ezan-1.mp3" type="audio/mpeg">
+    </audio>
 
     <script src="script.js"></script>
 </body>
