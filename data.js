@@ -477,7 +477,239 @@ const shortSurahs = [
     }
 ];
 
+// ========== CATEGORY B: CONTENT EXPANSION ==========
+
+// Daily Hadiths
+const dailyHadiths = [
+    {
+        id: 1,
+        arabic: "إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ",
+        turkish: "Ameller niyetlere göredir.",
+        source: "Buhari, Müslim",
+        explanation: "Her işin değeri niyete bağlıdır. İyi niyet olmadan yapılan ibadetlerin değeri yoktur."
+    },
+    {
+        id: 2,
+        arabic: "الدِّينُ النَّصِيحَةُ",
+        turkish: "Din nasihattir.",
+        source: "Müslim",
+        explanation: "Din kardeşlerine öğüt vermek ve doğru yolu göstermektir."
+    },
+    {
+        id: 3,
+        arabic: "خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ",
+        turkish: "Sizin en hayırlınız Kur'an'ı öğrenen ve öğretendir.",
+        source: "Buhari",
+        explanation: "Kur'an okumak, anlamak ve başkalarına öğretmek büyük sevaptır."
+    },
+    {
+        id: 4,
+        arabic: "مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الْآخِرِ فَلْيُكْرِمْ ضَيْفَهُ",
+        turkish: "Allah'a ve ahiret gününe iman eden kimse, misafirine ikram etsin.",
+        source: "Buhari, Müslim",
+        explanation: "Misafirperverlik İslam'ın güzel ahlakındandır."
+    },
+    {
+        id: 5,
+        arabic: "الْمُسْلِمُ مَنْ سَلِمَ الْمُسْلِمُونَ مِنْ لِسَانِهِ وَيَدِهِ",
+        turkish: "Müslüman, diğer müslümanları dilinden ve elinden emin kılandır.",
+        source: "Buhari, Müslim",
+        explanation: "Gerçek müslüman kimseye kötülük yapmaz, herkese iyilik eder."
+    },
+    {
+        id: 6,
+        arabic: "لَا يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لِأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ",
+        turkish: "Sizden biriniz, kendisi için istediğini kardeşi için de istemedikçe iman etmiş olmaz.",
+        source: "Buhari, Müslim",
+        explanation: "Başkalarını düşünmek ve onların iyiliğini istemek iman gereğidir."
+    },
+    {
+        id: 7,
+        arabic: "مَنْ صَلَّى الْبَرْدَيْنِ دَخَلَ الْجَنَّةَ",
+        turkish: "İki serin namazı (sabah ve ikindi) kılan cennete girer.",
+        source: "Buhari",
+        explanation: "Sabah ve ikindi namazlarını kılmak cennetin anahtarıdır."
+    }
+];
+
+// 40 Hadith Collection (Imam Nawawi)
+const fortyHadiths = [
+    {
+        id: 1,
+        number: 1,
+        title: "Niyet",
+        arabic: "إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى",
+        turkish: "Ameller niyetlere göredir. Herkes için niyet ettiği vardır.",
+        source: "Buhari, Müslim",
+        explanation: "Bu hadis İslam'ın temellerinden biridir. Yapılan her işin kıymeti niyete bağlıdır."
+    },
+    {
+        id: 2,
+        number: 2,
+        title: "İman, İslam ve İhsan",
+        arabic: "الْإِسْلَامُ أَنْ تَشْهَدَ أَنْ لَا إلَهَ إلَّا اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ",
+        turkish: "İslam, Allah'tan başka ilah olmadığına ve Muhammed'in Allah'ın elçisi olduğuna şahitlik etmendir.",
+        source: "Buhari, Müslim",
+        explanation: "Cebrail hadisi olarak da bilinir. İman, İslam ve İhsan'ı açıklar."
+    },
+    {
+        id: 3,
+        number: 3,
+        title: "İslamın Temelleri",
+        arabic: "بُنِيَ الْإِسْلَامُ عَلَى خَمْسٍ",
+        turkish: "İslam beş temel üzerine kurulmuştur: Kelime-i şahadet, namaz, zekat, oruç ve hac.",
+        source: "Buhari, Müslim",
+        explanation: "İslam'ın beş şartını açıklayan hadistir."
+    },
+    {
+        id: 4,
+        number: 4,
+        title: "İnsan Yaratılışı",
+        arabic: "إِنَّ أَحَدَكُمْ يُجْمَعُ خَلْقُهُ فِي بَطْنِ أُمِّهِ أَرْبَعِينَ يَوْمًا",
+        turkish: "Sizden birinin yaratılışı, annesinin karnında kırk gün toplanır.",
+        source: "Buhari, Müslim",
+        explanation: "İnsanın yaratılış aşamalarını ve kader konusunu açıklar."
+    },
+    {
+        id: 5,
+        number: 5,
+        title: "Bid'at",
+        arabic: "مَنْ أَحْدَثَ فِي أَمْرِنَا هَذَا مَا لَيْسَ مِنْهُ فَهُوَ رَدٌّ",
+        turkish: "Kim dinimizde olmayan bir şey ortaya koyarsa, o reddedilir.",
+        source: "Buhari, Müslim",
+        explanation: "Dinde olmayan yeniliklerin (bid'at) reddedildiğini belirtir."
+    }
+];
+
+// Prophet Stories
+const prophetStories = [
+    {
+        id: 1,
+        prophet: "Hz. Muhammed (S.A.V)",
+        title: "Hira Mağarası'nda İlk Vahiy",
+        story: "Peygamber Efendimiz 40 yaşında iken Hira Mağarası'nda ibadet ederken Cebrail aleyhisselam geldi ve 'Oku!' dedi. Peygamberimiz 'Ben okuma bilmem' dedi. Cebrail üç kez aynı şeyi tekrar etti ve Alak Suresi'nin ilk ayetlerini getirdi. Bu, İslam'ın başlangıcıydı.",
+        lesson: "İlim öğrenmek ve okumak İslam'ın temelidir.",
+        date: "610 (Miladi)"
+    },
+    {
+        id: 2,
+        prophet: "Hz. Muhammed (S.A.V)",
+        title: "Hicret",
+        story: "Müşriklerin baskıları arttığında, Peygamber Efendimiz Allah'ın emriyle Mekke'den Medine'ye hicret etti. Bu yolculuk çok zorlu geçti ancak Allah onları korudu. Medine'de İslam devleti kuruldu.",
+        lesson: "Zorluklara sabretmek ve Allah'a güvenmek önemlidir.",
+        date: "622 (Miladi) - Hicri Takvimin Başlangıcı"
+    },
+    {
+        id: 3,
+        prophet: "Hz. İbrahim (A.S)",
+        title: "Putları Kırması",
+        story: "Hz. İbrahim kavminin puta tapmasına çok üzülüyordu. Bir gün herkes şehir dışına çıktığında, en büyük put hariç hepsini kırdı ve baltayı büyük putun boynuna astı. Döndüklerinde 'Bunu kim yaptı?' dediler. İbrahim 'En büyüğüne sorun, belki o söyler' dedi. Böylece putların konuşamayacağını, güçsüz olduğunu gösterdi.",
+        lesson: "Tek Allah'a inanmak ve putlara tapmamak gerekir.",
+        date: "M.Ö 2000"
+    },
+    {
+        id: 4,
+        prophet: "Hz. Nuh (A.S)",
+        title: "Büyük Tufan ve Gemi",
+        story: "Hz. Nuh 950 yıl kavmini Allah'a iman etmeye çağırdı ama çok azı inandı. Allah ona bir gemi yapmasını emretti. Kavmi ona güldü. Tufan geldiğinde sadece gemidekiler kurtuldu. Hz. Nuh'un oğlu bile inanmadığı için boğuldu.",
+        lesson: "Allah'a itaat etmek ve sabırlı olmak önemlidir.",
+        date: "M.Ö 3000"
+    },
+    {
+        id: 5,
+        prophet: "Hz. Musa (A.S)",
+        title: "Denizin Yarılması",
+        story: "Firavun ve ordusu Hz. Musa ve İsrailoğullarını takip ediyordu. Deniz kıyısına sıkıştıklarında, Hz. Musa asasıyla denize vurdu ve Allah'ın izniyle deniz yarıldı. Müslümanlar geçti ama Firavun ve ordusu boğuldu.",
+        lesson: "Allah'a güvenen asla yalnız kalmaz.",
+        date: "M.Ö 1300"
+    },
+    {
+        id: 6,
+        prophet: "Hz. Yusuf (A.S)",
+        title: "Kuyudan Saraya",
+        story: "Hz. Yusuf'un kardeşleri kıskançlıktan onu kuyuya attılar. Bir kervan buldu ve Mısır'a götürdü. Yıllar sonra rüya yorumlama yeteneğiyle Mısır veziri oldu. Kardeşleri yardım istemeye geldiğinde onları affetti.",
+        lesson: "Sabır, affetmek ve Allah'a güvenmek her zorluğu aşar.",
+        date: "M.Ö 1800"
+    }
+];
+
+// Islamic Calendar Events
+const islamicEvents = [
+    {
+        id: 1,
+        name: "Regaib Kandili",
+        hijriMonth: 7,
+        hijriDay: "İlk Cuma Gecesi",
+        description: "Recep ayının ilk cuma gecesi. Bu gece ibadet edenlerin günahları bağışlanır.",
+        significance: "Özel ibadet gecesi",
+        prayers: "Nafile namaz, Kur'an okuma, istiğfar"
+    },
+    {
+        id: 2,
+        name: "Miraç Kandili",
+        hijriMonth: 7,
+        hijriDay: 27,
+        description: "Peygamber Efendimizin göğe yükseldiği gece. Beş vakit namaz bu gece farz kılındı.",
+        significance: "Peygamberimizin Miraç'a çıktığı gece",
+        prayers: "Gece ibadeti, namaz, dua"
+    },
+    {
+        id: 3,
+        name: "Berat Kandili",
+        hijriMonth: 8,
+        hijriDay: 15,
+        description: "Şaban ayının 15. gecesi. Bu gece yapılan dualar kabul edilir, gelecek yılın kaderi belirlenir.",
+        significance: "Bağışlanma ve af gecesi",
+        prayers: "Tövbe, istiğfar, nafile namaz"
+    },
+    {
+        id: 4,
+        name: "Kadir Gecesi",
+        hijriMonth: 9,
+        hijriDay: "27 (genellikle)",
+        description: "Bin aydan hayırlı gece. Kur'an-ı Kerim bu gece inmeye başladı.",
+        significance: "En değerli gece, bin aydan hayırlı",
+        prayers: "Kur'an okuma, teravih, teheccüd"
+    },
+    {
+        id: 5,
+        name: "Ramazan Bayramı",
+        hijriMonth: 10,
+        hijriDay: "1-3",
+        description: "Ramazan orucunun sonunda kutlanan bayram. Üç gün sürer.",
+        significance: "Ramazan sevinci, fıtır sadakası",
+        prayers: "Bayram namazı, ziyaretler"
+    },
+    {
+        id: 6,
+        name: "Kurban Bayramı",
+        hijriMonth: 12,
+        hijriDay: "10-13",
+        description: "Hz. İbrahim'in oğlu İsmail'i kurban etmeye hazır oluşunun hatırası. Dört gün sürer.",
+        significance: "Kurban kesme, hac ibadeti",
+        prayers: "Bayram namazı, kurban kesimi"
+    },
+    {
+        id: 7,
+        name: "Aşure Günü",
+        hijriMonth: 1,
+        hijriDay: 10,
+        description: "Muharrem ayının 10. günü. Hz. Nuh'un gemisi karaya oturdu, Hz. Musa denizi geçti.",
+        significance: "Tarihi olayların hatırası, oruç tutulur",
+        prayers: "Oruç, aşure ikramı"
+    },
+    {
+        id: 8,
+        name: "Mevlid Kandili",
+        hijriMonth: 3,
+        hijriDay: 12,
+        description: "Peygamber Efendimizin doğum günü. O'nu anma ve şükretme gecesi.",
+        significance: "Peygamberimizi anma gecesi",
+        prayers: "Mevlit okuma, salavat getirme"
+    }
+];
+
 // Export data
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { esmaUlHusna, prayers, shortSurahs };
+    module.exports = { esmaUlHusna, prayers, shortSurahs, dailyHadiths, fortyHadiths, prophetStories, islamicEvents };
 }

@@ -202,6 +202,26 @@
                 <span class="feature-icon">🕌</span>
                 <span class="feature-text">Ezan</span>
             </button>
+            <button class="feature-btn" id="hadithBtn" title="Günün Hadisi">
+                <span class="feature-icon">📖</span>
+                <span class="feature-text">Günlük Hadis</span>
+            </button>
+            <button class="feature-btn" id="fortyHadithBtn" title="40 Hadis">
+                <span class="feature-icon">📚</span>
+                <span class="feature-text">40 Hadis</span>
+            </button>
+            <button class="feature-btn" id="storiesBtn" title="Peygamber Kıssaları">
+                <span class="feature-icon">👳</span>
+                <span class="feature-text">Kıssalar</span>
+            </button>
+            <button class="feature-btn" id="eventsBtn" title="Dini Günler">
+                <span class="feature-icon">📅</span>
+                <span class="feature-text">Dini Günler</span>
+            </button>
+            <button class="feature-btn" id="juzBtn" title="Cüz Takibi">
+                <span class="feature-icon">📗</span>
+                <span class="feature-text">Cüz Takibi</span>
+            </button>
         </div>
 
         <!-- Prayer Times -->
@@ -637,6 +657,39 @@
                     </div>
                 </div>
 
+                <div class="settings-section">
+                    <h3>🌍 Dil Ayarları</h3>
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Uygulama Dili</span>
+                        </div>
+                        <select id="languageSelect" class="setting-select" onchange="setLanguage(this.value)">
+                            <option value="tr">Türkçe</option>
+                            <option value="en">English</option>
+                            <option value="ar">العربية</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Arapça Font Boyutu</span>
+                        </div>
+                        <select id="fontSizeSelect" class="setting-select" onchange="setFontSize(this.value)">
+                            <option value="small">Küçük</option>
+                            <option value="medium">Orta</option>
+                            <option value="large">Büyük</option>
+                            <option value="xlarge">Çok Büyük</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>💾 Veri Yönetimi</h3>
+                    <div class="setting-item">
+                        <button class="primary-btn" onclick="exportData()">📤 Verileri Dışa Aktar</button>
+                        <button class="primary-btn" onclick="importData()">📥 Verileri İçe Aktar</button>
+                    </div>
+                </div>
+
                 <div class="settings-actions">
                     <button class="primary-btn" onclick="saveSettings()">💾 Ayarları Kaydet</button>
                 </div>
@@ -682,6 +735,91 @@
             </div>
             <div class="modal-body">
                 <div id="adhanSettingsContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Daily Hadith Modal -->
+    <div class="modal" id="hadithModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📖 Günün Hadisi</h2>
+                <button class="close-btn" onclick="closeModal('hadithModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="dailyHadithContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 40 Hadith Modal -->
+    <div class="modal" id="fortyHadithModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📚 40 Hadis (İmam Nevevi)</h2>
+                <button class="close-btn" onclick="closeModal('fortyHadithModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="fortyHadithsList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Prophet Stories Modal -->
+    <div class="modal" id="storiesModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>👳 Peygamber Kıssaları</h2>
+                <button class="close-btn" onclick="closeModal('storiesModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="prophetStoriesList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Islamic Events Modal -->
+    <div class="modal" id="eventsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📅 Dini Günler Takvimi</h2>
+                <button class="close-btn" onclick="closeModal('eventsModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="islamicEventsList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Juz Tracker Modal -->
+    <div class="modal" id="juzModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📗 Kur'an Cüz Takibi</h2>
+                <button class="close-btn" onclick="closeModal('juzModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="juz-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">Tamamlanan</div>
+                        <div class="stat-value" id="juzCompleted">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Kalan</div>
+                        <div class="stat-value" id="juzRemaining">30</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">İlerleme</div>
+                        <div class="stat-value" id="juzPercentage">0%</div>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="juzProgressBar" style="width: 0%"></div>
+                </div>
+                <div id="juzTrackerGrid" class="juz-grid"></div>
+                <div class="juz-actions">
+                    <button class="primary-btn" onclick="resetJuzTracker()">🔄 Sıfırla</button>
+                </div>
             </div>
         </div>
     </div>

@@ -1271,7 +1271,8 @@ function getWidgetOrder() {
     return stored ? JSON.parse(stored) : [
         'qiblaBtn', 'tasbihBtn', 'trackBtn', 'notificationBtn',
         'locationBtn', 'esmaBtn', 'prayerBookBtn', 'surahBtn',
-        'ramadanBtn', 'alarmBtn', 'adhanSettingsBtn'
+        'ramadanBtn', 'alarmBtn', 'adhanSettingsBtn',
+        'hadithBtn', 'fortyHadithBtn', 'storiesBtn', 'eventsBtn', 'juzBtn'
     ];
 }
 
@@ -1565,7 +1566,12 @@ function loadWidgetCustomization() {
         'surahBtn': 'Sureler',
         'ramadanBtn': 'Ramazan',
         'alarmBtn': 'Alarmlar',
-        'adhanSettingsBtn': 'Ezan'
+        'adhanSettingsBtn': 'Ezan',
+        'hadithBtn': 'Günlük Hadis',
+        'fortyHadithBtn': '40 Hadis',
+        'storiesBtn': 'Kıssalar',
+        'eventsBtn': 'Dini Günler',
+        'juzBtn': 'Cüz Takibi'
     };
 
     widgetList.innerHTML = order.map(btnId => {
@@ -2117,4 +2123,559 @@ document.getElementById('alarmBtn')?.addEventListener('click', () => {
 document.getElementById('adhanSettingsBtn')?.addEventListener('click', () => {
     openModal('adhanModal');
     loadAdhanSettings();
+});
+
+// ========== CATEGORY B: CONTENT EXPANSION ==========
+
+// ========== DAILY HADITH ==========
+const LAST_HADITH_DATE_KEY = 'ezanvakti_last_hadith_date';
+
+function getTodaysHadith() {
+    const today = new Date().toDateString();
+    const lastDate = localStorage.getItem(LAST_HADITH_DATE_KEY);
+
+    // Calculate index based on day of year
+    const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+    const index = dayOfYear % dailyHadiths.length;
+
+    return dailyHadiths[index];
+}
+
+function loadDailyHadith() {
+    const container = document.getElementById('dailyHadithContainer');
+    if (!container) return;
+
+    const hadith = getTodaysHadith();
+
+    container.innerHTML = `
+        <div class="hadith-card">
+            <div class="hadith-header">
+                <span class="hadith-icon">📖</span>
+                <h3>Günün Hadisi</h3>
+            </div>
+            <div class="hadith-arabic">${hadith.arabic}</div>
+            <div class="hadith-turkish">${hadith.turkish}</div>
+            <div class="hadith-source">Kaynak: ${hadith.source}</div>
+            <div class="hadith-explanation">
+                <strong>Açıklama:</strong> ${hadith.explanation}
+            </div>
+            <div class="item-actions">
+                <button class="action-btn favorite-btn" onclick="handleFavorite('hadith', ${hadith.id}, this)" title="Favorilere ekle">
+                    <span class="action-icon">☆</span>
+                </button>
+                <button class="action-btn speak-btn" onclick="handleSpeak('${hadith.arabic.replace(/'/g, "\\'")}', this)" title="Sesli oku">
+                    <span class="action-icon">🔊</span>
+                </button>
+                <button class="action-btn share-btn" onclick="handleShare('Günün Hadisi', '${hadith.arabic}\\n\\n${hadith.turkish}\\n\\nKaynak: ${hadith.source}')" title="Paylaş">
+                    <span class="action-icon">📤</span>
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+// ========== 40 HADITH COLLECTION ==========
+function loadFortyHadiths() {
+    const container = document.getElementById('fortyHadithsList');
+    if (!container) return;
+
+    container.innerHTML = fortyHadiths.map(hadith => {
+        const favorited = isFavorited('fortyHadiths', hadith.id);
+        return `
+            <div class="hadith-item">
+                <div class="hadith-number">Hadis ${hadith.number}</div>
+                <div class="hadith-title">${hadith.title}</div>
+                <div class="hadith-arabic">${hadith.arabic}</div>
+                <div class="hadith-turkish">${hadith.turkish}</div>
+                <div class="hadith-source">Kaynak: ${hadith.source}</div>
+                <div class="hadith-explanation">${hadith.explanation}</div>
+                <div class="item-actions">
+                    <button class="action-btn favorite-btn ${favorited ? 'favorited' : ''}"
+                            onclick="handleFavorite('fortyHadiths', ${hadith.id}, this)"
+                            title="Favorilere ekle">
+                        <span class="action-icon">${favorited ? '⭐' : '☆'}</span>
+                    </button>
+                    <button class="action-btn speak-btn"
+                            onclick="handleSpeak('${hadith.arabic.replace(/'/g, "\\'")}', this)"
+                            title="Sesli oku">
+                        <span class="action-icon">🔊</span>
+                    </button>
+                    <button class="action-btn share-btn"
+                            onclick="handleShare('${hadith.title}', '${hadith.arabic}\\n\\n${hadith.turkish}\\n\\nKaynak: ${hadith.source}')"
+                            title="Paylaş">
+                        <span class="action-icon">📤</span>
+                    </button>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+// ========== PROPHET STORIES ==========
+function loadProphetStories() {
+    const container = document.getElementById('prophetStoriesList');
+    if (!container) return;
+
+    container.innerHTML = prophetStories.map(story => {
+        const favorited = isFavorited('stories', story.id);
+        return `
+            <div class="story-item">
+                <div class="story-header">
+                    <div class="story-prophet">${story.prophet}</div>
+                    <div class="story-date">${story.date}</div>
+                </div>
+                <div class="story-title">${story.title}</div>
+                <div class="story-content">${story.story}</div>
+                <div class="story-lesson">
+                    <strong>📚 Ders:</strong> ${story.lesson}
+                </div>
+                <div class="item-actions">
+                    <button class="action-btn favorite-btn ${favorited ? 'favorited' : ''}"
+                            onclick="handleFavorite('stories', ${story.id}, this)"
+                            title="Favorilere ekle">
+                        <span class="action-icon">${favorited ? '⭐' : '☆'}</span>
+                    </button>
+                    <button class="action-btn share-btn"
+                            onclick="handleShare('${story.title}', '${story.prophet}\\n${story.title}\\n\\n${story.story}\\n\\nDers: ${story.lesson}')"
+                            title="Paylaş">
+                        <span class="action-icon">📤</span>
+                    </button>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+// ========== ISLAMIC EVENTS CALENDAR ==========
+function loadIslamicEvents() {
+    const container = document.getElementById('islamicEventsList');
+    if (!container) return;
+
+    const hijriDate = getCurrentHijriDate();
+
+    container.innerHTML = islamicEvents.map(event => {
+        const isCurrentMonth = event.hijriMonth === hijriDate.month;
+        const monthName = getHijriMonthName(event.hijriMonth);
+
+        return `
+            <div class="event-item ${isCurrentMonth ? 'current-month' : ''}">
+                <div class="event-badge">${isCurrentMonth ? '📍 Bu Ay' : '📅'}</div>
+                <div class="event-name">${event.name}</div>
+                <div class="event-date">
+                    ${monthName} ${event.hijriDay}
+                </div>
+                <div class="event-description">${event.description}</div>
+                <div class="event-significance">
+                    <strong>⭐ Önemi:</strong> ${event.significance}
+                </div>
+                <div class="event-prayers">
+                    <strong>🤲 İbadetler:</strong> ${event.prayers}
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+// ========== JUZ TRACKER ==========
+const JUZ_TRACKER_KEY = 'ezanvakti_juz_tracker';
+
+function getJuzProgress() {
+    const stored = localStorage.getItem(JUZ_TRACKER_KEY);
+    return stored ? JSON.parse(stored) : Array(30).fill(false);
+}
+
+function saveJuzProgress(progress) {
+    localStorage.setItem(JUZ_TRACKER_KEY, JSON.stringify(progress));
+}
+
+function loadJuzTracker() {
+    const container = document.getElementById('juzTrackerGrid');
+    if (!container) return;
+
+    const progress = getJuzProgress();
+    const completed = progress.filter(Boolean).length;
+
+    // Update stats
+    document.getElementById('juzCompleted').textContent = completed;
+    document.getElementById('juzRemaining').textContent = 30 - completed;
+    document.getElementById('juzPercentage').textContent = Math.round((completed / 30) * 100);
+
+    // Update progress bar
+    const progressBar = document.getElementById('juzProgressBar');
+    if (progressBar) {
+        progressBar.style.width = `${(completed / 30) * 100}%`;
+    }
+
+    container.innerHTML = Array.from({ length: 30 }, (_, i) => {
+        const juzNum = i + 1;
+        const isCompleted = progress[i];
+
+        return `
+            <div class="juz-item ${isCompleted ? 'completed' : ''}"
+                 onclick="toggleJuz(${i})">
+                <div class="juz-number">${juzNum}</div>
+                <div class="juz-check">${isCompleted ? '✓' : ''}</div>
+            </div>
+        `;
+    }).join('');
+}
+
+function toggleJuz(index) {
+    vibrate('short');
+    const progress = getJuzProgress();
+    progress[index] = !progress[index];
+    saveJuzProgress(progress);
+    loadJuzTracker();
+}
+
+function resetJuzTracker() {
+    if (confirm('Tüm cüz takibini sıfırlamak istediğinize emin misiniz?')) {
+        saveJuzProgress(Array(30).fill(false));
+        loadJuzTracker();
+        showMessage('Cüz takibi sıfırlandı', 'success');
+    }
+}
+
+// ========== CATEGORY E: TECHNICAL IMPROVEMENTS ==========
+
+// ========== MULTI-LANGUAGE SUPPORT ==========
+const LANGUAGE_KEY = 'ezanvakti_language';
+
+const translations = {
+    tr: {
+        appTitle: 'Ezan Vakti Pro',
+        nextPrayer: 'Bir Sonraki Namaz',
+        prayerTimes: 'Namaz Vakitleri',
+        settings: 'Ayarlar',
+        language: 'Dil',
+        fontSize: 'Font Boyutu',
+        backup: 'Yedekleme',
+        restore: 'Geri Yükle',
+        imsak: 'İmsak',
+        gunes: 'Güneş',
+        ogle: 'Öğle',
+        ikindi: 'İkindi',
+        aksam: 'Akşam',
+        yatsi: 'Yatsı'
+    },
+    en: {
+        appTitle: 'Prayer Times Pro',
+        nextPrayer: 'Next Prayer',
+        prayerTimes: 'Prayer Times',
+        settings: 'Settings',
+        language: 'Language',
+        fontSize: 'Font Size',
+        backup: 'Backup',
+        restore: 'Restore',
+        imsak: 'Fajr',
+        gunes: 'Sunrise',
+        ogle: 'Dhuhr',
+        ikindi: 'Asr',
+        aksam: 'Maghrib',
+        yatsi: 'Isha'
+    },
+    ar: {
+        appTitle: 'أوقات الصلاة',
+        nextPrayer: 'الصلاة القادمة',
+        prayerTimes: 'أوقات الصلاة',
+        settings: 'الإعدادات',
+        language: 'اللغة',
+        fontSize: 'حجم الخط',
+        backup: 'النسخ الاحتياطي',
+        restore: 'استعادة',
+        imsak: 'الإمساك',
+        gunes: 'الشروق',
+        ogle: 'الظهر',
+        ikindi: 'العصر',
+        aksam: 'المغرب',
+        yatsi: 'العشاء'
+    }
+};
+
+function getCurrentLanguage() {
+    return localStorage.getItem(LANGUAGE_KEY) || 'tr';
+}
+
+function setLanguage(lang) {
+    localStorage.setItem(LANGUAGE_KEY, lang);
+    applyLanguage(lang);
+    showMessage('Dil değiştirildi / Language changed / تم تغيير اللغة', 'success');
+}
+
+function applyLanguage(lang) {
+    const t = translations[lang];
+    if (!t) return;
+
+    // Update prayer names (keep times as is)
+    const prayerNames = document.querySelectorAll('.prayer-name');
+    const prayerKeys = ['imsak', 'gunes', 'ogle', 'ikindi', 'aksam', 'yatsi'];
+    prayerNames.forEach((el, i) => {
+        if (prayerKeys[i] && t[prayerKeys[i]]) {
+            el.textContent = t[prayerKeys[i]];
+        }
+    });
+
+    // Update other UI elements
+    document.querySelector('.logo h1')?.textContent = t.appTitle || document.querySelector('.logo h1')?.textContent;
+    document.querySelector('.next-prayer-label')?.textContent = t.nextPrayer || document.querySelector('.next-prayer-label')?.textContent;
+}
+
+// ========== FONT SIZE CONTROL ==========
+const FONT_SIZE_KEY = 'ezanvakti_font_size';
+
+function getFontSize() {
+    return localStorage.getItem(FONT_SIZE_KEY) || 'medium';
+}
+
+function setFontSize(size) {
+    localStorage.setItem(FONT_SIZE_KEY, size);
+    applyFontSize(size);
+}
+
+function applyFontSize(size) {
+    const root = document.documentElement;
+    const sizes = {
+        small: {
+            arabic: '1.2rem',
+            turkish: '0.9rem'
+        },
+        medium: {
+            arabic: '1.5rem',
+            turkish: '1rem'
+        },
+        large: {
+            arabic: '1.8rem',
+            turkish: '1.1rem'
+        },
+        xlarge: {
+            arabic: '2.2rem',
+            turkish: '1.3rem'
+        }
+    };
+
+    const selectedSize = sizes[size] || sizes.medium;
+
+    root.style.setProperty('--arabic-font-size', selectedSize.arabic);
+    root.style.setProperty('--turkish-font-size', selectedSize.turkish);
+
+    showMessage('Font boyutu değiştirildi', 'success');
+}
+
+// ========== BACKUP AND RESTORE ==========
+function exportData() {
+    const data = {
+        favorites: getFavorites(),
+        juzProgress: getJuzProgress(),
+        alarms: getAlarmSettings(),
+        adhanSettings: getAdhanSettings(),
+        language: getCurrentLanguage(),
+        fontSize: getFontSize(),
+        theme: document.body.classList.contains('dark-theme') ? 'dark' : 'light',
+        prayerTracking: JSON.parse(localStorage.getItem(TRACKING_KEY) || '{}'),
+        exportDate: new Date().toISOString()
+    };
+
+    const dataStr = JSON.stringify(data, null, 2);
+    const blob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `ezan-vakti-yedek-${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+
+    URL.revokeObjectURL(url);
+    vibrate('double');
+    showMessage('Veriler dışa aktarıldı', 'success');
+}
+
+function importData() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+
+    input.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            try {
+                const data = JSON.parse(event.target.result);
+
+                // Restore all data
+                if (data.favorites) saveFavorites(data.favorites);
+                if (data.juzProgress) saveJuzProgress(data.juzProgress);
+                if (data.alarms) saveAlarmSettings(data.alarms);
+                if (data.adhanSettings) saveAdhanSettings(data.adhanSettings);
+                if (data.language) setLanguage(data.language);
+                if (data.fontSize) setFontSize(data.fontSize);
+                if (data.prayerTracking) localStorage.setItem(TRACKING_KEY, JSON.stringify(data.prayerTracking));
+
+                if (data.theme === 'dark' && !document.body.classList.contains('dark-theme')) {
+                    toggleTheme();
+                }
+
+                vibrate('triple');
+                showMessage('Veriler geri yüklendi! Sayfa yenileniyor...', 'success');
+
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+
+            } catch (err) {
+                console.error('Import error:', err);
+                showMessage('Veri içe aktarma başarısız!', 'error');
+            }
+        };
+
+        reader.readAsText(file);
+    };
+
+    input.click();
+}
+
+// ========== AUTO THEME SCHEDULING ==========
+const AUTO_THEME_KEY = 'ezanvakti_auto_theme';
+
+function getAutoThemeSettings() {
+    const stored = localStorage.getItem(AUTO_THEME_KEY);
+    return stored ? JSON.parse(stored) : {
+        enabled: false,
+        mode: 'time', // 'time' or 'prayer'
+        timeStart: '20:00',
+        timeEnd: '06:00'
+    };
+}
+
+function saveAutoThemeSettings(settings) {
+    localStorage.setItem(AUTO_THEME_KEY, JSON.stringify(settings));
+}
+
+function checkAutoTheme() {
+    const settings = getAutoThemeSettings();
+    if (!settings.enabled) return;
+
+    const now = new Date();
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+    const currentTime = currentHour * 60 + currentMinute;
+
+    let shouldBeDark = false;
+
+    if (settings.mode === 'time') {
+        const [startH, startM] = settings.timeStart.split(':').map(Number);
+        const [endH, endM] = settings.timeEnd.split(':').map(Number);
+        const startTime = startH * 60 + startM;
+        const endTime = endH * 60 + endM;
+
+        if (startTime > endTime) {
+            // Crosses midnight
+            shouldBeDark = currentTime >= startTime || currentTime < endTime;
+        } else {
+            shouldBeDark = currentTime >= startTime && currentTime < endTime;
+        }
+    } else if (settings.mode === 'prayer') {
+        // Dark between Maghrib and Fajr
+        const aksamTime = document.getElementById('aksam')?.textContent;
+        const imsakTime = document.getElementById('imsak')?.textContent;
+
+        if (aksamTime && imsakTime) {
+            const [aksamH, aksamM] = aksamTime.split(':').map(Number);
+            const [imsakH, imsakM] = imsakTime.split(':').map(Number);
+            const aksamMinutes = aksamH * 60 + aksamM;
+            const imsakMinutes = imsakH * 60 + imsakM;
+
+            if (aksamMinutes > imsakMinutes) {
+                shouldBeDark = currentTime >= aksamMinutes || currentTime < imsakMinutes;
+            } else {
+                shouldBeDark = currentTime >= aksamMinutes && currentTime < imsakMinutes;
+            }
+        }
+    }
+
+    const isDark = document.body.classList.contains('dark-theme');
+
+    if (shouldBeDark && !isDark) {
+        document.body.classList.add('dark-theme');
+        localStorage.setItem('theme', 'dark');
+        document.getElementById('themeIcon').textContent = '☀️';
+    } else if (!shouldBeDark && isDark) {
+        document.body.classList.remove('dark-theme');
+        localStorage.setItem('theme', 'light');
+        document.getElementById('themeIcon').textContent = '🌙';
+    }
+}
+
+// Check auto theme every minute
+setInterval(checkAutoTheme, 60000);
+checkAutoTheme();
+
+function loadAutoThemeSettings() {
+    const settings = getAutoThemeSettings();
+
+    document.getElementById('autoThemeEnabled').checked = settings.enabled;
+    document.getElementById('autoThemeMode').value = settings.mode;
+    document.getElementById('themeStartTime').value = settings.timeStart;
+    document.getElementById('themeEndTime').value = settings.timeEnd;
+
+    toggleAutoThemeOptions();
+}
+
+function toggleAutoThemeOptions() {
+    const enabled = document.getElementById('autoThemeEnabled').checked;
+    const mode = document.getElementById('autoThemeMode').value;
+    const timeInputs = document.getElementById('themeTimeInputs');
+
+    if (timeInputs) {
+        timeInputs.style.display = enabled && mode === 'time' ? 'flex' : 'none';
+    }
+}
+
+function saveAutoTheme() {
+    const settings = {
+        enabled: document.getElementById('autoThemeEnabled').checked,
+        mode: document.getElementById('autoThemeMode').value,
+        timeStart: document.getElementById('themeStartTime').value,
+        timeEnd: document.getElementById('themeEndTime').value
+    };
+
+    saveAutoThemeSettings(settings);
+    checkAutoTheme();
+    showMessage('Otomatik tema ayarları kaydedildi', 'success');
+}
+
+// Button handlers for new features
+document.getElementById('hadithBtn')?.addEventListener('click', () => {
+    openModal('hadithModal');
+    loadDailyHadith();
+});
+
+document.getElementById('fortyHadithBtn')?.addEventListener('click', () => {
+    openModal('fortyHadithModal');
+    loadFortyHadiths();
+});
+
+document.getElementById('storiesBtn')?.addEventListener('click', () => {
+    openModal('storiesModal');
+    loadProphetStories();
+});
+
+document.getElementById('eventsBtn')?.addEventListener('click', () => {
+    openModal('eventsModal');
+    loadIslamicEvents();
+});
+
+document.getElementById('juzBtn')?.addEventListener('click', () => {
+    openModal('juzModal');
+    loadJuzTracker();
+});
+
+// Apply saved settings on load
+document.addEventListener('DOMContentLoaded', () => {
+    const lang = getCurrentLanguage();
+    applyLanguage(lang);
+
+    const fontSize = getFontSize();
+    applyFontSize(fontSize);
 });
