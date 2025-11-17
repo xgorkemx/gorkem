@@ -2433,3 +2433,150 @@ input:checked + .slider:before {
         margin-bottom: 10px;
     }
 }
+
+/* ========== CATEGORY B: CONTENT STYLES ========== */
+.hadith-card, .hadith-item, .story-item, .event-item {
+    padding: 20px;
+    background: rgba(102, 126, 234, 0.05);
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.hadith-header, .story-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.hadith-arabic, .story-content, .event-description {
+    font-size: var(--arabic-font-size, 1.5rem);
+    line-height: 2;
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(102, 126, 234, 0.03);
+    border-radius: 8px;
+    direction: rtl;
+    text-align: right;
+}
+
+.hadith-turkish {
+    font-size: var(--turkish-font-size, 1rem);
+    margin: 10px 0;
+}
+
+.hadith-source, .hadith-explanation, .story-lesson {
+    margin: 10px 0;
+    color: var(--text-secondary);
+}
+
+.event-item.current-month {
+    border: 2px solid #667eea;
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.event-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    background: #667eea;
+    color: white;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+}
+
+/* Juz Tracker */
+.juz-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 15px;
+    background: rgba(102, 126, 234, 0.05);
+    border-radius: 8px;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-top: 5px;
+}
+
+.juz-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.juz-item {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.juz-item:hover {
+    transform: scale(1.05);
+    background: rgba(102, 126, 234, 0.2);
+}
+
+.juz-item.completed {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+}
+
+.juz-number {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.juz-check {
+    font-size: 1.5rem;
+    margin-top: 5px;
+}
+
+.juz-actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Dark Theme */
+.dark-theme .hadith-card,
+.dark-theme .hadith-item,
+.dark-theme .story-item,
+.dark-theme .event-item {
+    background: rgba(102, 126, 234, 0.1);
+}
+
+@media (max-width: 768px) {
+    .juz-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .juz-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .juz-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+    }
+}
