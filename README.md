@@ -1,13 +1,13 @@
 # Ezan Vakti Pro
 
-Modern ve kullanıcı dostu bir namaz vakitleri uygulaması. Türkiye'deki 10 büyük şehir için günlük namaz vakitlerini gösterir.
+Modern ve kullanıcı dostu bir namaz vakitleri uygulaması. Türkiye'nin 81 ili için günlük namaz vakitlerini gösterir. PWA desteği ile offline çalışma, Esmâ-ül Hüsnâ, 25+ dua ve 20 kısa sure içerir.
 
 ## Özellikler
 
 ### Ana Özellikler
 - **Gerçek Zamanlı Namaz Vakitleri**: Diyanet İşleri Başkanlığı verilerine dayalı güncel namaz vakitleri
 - **Geri Sayım**: Bir sonraki namaz vaktine kalan süreyi gösterir
-- **Şehir Seçimi**: 10 farklı şehir için namaz vakitleri
+- **Şehir Seçimi**: Türkiye'nin 81 ili için namaz vakitleri
 - **Otomatik Konum**: GPS ile otomatik şehir tespiti
 - **Hicri Takvim**: Güncel Hicri tarih görüntüleme
 
@@ -15,8 +15,8 @@ Modern ve kullanıcı dostu bir namaz vakitleri uygulaması. Türkiye'deki 10 b�
 - **Kıble Yönü**: Dijital pusula ile Kabe yönünü bulma
 - **Dijital Tesbih**: Hedef sayaçlı zikir sayacı (33, 99, 100)
 - **Esmâ-ül Hüsnâ**: Allah'ın 99 ismi (Arapça, Türkçe, anlam)
-- **Dua Kitabı**: Kategorize edilmiş günlük dualar
-- **Kısa Sureler**: 7 sıkça okunan sure (Fatiha, İhlas, Felak, Nas, Nasr, Kevser, Kafirun)
+- **Dua Kitabı**: 25+ kategorize edilmiş dua (Günlük, Namaz, Yolculuk, Çeşitli)
+- **Kısa Sureler**: 20 sıkça okunan sure (Fatiha, İhlas, Felak, Nas, Nasr, Kevser, Kafirun, Fil, Kureyş, Maun, Asr, Tekasür, Duha, İnşirah, Tin, Alak, Kadir, Zilzal, Adiyat, Karia)
 - **Namaz Takibi**: Günlük, haftalık ve aylık namaz istatistikleri
 
 ### Bildirim ve Ses
@@ -40,16 +40,7 @@ Modern ve kullanıcı dostu bir namaz vakitleri uygulaması. Türkiye'deki 10 b�
 
 ## Desteklenen Şehirler
 
-- İstanbul
-- Ankara
-- İzmir
-- Bursa
-- Antalya
-- Adana
-- Konya
-- Gaziantep
-- Kayseri
-- Mersin
+**Türkiye'nin 81 İli:** Adana, Adıyaman, Afyonkarahisar, Ağrı, Aksaray, Amasya, Ankara, Antalya, Ardahan, Artvin, Aydın, Balıkesir, Bartın, Batman, Bayburt, Bilecik, Bingöl, Bitlis, Bolu, Burdur, Bursa, Çanakkale, Çankırı, Çorum, Denizli, Diyarbakır, Düzce, Edirne, Elazığ, Erzincan, Erzurum, Eskişehir, Gaziantep, Giresun, Gümüşhane, Hakkari, Hatay, Iğdır, Isparta, İstanbul, İzmir, Kahramanmaraş, Karabük, Karaman, Kars, Kastamonu, Kayseri, Kilis, Kırıkkale, Kırklareli, Kırşehir, Kocaeli, Konya, Kütahya, Malatya, Manisa, Mardin, Mersin, Muğla, Muş, Nevşehir, Niğde, Ordu, Osmaniye, Rize, Sakarya, Samsun, Şanlıurfa, Siirt, Sinop, Şırnak, Sivas, Tekirdağ, Tokat, Trabzon, Tunceli, Uşak, Van, Yalova, Yozgat, Zonguldak
 
 ## Teknolojiler
 

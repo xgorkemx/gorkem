@@ -135,6 +135,38 @@ const prayers = {
             arabic: "اَلْحَمْدُ لِلّٰهِ الَّذِي اَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مِنَ الْمُسْلِمِينَ",
             turkish: "Bizi yedirip içiren ve müslümanlardan kılan Allah'a hamdolsun.",
             latin: "Elhamdülillahillezi at'amena ve sekana ve cealena minel müslimin"
+        },
+        {
+            id: 11,
+            category: "Sabah-Akşam",
+            name: "Sabah Zikri",
+            arabic: "اَللّٰهُمَّ اِنِّي اَسْاَلُكَ عِلْماً نَافِعاً وَرِزْقاً طَيِّباً وَعَمَلاً مُتَقَبَّلاً",
+            turkish: "Allah'ım! Senden faydalı ilim, helal rızık ve makbul amel istiyorum.",
+            latin: "Allahümme inni es'elüke ilmen nafia ve rizkan tayyiben ve amelen mütekabbela"
+        },
+        {
+            id: 12,
+            category: "Sabah-Akşam",
+            name: "Akşam Zikri",
+            arabic: "اَللّٰهُمَّ اَجِرْنِي مِنَ النَّارِ",
+            turkish: "Allah'ım! Beni cehennem ateşinden koru.",
+            latin: "Allahumme ecirnî minen-nâr"
+        },
+        {
+            id: 13,
+            category: "Yemek",
+            name: "İftar Duası",
+            arabic: "اَللّٰهُمَّ لَكَ صُمْتُ وَعَلٰى رِزْقِكَ اَفْطَرْتُ",
+            turkish: "Allah'ım! Senin için oruç tuttum ve senin rızkınla iftar ettim.",
+            latin: "Allahümme leke sumtu ve ala rızkıke eftartu"
+        },
+        {
+            id: 14,
+            category: "Yemek",
+            name: "Misafire İkram Duası",
+            arabic: "بَارَكَ اللهُ لَكُمْ وَبَارَكَ عَلَيْكُمْ وَجَمَعَ بَيْنَكُمْ فِي خَيْرٍ",
+            turkish: "Allah size bereket versin, sizi mübarek kılsın ve aranızda hayırla birleştirsin.",
+            latin: "Barekalluhu lekum ve barake aleykum ve cemea beynekum fi hayrin"
         }
     ],
     namaz: [
@@ -153,6 +185,38 @@ const prayers = {
             arabic: "سُبْحَانَ اللهِ ٣٣ - اَلْحَمْدُ لِلّٰهِ ٣٣ - اَللّٰهُ اَكْبَرُ ٣٣",
             turkish: "Subhanallah (33 defa), Elhamdülillah (33 defa), Allahu Ekber (33 defa)",
             latin: "Subhanallah (33), Elhamdülillah (33), Allahu Ekber (33)"
+        },
+        {
+            id: 15,
+            category: "Namaz Öncesi",
+            name: "Ezan Duası",
+            arabic: "اَللّٰهُمَّ رَبَّ هٰذِهِ الدَّعْوَةِ التَّامَّةِ وَالصَّلاَةِ الْقَائِمَةِ آتِ مُحَمَّداً الْوَسِيلَةَ وَالْفَضِيلَةَ وَابْعَثْهُ مَقَاماً مَحْمُوداً الَّذِي وَعَدْتَهُ",
+            turkish: "Allah'ım! Bu tam daavetin ve kılınacak namazın Rabbi, Muhammed'e vesileyi ve fazileti ver ve onu, kendisine vaat ettiğin makam-ı mahmuda ulaştır.",
+            latin: "Allahümme rabbe hazihid-da'vetit-tammeti ves-salatil kaime, ati Muhammeden'il-vesileten ve'l-fazileten veb'ashu makaamen mahmudan'llezi ve adtehu"
+        },
+        {
+            id: 16,
+            category: "Namaz Duaları",
+            name: "Kunut Duası",
+            arabic: "اَللّٰهُمَّ اِنَّا نَسْتَعِينُكَ وَنَسْتَغْفِرُكَ وَنَسْتَهْدِيكَ وَنُؤْمِنُ بِكَ وَنَتُوبُ اِلَيْكَ وَنَتَوَكَّلُ عَلَيْكَ",
+            turkish: "Allah'ım! Senden yardım diler, mağfiret diler, hidayet dileriz. Sana iman eder, sana tevbe eder ve sana tevekkül ederiz.",
+            latin: "Allahümme inna nesta'inüke ve nestagfiruke ve nestehdike ve nü'minü bike ve netübü ileyke ve netevekkelü aleyke"
+        },
+        {
+            id: 17,
+            category: "Namaz Duaları",
+            name: "Rabena Duaları",
+            arabic: "رَبَّنَا اٰتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْاٰخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+            turkish: "Rabbimiz! Bize dünyada da iyilik ver, ahirette de iyilik ver ve bizi ateş azabından koru.",
+            latin: "Rabbena atina fid-dünya haseneten ve fil ahireti haseneten ve kına azaben-nar"
+        },
+        {
+            id: 18,
+            category: "Namaz Sonrası",
+            name: "Kısa Dua",
+            arabic: "اَللّٰهُمَّ اَنْتَ السَّلاَمُ وَمِنْكَ السَّلاَمُ تَبَارَكْتَ يَا ذَا الْجَلاَلِ وَالْاِكْرَامِ",
+            turkish: "Allah'ım! Sen selamsın, selam sendedir. Ey celal ve ikram sahibi! Sen ne yücesin, ne bereketlisin.",
+            latin: "Allahümme entes-selamu ve minkes-selamu tebarakte ya zel celali vel ikram"
         }
     ],
     travel: [
@@ -163,6 +227,22 @@ const prayers = {
             arabic: "سُبْحَانَ الَّذِي سَخَّرَ لَنَا هٰذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَاِنَّا اِلٰى رَبِّنَا لَمُنْقَلِبُونَ",
             turkish: "Bunu emrimiz altına koyan Allah'ın şanı yücedir. Yoksa bizim buna gücümüz yetmezdi. Şüphesiz ki biz Rabbimize döneceğiz.",
             latin: "Sübhanellezi sehhara lena haza ve ma künna lehu mukrinin ve inna ila rabbina lemünkalibun"
+        },
+        {
+            id: 19,
+            category: "Yolculuk",
+            name: "Yola Çıkarken Dua",
+            arabic: "اَللّٰهُمَّ اِنَّا نَسْاَلُكَ فِي سَفَرِنَا هٰذَا الْبِرَّ وَالتَّقْوٰى وَمِنَ الْعَمَلِ مَا تَرْضٰى",
+            turkish: "Allah'ım! Bu yolculuğumuzda bizden iyiliği, takvayı ve razı olacağın amelleri dileriz.",
+            latin: "Allahümme inna nes'elüke fi seferina hazel-birre vet-takva ve minel ameli ma terda"
+        },
+        {
+            id: 20,
+            category: "Yolculuk",
+            name: "Yolculuktan Dönüş Duası",
+            arabic: "آيِبُونَ تَائِبُونَ عَابِدُونَ لِرَبِّنَا حَامِدُونَ",
+            turkish: "Dönenler, tevbe edenler, ibadet edenler ve Rabbimize hamd edenler olarak döndük.",
+            latin: "Ayibune tâibune âbidune li Rabbina hâmidûn"
         }
     ],
     other: [
@@ -189,6 +269,46 @@ const prayers = {
             arabic: "اَلْحَمْدُ لِلّٰهِ الَّذِي اَحْيَانَا بَعْدَ مَا اَمَاتَنَا وَاِلَيْهِ النُّشُورُ",
             turkish: "Bizi öldükten (uyuduktan) sonra dirilten (uyandıran) Allah'a hamdolsun. Dönüş ancak O'nadır.",
             latin: "Elhamdülillahillezi ahyana ba'de ma ematena ve ileyhin-nüşûr"
+        },
+        {
+            id: 21,
+            category: "Çeşitli",
+            name: "Tövbe Duası",
+            arabic: "اَسْتَغْفِرُ اللهَ الَّذِي لاَ اِلٰهَ اِلاَّ هُوَ الْحَيَّ الْقَيُّومَ وَاَتُوبُ اِلَيْهِ",
+            turkish: "Kendisinden başka ilah olmayan, Diri ve Kayyum olan Allah'tan mağfiret dilerim ve O'na tevbe ederim.",
+            latin: "Estaağfirullahellezi la ilahe illâ hüvel hayyel kayyume ve etûbü ileyh"
+        },
+        {
+            id: 22,
+            category: "Çeşitli",
+            name: "Çocuklar İçin Dua",
+            arabic: "اَللّٰهُمَّ بَارِكْ لِي فِي اَوْلاَدِي وَوَفِّقْهُمْ لِطَاعَتِكَ",
+            turkish: "Allah'ım! Çocuklarımı bana mübarek kıl ve onları sana itaate muvaffak eyle.",
+            latin: "Allahümme barik li fi evladi ve veffikhum li tâatike"
+        },
+        {
+            id: 23,
+            category: "Çeşitli",
+            name: "Şifa Duası",
+            arabic: "اَللّٰهُمَّ رَبَّ النَّاسِ اَذْهِبِ الْبَاْسَ اشْفِ اَنْتَ الشَّافِي لاَ شِفَاءَ اِلاَّ شِفَاؤُكَ شِفَاءً لاَ يُغَادِرُ سَقَماً",
+            turkish: "Ey insanların Rabbi olan Allah'ım! Hastalığı gider. Şifa ver. Şifa veren ancak Sensin. Senin şifandan başka şifa yoktur. Hiçbir hastalık bırakmayan bir şifa ver.",
+            latin: "Allahümme rabben-nasi ezhebil be'se işfi ente'ş-şafi la şifâe illa şifauke şifaen la yugadiru sekama"
+        },
+        {
+            id: 24,
+            category: "Çeşitli",
+            name: "Sıkıntıdan Kurtuluş Duası",
+            arabic: "لاَ اِلٰهَ اِلاَّ اللهُ الْعَظِيمُ الْحَلِيمُ لاَ اِلٰهَ اِلاَّ اللهُ رَبُّ الْعَرْشِ الْعَظِيمِ",
+            turkish: "Büyük ve Halim olan Allah'tan başka ilah yoktur. Arş-ı azimin Rabbi olan Allah'tan başka ilah yoktur.",
+            latin: "La ilahe illallahul azimul halim, la ilahe illallahu rabbul arşil azim"
+        },
+        {
+            id: 25,
+            category: "Çeşitli",
+            name: "Borçtan Kurtulma Duası",
+            arabic: "اَللّٰهُمَّ اكْفِنِي بِحَلاَلِكَ عَنْ حَرَامِكَ وَاَغْنِنِي بِفَضْلِكَ عَمَّنْ سِوَاكَ",
+            turkish: "Allah'ım! Haram kazançtan helal kazançla beni koru. Lutfunla senden başkasından müstağni eyle.",
+            latin: "Allahümmekfini bi helalike an haramike ve ağnini bi fadlike ammen sivake"
         }
     ]
 };
@@ -250,6 +370,110 @@ const shortSurahs = [
         arabic: "بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيمِ\nقُلْ يَا اَيُّهَا الْكَافِرُونَ\nلاَ اَعْبُدُ مَا تَعْبُدُونَ\nوَلاَ اَنْتُمْ عَابِدُونَ مَا اَعْبُدُ\nوَلاَ اَنَا عَابِدٌ مَا عَبَدْتُمْ\nوَلاَ اَنْتُمْ عَابِدُونَ مَا اَعْبُدُ\nلَكُمْ دِينُكُمْ وَلِيَ دِينِ",
         turkish: "Rahman ve Rahim olan Allah'ın adıyla. De ki: Ey kafirler! Ben sizin taptıklarınıza tapmam. Siz de benim taptığıma tapmazsınız. Ben de sizin taptıklarınıza tapacak değilim. Siz de benim taptığıma tapacak değilsiniz. Sizin dininiz size, benim dinim banadır.",
         ayah_count: 6
+    },
+    {
+        id: 8,
+        number: 105,
+        name: "Fil",
+        arabic: "بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيمِ\nاَلَمْ تَرَ كَيْفَ فَعَلَ رَبُّكَ بِاَصْحَابِ الْفِيلِ\nاَلَمْ يَجْعَلْ كَيْدَهُمْ فِي تَضْلِيلٍ\nوَاَرْسَلَ عَلَيْهِمْ طَيْراً اَبَابِيلَ\nتَرْمِيهِمْ بِحِجَارَةٍ مِنْ سِجِّيلٍ\nفَجَعَلَهُمْ كَعَصْفٍ مَاْكُولٍ",
+        turkish: "Rahman ve Rahim olan Allah'ın adıyla. Rabbinin, fil sahiplerine neler yaptığını görmedin mi? Onların tuzaklarını boşa çıkarmadı mı? Üzerlerine sürü sürü kuşlar gönderdi. Onları pişmiş topraktan taşlarla taşladı. Böylece onları yenilmiş ekin yaprağı gibi yaptı.",
+        ayah_count: 5
+    },
+    {
+        id: 9,
+        number: 106,
+        name: "Kureyş",
+        arabic: "بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيمِ\nلِاِيلاَفِ قُرَيْشٍ\nاِيلاَفِهِمْ رِحْلَةَ الشِّتَاءِ وَالصَّيْفِ\nفَلْيَعْبُدُوا رَبَّ هٰذَا الْبَيْتِ\nاَلَّذِي اَطْعَمَهُمْ مِنْ جُوعٍ وَاٰمَنَهُمْ مِنْ خَوْفٍ",
+        turkish: "Rahman ve Rahim olan Allah'ın adıyla. Kureyş'in alışkanlığı dolayısıyla, onların kış ve yaz seferlerini alışkanlık haline getirmesi dolayısıyla, bu Evin (Kâbe'nin) Rabbine kulluk etsinler. O ki, onları açlıktan doyurmuş, korkudan emin kılmıştır.",
+        ayah_count: 4
+    },
+    {
+        id: 10,
+        number: 107,
+        name: "Maun",
+        arabic: "بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيمِ\nاَرَاَيْتَ الَّذِي يُكَذِّبُ بِالدِّينِ\nفَذٰلِكَ الَّذِي يَدُعُّ الْيَتِيمَ\nوَلاَ يَحُضُّ عَلٰى طَعَامِ الْمِسْكِينِ\nفَوَيْلٌ لِلْمُصَلِّينَ\nاَلَّذِينَ هُمْ عَنْ صَلاَتِهِمْ سَاهُونَ\nاَلَّذِينَ هُمْ يُرَاۤءُونَ\nوَيَمْنَعُونَ الْمَاعُونَ",
+        turkish: "Rahman ve Rahim olan Allah'ın adıyla. Dini yalanlayanı gördün mü? İşte o, yetimi itip kakan, yoksulu doyurmayı özendirmeyen kimsedir. Vay o namaz kılanlara ki, onlar namazlarını ciddiye almazlar. Onlar gösteriş yaparlar ve en küçük bir yardımı bile esirgerler.",
+        ayah_count: 7
+    },
+    {
+        id: 11,
+        number: 103,
+        name: "Asr",
+        arabic: "بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيمِ\nوَالْعَصْرِ\nاِنَّ الْاِنْسَانَ لَفِي خُسْرٍ\nاِلاَّ الَّذِينَ اٰمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ",
+        turkish: "Rahman ve Rahim olan Allah'ın adıyla. Asra (zamana) andolsun ki, insan gerçekten ziyan içindedir. Ancak iman edip salih amel işleyenler, birbirlerine hakkı tavsiye edenler ve sabrı tavsiye edenler başka.",
+        ayah_count: 3
+    },
+    {
+        id: 12,
+        number: 102,
+        name: "Tekasür",
+        arabic: "بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيمِ\nاَلْهٰيكُمُ التَّكَاثُرُ\nحَتّٰى زُرْتُمُ الْمَقَابِرَ\nكَلاَّ سَوْفَ تَعْلَمُونَ\nثُمَّ كَلاَّ سَوْفَ تَعْلَمُونَ\nكَلاَّ لَوْ تَعْلَمُونَ عِلْمَ الْيَقِينِ\nلَتَرَوُنَّ الْجَحِيمَ\nثُمَّ لَتَرَوُنَّهَا عَيْنَ الْيَقِينِ\nثُمَّ لَتُسْئَلُنَّ يَوْمَئِذٍ عَنِ النَّعِيمِ",
+        turkish: "Rahman ve Rahim olan Allah'ın adıyla. Çokluk sevgisi sizi aldattı. Öyle ki mezarları ziyaret edinceye kadar (bu böyle gitti). Hayır! Yakında bileceksiniz! Sonra yine hayır! Yakında bileceksiniz! Hayır! Eğer kesin bilgiyle bilseydiniz, mutlaka cehennemi görürdünüz. Sonra onu kesin görmekle göreceksiniz. Sonra, o gün nimetlerden mutlaka sorguya çekileceksiniz.",
+        ayah_count: 8
+    },
+    {
+        id: 13,
+        number: 93,
+        name: "Duha",
+        arabic: "بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيمِ\nوَالضُّحٰى\nوَاللَّيْلِ اِذَا سَجٰى\nمَا وَدَّعَكَ رَبُّكَ وَمَا قَلٰى\nوَلَلْاٰخِرَةُ خَيْرٌ لَكَ مِنَ الْاُولٰى\nوَلَسَوْفَ يُعْطِيكَ رَبُّكَ فَتَرْضٰى\nاَلَمْ يَجِدْكَ يَتِيماً فَاٰوٰى\nوَوَجَدَكَ ضَآلاًّ فَهَدٰى\nوَوَجَدَكَ عَآئِلاً فَاَغْنٰى\nفَاَمَّا الْيَتِيمَ فَلاَ تَقْهَرْ\nوَاَمَّا السَّآئِلَ فَلاَ تَنْهَرْ\nوَاَمَّا بِنِعْمَةِ رَبِّكَ فَحَدِّثْ",
+        turkish: "Rahman ve Rahim olan Allah'ın adıyla. Kuşluk vaktine andolsun! Gecenin sessizliğe bürünmesi üzerine andolsun! Rabbin seni terk etmedi ve sana darılmadı. Senin için ahiret, dünyadan elbette daha hayırlıdır. Andolsun ki Rabbin sana verecek, sen de hoşnut olacaksın. O seni yetim bulup barındırmadı mı? Seni şaşkın bulup yol göstermedi mi? Seni fakir bulup zengin etmedi mi? Öyleyse sakın yetime haksızlık etme! Sakın isteyeni azarlama! Rabbinin nimetini anlat!",
+        ayah_count: 11
+    },
+    {
+        id: 14,
+        number: 94,
+        name: "İnşirah",
+        arabic: "بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيمِ\nاَلَمْ نَشْرَحْ لَكَ صَدْرَكَ\nوَوَضَعْنَا عَنْكَ وِزْرَكَ\nاَلَّذِي اَنْقَضَ ظَهْرَكَ\nوَرَفَعْنَا لَكَ ذِكْرَكَ\nفَاِنَّ مَعَ الْعُسْرِ يُسْراً\nاِنَّ مَعَ الْعُسْرِ يُسْراً\nفَاِذَا فَرَغْتَ فَانْصَبْ\nوَاِلٰى رَبِّكَ فَارْغَبْ",
+        turkish: "Rahman ve Rahim olan Allah'ın adıyla. Senin göğsünü açıp genişletmedik mi? Belini büken yükünü üzerinden kaldırmadık mı? Senin şanını yüceltmedik mi? Şüphesiz güçlükle beraber kolaylık vardır. Elbette güçlükle beraber bir kolaylık vardır. Öyleyse bir işi bitirince diğerine koyul. Ve yalnız Rabbine yönel.",
+        ayah_count: 8
+    },
+    {
+        id: 15,
+        number: 95,
+        name: "Tin",
+        arabic: "بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيمِ\nوَالتِّينِ وَالزَّيْتُونِ\nوَطُورِ سِينِينَ\nوَهٰذَا الْبَلَدِ الْاَمِينِ\nلَقَدْ خَلَقْنَا الْاِنْسَانَ فِي اَحْسَنِ تَقْوِيمٍ\nثُمَّ رَدَدْنَاهُ اَسْفَلَ سَافِلِينَ\nاِلاَّ الَّذِينَ اٰمَنُوا وَعَمِلُوا الصَّالِحَاتِ فَلَهُمْ اَجْرٌ غَيْرُ مَمْنُونٍ\nفَمَا يُكَذِّبُكَ بَعْدُ بِالدِّينِ\nاَلَيْسَ اللّٰهُ بِاَحْكَمِ الْحَاكِمِينَ",
+        turkish: "Rahman ve Rahim olan Allah'ın adıyla. İncire ve zeytine, Sina Dağı'na, bu emin beldeye (Mekke'ye) andolsun ki, gerçekten insanı en güzel bir biçimde yarattık. Sonra da onu aşağıların en aşağısına indirdik. Ancak iman edip salih amel işleyenler başka; onlar için sürekli bir mükâfat vardır. Artık bundan sonra, seni dini yalanlamaya iten nedir? Allah, hükmedenlerin en iyi hükmedeni değil midir?",
+        ayah_count: 8
+    },
+    {
+        id: 16,
+        number: 96,
+        name: "Alak",
+        arabic: "بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيمِ\nاِقْرَاْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ\nخَلَقَ الْاِنْسَانَ مِنْ عَلَقٍ\nاِقْرَاْ وَرَبُّكَ الْاَكْرَمُ\nاَلَّذِي عَلَّمَ بِالْقَلَمِ\nعَلَّمَ الْاِنْسَانَ مَا لَمْ يَعْلَمْ\nكَلاَّ اِنَّ الْاِنْسَانَ لَيَطْغٰى\nاَنْ رَاٰهُ اسْتَغْنٰى\nاِنَّ اِلٰى رَبِّكَ الرُّجْعٰى",
+        turkish: "Rahman ve Rahim olan Allah'ın adıyla. Yaratan Rabbinin adıyla oku! O, insanı yapışkan bir maddeden yarattı. Oku! Rabbin en cömerttir. O, kalemle yazmayı öğretendir. İnsana bilmediğini öğretmiştir. Hayır! Gerçek şu ki insan azar. Kendini yeterli gördüğü için. Şüphesiz ki dönüş Rabbinedir.",
+        ayah_count: 19
+    },
+    {
+        id: 17,
+        number: 97,
+        name: "Kadir",
+        arabic: "بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيمِ\nاِنَّا اَنْزَلْنَاهُ فِي لَيْلَةِ الْقَدْرِ\nوَمَا اَدْرٰيكَ مَا لَيْلَةُ الْقَدْرِ\nلَيْلَةُ الْقَدْرِ خَيْرٌ مِنْ اَلْفِ شَهْرٍ\nتَنَزَّلُ الْمَلٰۤئِكَةُ وَالرُّوحُ فِيهَا بِاِذْنِ رَبِّهِمْ مِنْ كُلِّ اَمْرٍ\nسَلاَمٌ هِيَ حَتّٰى مَطْلَعِ الْفَجْرِ",
+        turkish: "Rahman ve Rahim olan Allah'ın adıyla. Biz onu Kadir gecesinde indirdik. Kadir gecesinin ne olduğunu sen ne bileceksin! Kadir gecesi bin aydan daha hayırlıdır. O gecede melekler ve Ruh, Rablerinin izniyle her iş için iner. O gece, tan yeri ağarıncaya kadar bir esenlik ve selâmettir.",
+        ayah_count: 5
+    },
+    {
+        id: 18,
+        number: 99,
+        name: "Zilzal",
+        arabic: "بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيمِ\nاِذَا زُلْزِلَتِ الْاَرْضُ زِلْزَالَهَا\nوَاَخْرَجَتِ الْاَرْضُ اَثْقَالَهَا\nوَقَالَ الْاِنْسَانُ مَا لَهَا\nيَوْمَئِذٍ تُحَدِّثُ اَخْبَارَهَا\nبِاَنَّ رَبَّكَ اَوْحٰى لَهَا\nيَوْمَئِذٍ يَصْدُرُ النَّاسُ اَشْتَاتاً لِيُرَوْا اَعْمَالَهُمْ\nفَمَنْ يَعْمَلْ مِثْقَالَ ذَرَّةٍ خَيْراً يَرَهُ\nوَمَنْ يَعْمَلْ مِثْقَالَ ذَرَّةٍ شَرّاً يَرَهُ",
+        turkish: "Rahman ve Rahim olan Allah'ın adıyla. Yer, şiddetli sarsıntısıyla sarsıldığı, yer, ağırlıklarını dışarı çıkardığı ve insan: 'Ona ne oluyor?' dediği zaman, işte o gün yer, haberlerini anlatacaktır. Çünkü Rabbin ona vahyetmiştir. O gün insanlar, amellerinin karşılığını görmek için bölük bölük çıkacaklardır. Kim zerre kadar hayır işlemişse onu görecektir. Kim de zerre kadar şer işlemişse onu görecektir.",
+        ayah_count: 8
+    },
+    {
+        id: 19,
+        number: 100,
+        name: "Adiyat",
+        arabic: "بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيمِ\nوَالْعَادِيَاتِ ضَبْحاً\nفَالْمُورِيَاتِ قَدْحاً\nفَالْمُغِيرَاتِ صُبْحاً\nفَاَثَرْنَ بِهِ نَقْعاً\nفَوَسَطْنَ بِهِ جَمْعاً\nاِنَّ الْاِنْسَانَ لِرَبِّهِ لَكَنُودٌ\nوَاِنَّهُ عَلٰى ذٰلِكَ لَشَهِيدٌ\nوَاِنَّهُ لِحُبِّ الْخَيْرِ لَشَدِيدٌ",
+        turkish: "Rahman ve Rahim olan Allah'ın adıyla. Soluk soluğa koşanlara, çakmak taşlarından kıvılcım çıkaranlara, sabahleyin akın edenlere, orada toz duman kaldıranlara, sonra ortalarına dalanlara andolsun ki, insan gerçekten Rabbine nankörlük edendir. Şüphesiz o, buna şahittir. Ve o, mal sevgisinde gerçekten çok şiddetlidir.",
+        ayah_count: 11
+    },
+    {
+        id: 20,
+        number: 101,
+        name: "Karia",
+        arabic: "بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيمِ\nاَلْقَارِعَةُ\nمَا الْقَارِعَةُ\nوَمَا اَدْرٰيكَ مَا الْقَارِعَةُ\nيَوْمَ يَكُونُ النَّاسُ كَالْفَرَاشِ الْمَبْثُوثِ\nوَتَكُونُ الْجِبَالُ كَالْعِهْنِ الْمَنْفُوشِ\nفَاَمَّا مَنْ ثَقُلَتْ مَوَازِينُهُ\nفَهُوَ فِي عِيشَةٍ رَاضِيَةٍ\nوَاَمَّا مَنْ خَفَّتْ مَوَازِينُهُ\nفَاُمُّهُ هَاوِيَةٌ\nوَمَا اَدْرٰيكَ مَا هِيَهْ\nنَارٌ حَامِيَةٌ",
+        turkish: "Rahman ve Rahim olan Allah'ın adıyla. Karia (çarpıcı felâket)! Karia nedir? Karia'nın ne olduğunu sana bildiren nedir? O gün insanlar, yayılmış pervaneler gibi olacaklar. Dağlar da atılmış renkli yün gibi olacaklar. Kimin tartıları ağır gelirse, o, hoşnut olacağı bir hayat içindedir. Kimin de tartıları hafif gelirse, onun barınağı Haviye'dir. Haviye'nin ne olduğunu sana bildiren nedir? O, çok sıcak bir ateştir.",
+        ayah_count: 11
     }
 ];
 
