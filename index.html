@@ -44,6 +44,9 @@
                 <div class="current-time" id="currentTime"></div>
             </div>
             <div class="header-controls">
+                <button class="control-btn" id="settingsBtn" title="Ayarlar">
+                    <span>⚙️</span>
+                </button>
                 <button class="control-btn" id="themeToggle" title="Tema Değiştir">
                     <span id="themeIcon">🌙</span>
                 </button>
@@ -557,6 +560,63 @@
             </div>
             <div class="modal-body">
                 <div class="surah-list" id="surahList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>⚙️ Ayarlar</h2>
+                <button class="close-btn" onclick="closeModal('settingsModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="settings-section">
+                    <h3>🔊 Titreşim Ayarları</h3>
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Titreşimi Etkinleştir</span>
+                            <p class="setting-description">Buton tıklamalarında titreşim</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="vibrationToggle" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Titreşim Deseni</span>
+                            <p class="setting-description">Titreşim türünü seçin</p>
+                        </div>
+                        <select id="vibrationPattern" class="setting-select">
+                            <option value="short">Kısa</option>
+                            <option value="double">Çift</option>
+                            <option value="triple">Üçlü</option>
+                            <option value="long">Uzun</option>
+                            <option value="pulse">Nabız</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>📱 Widget Özelleştirme</h3>
+                    <p class="section-description">Hangi özelliklerin gösterileceğini seçin</p>
+                    <div class="widget-list" id="widgetList"></div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>ℹ️ Bilgi</h3>
+                    <div class="info-item">
+                        <p><strong>Favoriler:</strong> ⭐ butonuna basarak içerikleri favorilerinize ekleyin</p>
+                        <p><strong>Sesli Okuma:</strong> 🔊 butonuna basarak Arapça metinleri dinleyin</p>
+                        <p><strong>Paylaşım:</strong> 📤 butonuna basarak içerikleri paylaşın</p>
+                    </div>
+                </div>
+
+                <div class="settings-actions">
+                    <button class="primary-btn" onclick="saveSettings()">💾 Ayarları Kaydet</button>
+                </div>
             </div>
         </div>
     </div>

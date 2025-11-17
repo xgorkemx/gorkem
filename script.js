@@ -1120,3 +1120,462 @@ document.getElementById('surahBtn')?.addEventListener('click', () => {
     openModal('surahModal');
     loadShortSurahs();
 });
+
+// ========== CATEGORY F: UX FEATURES ==========
+
+// ========== FAVORITES SYSTEM ==========
+const FAVORITES_KEY = 'ezanvakti_favorites';
+
+// Get favorites from localStorage
+function getFavorites() {
+    const stored = localStorage.getItem(FAVORITES_KEY);
+    return stored ? JSON.parse(stored) : {
+        prayers: [],
+        surahs: [],
+        esma: []
+    };
+}
+
+// Save favorites to localStorage
+function saveFavorites(favorites) {
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+}
+
+// Toggle favorite
+function toggleFavorite(type, id) {
+    const favorites = getFavorites();
+    const index = favorites[type].indexOf(id);
+
+    if (index === -1) {
+        favorites[type].push(id);
+    } else {
+        favorites[type].splice(index, 1);
+    }
+
+    saveFavorites(favorites);
+    return index === -1; // Return true if favorited, false if unfavorited
+}
+
+// Check if item is favorited
+function isFavorited(type, id) {
+    const favorites = getFavorites();
+    return favorites[type].includes(id);
+}
+
+// ========== SHARE FUNCTIONALITY ==========
+async function shareContent(title, text) {
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                title: title,
+                text: text,
+                url: window.location.href
+            });
+            console.log('Content shared successfully');
+        } catch (err) {
+            if (err.name !== 'AbortError') {
+                console.log('Error sharing:', err);
+                fallbackCopyToClipboard(text);
+            }
+        }
+    } else {
+        fallbackCopyToClipboard(text);
+    }
+}
+
+// Fallback copy to clipboard
+function fallbackCopyToClipboard(text) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    try {
+        document.execCommand('copy');
+        showMessage('Panoya kopyalandı!', 'success');
+    } catch (err) {
+        showMessage('Kopyalama başarısız', 'error');
+    }
+
+    document.body.removeChild(textarea);
+}
+
+// ========== TEXT-TO-SPEECH ==========
+let speechSynthesis = window.speechSynthesis;
+let currentUtterance = null;
+
+function speakArabic(text) {
+    // Stop any ongoing speech
+    if (speechSynthesis.speaking) {
+        speechSynthesis.cancel();
+        return false; // Indicate that we stopped
+    }
+
+    currentUtterance = new SpeechSynthesisUtterance(text);
+
+    // Try to find Arabic voice, fallback to default
+    const voices = speechSynthesis.getVoices();
+    const arabicVoice = voices.find(voice => voice.lang.startsWith('ar'));
+
+    if (arabicVoice) {
+        currentUtterance.voice = arabicVoice;
+    }
+
+    currentUtterance.lang = 'ar-SA';
+    currentUtterance.rate = 0.8; // Slower for clarity
+    currentUtterance.pitch = 1;
+
+    speechSynthesis.speak(currentUtterance);
+    return true; // Indicate that we started speaking
+}
+
+// Load voices (some browsers load them asynchronously)
+if (speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = () => {
+        speechSynthesis.getVoices();
+    };
+}
+
+// ========== VIBRATION PATTERNS ==========
+const VIBRATION_PATTERNS = {
+    short: [100],
+    double: [100, 50, 100],
+    triple: [100, 50, 100, 50, 100],
+    long: [300],
+    pulse: [50, 50, 50, 50, 50]
+};
+
+function vibrate(pattern = 'short') {
+    if (!navigator.vibrate) return;
+
+    const vibrationEnabled = localStorage.getItem('vibrationEnabled') !== 'false';
+    if (!vibrationEnabled) return;
+
+    const selectedPattern = localStorage.getItem('vibrationPattern') || 'short';
+    navigator.vibrate(VIBRATION_PATTERNS[selectedPattern] || VIBRATION_PATTERNS.short);
+}
+
+// ========== CUSTOMIZABLE HOME SCREEN ==========
+const WIDGET_ORDER_KEY = 'ezanvakti_widget_order';
+const HIDDEN_WIDGETS_KEY = 'ezanvakti_hidden_widgets';
+
+function getWidgetOrder() {
+    const stored = localStorage.getItem(WIDGET_ORDER_KEY);
+    return stored ? JSON.parse(stored) : [
+        'qiblaBtn', 'tasbihBtn', 'trackBtn', 'notificationBtn',
+        'locationBtn', 'esmaBtn', 'prayerBookBtn', 'surahBtn'
+    ];
+}
+
+function getHiddenWidgets() {
+    const stored = localStorage.getItem(HIDDEN_WIDGETS_KEY);
+    return stored ? JSON.parse(stored) : [];
+}
+
+function saveWidgetOrder(order) {
+    localStorage.setItem(WIDGET_ORDER_KEY, JSON.stringify(order));
+}
+
+function saveHiddenWidgets(hidden) {
+    localStorage.setItem(HIDDEN_WIDGETS_KEY, JSON.stringify(hidden));
+}
+
+function applyWidgetCustomization() {
+    const order = getWidgetOrder();
+    const hidden = getHiddenWidgets();
+    const container = document.querySelector('.feature-buttons');
+
+    if (!container) return;
+
+    // Reorder buttons
+    order.forEach(btnId => {
+        const btn = document.getElementById(btnId);
+        if (btn) {
+            container.appendChild(btn);
+
+            // Hide if in hidden list
+            if (hidden.includes(btnId)) {
+                btn.style.display = 'none';
+            } else {
+                btn.style.display = '';
+            }
+        }
+    });
+}
+
+function toggleWidgetVisibility(widgetId) {
+    const hidden = getHiddenWidgets();
+    const index = hidden.indexOf(widgetId);
+
+    if (index === -1) {
+        hidden.push(widgetId);
+    } else {
+        hidden.splice(index, 1);
+    }
+
+    saveHiddenWidgets(hidden);
+    applyWidgetCustomization();
+}
+
+// ========== UPDATE CONTENT LOADING WITH UX FEATURES ==========
+
+// Enhanced Esma loading with favorites and actions
+function loadEsmaUlHusna(searchTerm = '') {
+    const esmaList = document.getElementById('esmaList');
+    if (!esmaList) return;
+
+    const filtered = esmaUlHusna.filter(item => {
+        const search = searchTerm.toLowerCase();
+        return item.turkish.toLowerCase().includes(search) ||
+               item.meaning.toLowerCase().includes(search) ||
+               item.arabic.includes(search);
+    });
+
+    esmaList.innerHTML = filtered.map(item => {
+        const favorited = isFavorited('esma', item.id);
+        return `
+            <div class="esma-item">
+                <div class="esma-item-header">
+                    <div class="esma-number">${item.id}</div>
+                    <div class="esma-arabic">${item.arabic}</div>
+                </div>
+                <div class="esma-turkish">${item.turkish}</div>
+                <div class="esma-meaning">${item.meaning}</div>
+                <div class="item-actions">
+                    <button class="action-btn favorite-btn ${favorited ? 'favorited' : ''}"
+                            onclick="handleFavorite('esma', ${item.id}, this)"
+                            title="Favorilere ekle">
+                        <span class="action-icon">${favorited ? '⭐' : '☆'}</span>
+                    </button>
+                    <button class="action-btn speak-btn"
+                            onclick="handleSpeak('${item.arabic.replace(/'/g, "\\'")}', this)"
+                            title="Sesli oku">
+                        <span class="action-icon">🔊</span>
+                    </button>
+                    <button class="action-btn share-btn"
+                            onclick="handleShare('${item.turkish}', '${item.arabic}\\n${item.meaning}')"
+                            title="Paylaş">
+                        <span class="action-icon">📤</span>
+                    </button>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+// Enhanced Prayer Book loading
+function loadPrayerBook(category = 'daily') {
+    const prayerBookList = document.getElementById('prayerBookList');
+    if (!prayerBookList) return;
+
+    const categoryPrayers = prayers[category] || [];
+
+    prayerBookList.innerHTML = categoryPrayers.map(prayer => {
+        const favorited = isFavorited('prayers', prayer.id);
+        return `
+            <div class="prayer-item">
+                <div class="prayer-item-header">
+                    <div class="prayer-name">${prayer.name}</div>
+                    <div class="prayer-category">${prayer.category}</div>
+                </div>
+                <div class="prayer-arabic">${prayer.arabic}</div>
+                <div class="prayer-turkish">${prayer.turkish}</div>
+                <div class="prayer-latin">${prayer.latin}</div>
+                <div class="item-actions">
+                    <button class="action-btn favorite-btn ${favorited ? 'favorited' : ''}"
+                            onclick="handleFavorite('prayers', ${prayer.id}, this)"
+                            title="Favorilere ekle">
+                        <span class="action-icon">${favorited ? '⭐' : '☆'}</span>
+                    </button>
+                    <button class="action-btn speak-btn"
+                            onclick="handleSpeak('${prayer.arabic.replace(/'/g, "\\'")}', this)"
+                            title="Sesli oku">
+                        <span class="action-icon">🔊</span>
+                    </button>
+                    <button class="action-btn share-btn"
+                            onclick="handleShare('${prayer.name}', '${prayer.arabic}\\n\\n${prayer.turkish}\\n\\n${prayer.latin}')"
+                            title="Paylaş">
+                        <span class="action-icon">📤</span>
+                    </button>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+// Enhanced Surah loading
+function loadShortSurahs() {
+    const surahList = document.getElementById('surahList');
+    if (!surahList) return;
+
+    surahList.innerHTML = shortSurahs.map(surah => {
+        const favorited = isFavorited('surahs', surah.id);
+        return `
+            <div class="surah-item">
+                <div class="surah-header">
+                    <div class="surah-info">
+                        <div class="surah-name">${surah.name} Suresi</div>
+                        <div class="surah-meta">Sure No: ${surah.number} | ${surah.ayah_count} Ayet</div>
+                    </div>
+                    <div class="surah-number">${surah.number}</div>
+                </div>
+                <div class="surah-arabic">${surah.arabic}</div>
+                <div class="surah-turkish">${surah.turkish}</div>
+                <div class="item-actions">
+                    <button class="action-btn favorite-btn ${favorited ? 'favorited' : ''}"
+                            onclick="handleFavorite('surahs', ${surah.id}, this)"
+                            title="Favorilere ekle">
+                        <span class="action-icon">${favorited ? '⭐' : '☆'}</span>
+                    </button>
+                    <button class="action-btn speak-btn"
+                            onclick="handleSpeak('${surah.arabic.replace(/'/g, "\\'").replace(/\n/g, ' ')}', this)"
+                            title="Sesli oku">
+                        <span class="action-icon">🔊</span>
+                    </button>
+                    <button class="action-btn share-btn"
+                            onclick="handleShare('${surah.name} Suresi', '${surah.arabic}\\n\\n${surah.turkish}')"
+                            title="Paylaş">
+                        <span class="action-icon">📤</span>
+                    </button>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+// ========== ACTION HANDLERS ==========
+function handleFavorite(type, id, button) {
+    vibrate('short');
+    const isFav = toggleFavorite(type, id);
+
+    // Update button appearance
+    const icon = button.querySelector('.action-icon');
+    if (isFav) {
+        button.classList.add('favorited');
+        icon.textContent = '⭐';
+    } else {
+        button.classList.remove('favorited');
+        icon.textContent = '☆';
+    }
+}
+
+function handleSpeak(text, button) {
+    vibrate('short');
+    const icon = button.querySelector('.action-icon');
+
+    const isSpeaking = speakArabic(text);
+
+    if (isSpeaking) {
+        icon.textContent = '🔇';
+        button.classList.add('speaking');
+
+        // Reset button when speech ends
+        if (currentUtterance) {
+            currentUtterance.onend = () => {
+                icon.textContent = '🔊';
+                button.classList.remove('speaking');
+            };
+        }
+    } else {
+        icon.textContent = '🔊';
+        button.classList.remove('speaking');
+    }
+}
+
+function handleShare(title, text) {
+    vibrate('short');
+    shareContent(title, text);
+}
+
+// Show success/error message
+function showMessage(message, type = 'info') {
+    const existingMsg = document.querySelector('.toast-message');
+    if (existingMsg) {
+        existingMsg.remove();
+    }
+
+    const toast = document.createElement('div');
+    toast.className = `toast-message toast-${type}`;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 10);
+
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+// Settings button handler
+document.getElementById('settingsBtn')?.addEventListener('click', () => {
+    openModal('settingsModal');
+    loadSettings();
+});
+
+// Load settings UI
+function loadSettings() {
+    const vibrationEnabled = localStorage.getItem('vibrationEnabled') !== 'false';
+    const vibrationPattern = localStorage.getItem('vibrationPattern') || 'short';
+
+    document.getElementById('vibrationToggle').checked = vibrationEnabled;
+    document.getElementById('vibrationPattern').value = vibrationPattern;
+
+    // Load widget customization
+    loadWidgetCustomization();
+}
+
+// Save settings
+function saveSettings() {
+    const vibrationEnabled = document.getElementById('vibrationToggle').checked;
+    const vibrationPattern = document.getElementById('vibrationPattern').value;
+
+    localStorage.setItem('vibrationEnabled', vibrationEnabled);
+    localStorage.setItem('vibrationPattern', vibrationPattern);
+
+    showMessage('Ayarlar kaydedildi', 'success');
+}
+
+// Load widget customization UI
+function loadWidgetCustomization() {
+    const widgetList = document.getElementById('widgetList');
+    if (!widgetList) return;
+
+    const order = getWidgetOrder();
+    const hidden = getHiddenWidgets();
+
+    const widgetNames = {
+        'qiblaBtn': 'Kıble',
+        'tasbihBtn': 'Tesbih',
+        'trackBtn': 'Takip',
+        'notificationBtn': 'Bildirim',
+        'locationBtn': 'Konum',
+        'esmaBtn': '99 İsim',
+        'prayerBookBtn': 'Dualar',
+        'surahBtn': 'Sureler'
+    };
+
+    widgetList.innerHTML = order.map(btnId => {
+        const isHidden = hidden.includes(btnId);
+        return `
+            <div class="widget-item" data-widget-id="${btnId}">
+                <span class="widget-drag-handle">⋮⋮</span>
+                <span class="widget-name">${widgetNames[btnId] || btnId}</span>
+                <label class="widget-toggle">
+                    <input type="checkbox" ${!isHidden ? 'checked' : ''}
+                           onchange="toggleWidgetVisibility('${btnId}')">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        `;
+    }).join('');
+}
+
+// Apply customization on page load
+document.addEventListener('DOMContentLoaded', () => {
+    applyWidgetCustomization();
+});
