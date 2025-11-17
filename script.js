@@ -593,14 +593,23 @@ document.querySelectorAll('#notificationModal input, #notificationModal select')
     });
 });
 
-// Notification button click
+// Notification button click - Opens enhanced notifications
 document.getElementById('notificationBtn')?.addEventListener('click', () => {
-    openModal('notificationModal');
-    loadNotificationSettings();
+    openModal('notificationEnhancedModal');
+    loadNotificationPresets();
 });
 
 // ========== ADHAN AUDIO ==========
 const adhanAudio = document.getElementById('adhanAudio');
+
+// Load selected adhan sound on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const selectedSoundId = localStorage.getItem('selectedAdhanSound') || '1';
+    const selectedSound = adhanSounds.find(s => s.id == selectedSoundId);
+    if (selectedSound && adhanAudio) {
+        adhanAudio.src = selectedSound.url;
+    }
+});
 
 // Update volume
 document.getElementById('volumeSlider')?.addEventListener('input', (e) => {
@@ -2453,8 +2462,15 @@ function applyLanguage(lang) {
     });
 
     // Update other UI elements
-    document.querySelector('.logo h1')?.textContent = t.appTitle || document.querySelector('.logo h1')?.textContent;
-    document.querySelector('.next-prayer-label')?.textContent = t.nextPrayer || document.querySelector('.next-prayer-label')?.textContent;
+    const logoH1 = document.querySelector('.logo h1');
+    if (logoH1 && t.appTitle) {
+        logoH1.textContent = t.appTitle;
+    }
+
+    const nextPrayerLabel = document.querySelector('.next-prayer-label');
+    if (nextPrayerLabel && t.nextPrayer) {
+        nextPrayerLabel.textContent = t.nextPrayer;
+    }
 }
 
 // ========== FONT SIZE CONTROL ==========
@@ -2682,6 +2698,438 @@ function saveAutoTheme() {
     showMessage('Otomatik tema ayarları kaydedildi', 'success');
 }
 
+// ========== ISLAMIC LIBRARY FUNCTIONS ==========
+let currentLibraryTab = 'books';
+let previewAudio = null;
+
+function loadLibraryContent(type) {
+    currentLibraryTab = type;
+    const container = document.getElementById('libraryContent');
+
+    // Update active tab
+    document.querySelectorAll('.prayer-tab[data-library]').forEach(tab => {
+        tab.classList.toggle('active', tab.dataset.library === type);
+    });
+
+    let content = '';
+
+    switch(type) {
+        case 'books':
+            content = libraryBooks.map(book => `
+                <div class="library-item">
+                    <div class="library-item-header">
+                        <span class="library-icon">${book.cover}</span>
+                        <div class="library-info">
+                            <h4>${book.title}</h4>
+                            <p class="library-meta">${book.author} • ${book.pages} sayfa</p>
+                        </div>
+                    </div>
+                    <p class="library-description">${book.description}</p>
+                    <div class="library-tags">
+                        <span class="tag">${book.category}</span>
+                        <span class="tag">${book.language}</span>
+                    </div>
+                </div>
+            `).join('');
+            break;
+
+        case 'articles':
+            content = libraryArticles.map(article => `
+                <div class="library-item">
+                    <div class="library-item-header">
+                        <span class="library-icon">📰</span>
+                        <div class="library-info">
+                            <h4>${article.title}</h4>
+                            <p class="library-meta">${article.author} • ${article.readTime}</p>
+                        </div>
+                    </div>
+                    <p class="library-description">${article.excerpt}</p>
+                    <div class="library-tags">
+                        <span class="tag">${article.category}</span>
+                        <span class="tag">${article.date}</span>
+                    </div>
+                </div>
+            `).join('');
+            break;
+
+        case 'videos':
+            content = libraryVideos.map(video => `
+                <div class="library-item">
+                    <div class="library-item-header">
+                        <span class="library-icon">${video.thumbnail}</span>
+                        <div class="library-info">
+                            <h4>${video.title}</h4>
+                            <p class="library-meta">${video.speaker} • ${video.duration}</p>
+                        </div>
+                    </div>
+                    <div class="library-tags">
+                        <span class="tag">${video.category}</span>
+                        <span class="tag">${video.views} görüntülenme</span>
+                    </div>
+                </div>
+            `).join('');
+            break;
+
+        case 'podcasts':
+            content = libraryPodcasts.map(podcast => `
+                <div class="library-item">
+                    <div class="library-item-header">
+                        <span class="library-icon">${podcast.cover}</span>
+                        <div class="library-info">
+                            <h4>${podcast.title}</h4>
+                            <p class="library-meta">${podcast.host} • ${podcast.episodes} bölüm</p>
+                        </div>
+                    </div>
+                    <p class="library-description">${podcast.description}</p>
+                    <div class="library-tags">
+                        <span class="tag">${podcast.category}</span>
+                        <span class="tag">${podcast.duration}</span>
+                    </div>
+                </div>
+            `).join('');
+            break;
+    }
+
+    container.innerHTML = content;
+
+    // Add tab click listeners
+    document.querySelectorAll('.prayer-tab[data-library]').forEach(tab => {
+        tab.addEventListener('click', () => {
+            loadLibraryContent(tab.dataset.library);
+        });
+    });
+}
+
+// ========== RADIO PLAYER FUNCTIONS ==========
+let radioAudio = null;
+let currentRadioStation = null;
+let isRadioPlaying = false;
+
+function loadRadioStations() {
+    const container = document.getElementById('radioStationsList');
+
+    container.innerHTML = radioStations.map(station => `
+        <div class="radio-station-item" data-station-id="${station.id}">
+            <div class="radio-station-info">
+                <span class="radio-icon">${station.icon}</span>
+                <div>
+                    <h4>${station.name}</h4>
+                    <p>${station.description}</p>
+                </div>
+            </div>
+            <button class="btn-primary" onclick="playRadioStation(${station.id})">
+                ▶️ Dinle
+            </button>
+        </div>
+    `).join('');
+}
+
+function playRadioStation(stationId) {
+    const station = radioStations.find(s => s.id === stationId);
+    if (!station) return;
+
+    currentRadioStation = station;
+
+    // Create or update audio element
+    if (!radioAudio) {
+        radioAudio = new Audio();
+        radioAudio.addEventListener('error', () => {
+            showError('Radyo yüklenirken hata oluştu. Lütfen tekrar deneyin.');
+            stopRadio();
+        });
+    }
+
+    radioAudio.src = station.url;
+    radioAudio.volume = 0.7;
+    radioAudio.play().catch(err => {
+        showError('Radyo çalmaya başlanamadı: ' + err.message);
+        return;
+    });
+
+    isRadioPlaying = true;
+
+    // Show player
+    const player = document.getElementById('radioPlayer');
+    player.style.display = 'block';
+
+    // Update player info
+    document.getElementById('currentRadioName').textContent = station.name;
+    document.getElementById('currentRadioDesc').textContent = station.description;
+
+    // Update play/pause button
+    updateRadioPlayPauseButton();
+
+    // Setup control listeners
+    setupRadioControls();
+}
+
+function setupRadioControls() {
+    const playPauseBtn = document.getElementById('radioPlayPauseBtn');
+    const stopBtn = document.getElementById('radioStopBtn');
+    const volumeSlider = document.getElementById('radioVolumeSlider');
+
+    // Remove existing listeners
+    const newPlayPauseBtn = playPauseBtn.cloneNode(true);
+    playPauseBtn.parentNode.replaceChild(newPlayPauseBtn, playPauseBtn);
+
+    const newStopBtn = stopBtn.cloneNode(true);
+    stopBtn.parentNode.replaceChild(newStopBtn, stopBtn);
+
+    // Play/Pause
+    newPlayPauseBtn.addEventListener('click', () => {
+        if (isRadioPlaying) {
+            radioAudio.pause();
+            isRadioPlaying = false;
+        } else {
+            radioAudio.play();
+            isRadioPlaying = true;
+        }
+        updateRadioPlayPauseButton();
+    });
+
+    // Stop
+    newStopBtn.addEventListener('click', () => {
+        stopRadio();
+    });
+
+    // Volume
+    volumeSlider.addEventListener('input', (e) => {
+        if (radioAudio) {
+            radioAudio.volume = e.target.value / 100;
+        }
+    });
+}
+
+function updateRadioPlayPauseButton() {
+    const btn = document.getElementById('radioPlayPauseBtn');
+    if (btn) {
+        btn.textContent = isRadioPlaying ? '⏸️' : '▶️';
+    }
+}
+
+function stopRadio() {
+    if (radioAudio) {
+        radioAudio.pause();
+        radioAudio.src = '';
+        isRadioPlaying = false;
+        currentRadioStation = null;
+    }
+
+    const player = document.getElementById('radioPlayer');
+    if (player) {
+        player.style.display = 'none';
+    }
+}
+
+// ========== ADHAN SOUNDS FUNCTIONS ==========
+function loadAdhanSounds() {
+    const container = document.getElementById('adhanSoundsList');
+    const selectedSound = localStorage.getItem('selectedAdhanSound') || '1';
+
+    container.innerHTML = adhanSounds.map(sound => `
+        <div class="adhan-sound-item ${sound.id == selectedSound ? 'selected' : ''}" data-sound-id="${sound.id}">
+            <div class="adhan-sound-info">
+                <div class="adhan-sound-header">
+                    <h4>${sound.name}</h4>
+                    <span class="adhan-duration">${sound.duration}</span>
+                </div>
+                <p class="adhan-country">🌍 ${sound.country}</p>
+            </div>
+            <div class="adhan-sound-actions">
+                <button class="btn-secondary" onclick="previewAdhanSound('${sound.url}')">
+                    🔊 Dinle
+                </button>
+                <button class="btn-primary ${sound.id == selectedSound ? 'active' : ''}"
+                        onclick="selectAdhanSound(${sound.id}, '${sound.url}')">
+                    ${sound.id == selectedSound ? '✓ Seçili' : 'Seç'}
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function previewAdhanSound(url) {
+    // Stop any existing preview
+    if (previewAudio) {
+        previewAudio.pause();
+        previewAudio = null;
+    }
+
+    previewAudio = new Audio(url);
+    previewAudio.volume = 0.5;
+    previewAudio.play().catch(err => {
+        showError('Ses çalınamadı: ' + err.message);
+    });
+
+    // Auto-stop after 15 seconds
+    setTimeout(() => {
+        if (previewAudio) {
+            previewAudio.pause();
+            previewAudio = null;
+        }
+    }, 15000);
+}
+
+function selectAdhanSound(soundId, url) {
+    // Save selection
+    localStorage.setItem('selectedAdhanSound', soundId);
+
+    // Update main adhan audio
+    const adhanAudio = document.getElementById('adhanAudio');
+    if (adhanAudio) {
+        adhanAudio.src = url;
+    }
+
+    // Reload the list to update UI
+    loadAdhanSounds();
+
+    showMessage('Ezan sesi seçildi', 'success');
+}
+
+// ========== ENHANCED NOTIFICATIONS FUNCTIONS ==========
+let notificationHistory = [];
+
+function loadNotificationPresets() {
+    const container = document.getElementById('notificationPresetsList');
+
+    container.innerHTML = notificationPresets.map(preset => `
+        <div class="notification-preset-item" onclick="applyNotificationPreset('${preset.id}')">
+            <div class="preset-info">
+                <h4>${preset.name}</h4>
+                <p>${preset.description}</p>
+            </div>
+            <button class="btn-primary">Uygula</button>
+        </div>
+    `).join('');
+
+    // Setup DND mode
+    setupDNDMode();
+
+    // Load notification history
+    loadNotificationHistory();
+}
+
+function applyNotificationPreset(presetId) {
+    const preset = notificationPresets.find(p => p.id === presetId);
+    if (!preset) return;
+
+    // Apply settings
+    Object.keys(preset.settings).forEach(key => {
+        localStorage.setItem(`notification_${key}`, preset.settings[key]);
+    });
+
+    showMessage(`${preset.name} profili uygulandı`, 'success');
+
+    // Add to history
+    addNotificationHistory(`${preset.name} profili uygulandı`);
+}
+
+function setupDNDMode() {
+    const dndToggle = document.getElementById('dndMode');
+    const dndSettings = document.getElementById('dndSettings');
+    const startTime = document.getElementById('dndStartTime');
+    const endTime = document.getElementById('dndEndTime');
+
+    // Load saved settings
+    const dndEnabled = localStorage.getItem('dndMode') === 'true';
+    dndToggle.checked = dndEnabled;
+    dndSettings.style.display = dndEnabled ? 'block' : 'none';
+
+    if (localStorage.getItem('dndStartTime')) {
+        startTime.value = localStorage.getItem('dndStartTime');
+    }
+    if (localStorage.getItem('dndEndTime')) {
+        endTime.value = localStorage.getItem('dndEndTime');
+    }
+
+    // Toggle event
+    dndToggle.addEventListener('change', (e) => {
+        const enabled = e.target.checked;
+        localStorage.setItem('dndMode', enabled);
+        dndSettings.style.display = enabled ? 'block' : 'none';
+
+        if (enabled) {
+            addNotificationHistory('Rahatsız Etme Modu açıldı');
+        } else {
+            addNotificationHistory('Rahatsız Etme Modu kapatıldı');
+        }
+    });
+
+    // Time changes
+    startTime.addEventListener('change', (e) => {
+        localStorage.setItem('dndStartTime', e.target.value);
+    });
+
+    endTime.addEventListener('change', (e) => {
+        localStorage.setItem('dndEndTime', e.target.value);
+    });
+}
+
+function addNotificationHistory(message) {
+    const timestamp = new Date().toLocaleString('tr-TR');
+    notificationHistory.unshift({ message, timestamp });
+
+    // Keep only last 20 items
+    if (notificationHistory.length > 20) {
+        notificationHistory = notificationHistory.slice(0, 20);
+    }
+
+    // Save to localStorage
+    localStorage.setItem('notificationHistory', JSON.stringify(notificationHistory));
+
+    // Update display
+    loadNotificationHistory();
+}
+
+function loadNotificationHistory() {
+    const container = document.getElementById('notificationHistory');
+    if (!container) return;
+
+    // Load from localStorage
+    const saved = localStorage.getItem('notificationHistory');
+    if (saved) {
+        notificationHistory = JSON.parse(saved);
+    }
+
+    if (notificationHistory.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">Henüz bildirim geçmişi yok</p>';
+        return;
+    }
+
+    container.innerHTML = notificationHistory.map(item => `
+        <div class="notification-history-item">
+            <p>${item.message}</p>
+            <span class="notification-time">${item.timestamp}</span>
+        </div>
+    `).join('');
+}
+
+// Check if current time is in DND period
+function isDNDActive() {
+    const dndEnabled = localStorage.getItem('dndMode') === 'true';
+    if (!dndEnabled) return false;
+
+    const startTime = localStorage.getItem('dndStartTime');
+    const endTime = localStorage.getItem('dndEndTime');
+    if (!startTime || !endTime) return false;
+
+    const now = new Date();
+    const currentTime = now.getHours() * 60 + now.getMinutes();
+
+    const [startHour, startMin] = startTime.split(':').map(Number);
+    const [endHour, endMin] = endTime.split(':').map(Number);
+
+    const start = startHour * 60 + startMin;
+    const end = endHour * 60 + endMin;
+
+    // Handle overnight periods (e.g., 22:00 to 07:00)
+    if (start > end) {
+        return currentTime >= start || currentTime <= end;
+    } else {
+        return currentTime >= start && currentTime <= end;
+    }
+}
+
 // Button handlers for new features - Moved to DOMContentLoaded
 // Apply saved settings on load
 document.addEventListener('DOMContentLoaded', () => {
@@ -2729,6 +3177,31 @@ document.addEventListener('DOMContentLoaded', () => {
         juzBtn.addEventListener('click', () => {
             openModal('juzModal');
             loadJuzTracker();
+        });
+    }
+
+    // NEW FEATURES - Library, Radio, Adhan Sounds Event Listeners
+    const libraryBtn = document.getElementById('libraryBtn');
+    if (libraryBtn) {
+        libraryBtn.addEventListener('click', () => {
+            openModal('libraryModal');
+            loadLibraryContent('books');
+        });
+    }
+
+    const radioBtn = document.getElementById('radioBtn');
+    if (radioBtn) {
+        radioBtn.addEventListener('click', () => {
+            openModal('radioModal');
+            loadRadioStations();
+        });
+    }
+
+    const adhanSoundsBtn = document.getElementById('adhanSoundsBtn');
+    if (adhanSoundsBtn) {
+        adhanSoundsBtn.addEventListener('click', () => {
+            openModal('adhanSoundsModal');
+            loadAdhanSounds();
         });
     }
 
