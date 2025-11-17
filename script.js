@@ -310,6 +310,11 @@ function closeModal(modalId) {
     if (modal) {
         modal.classList.remove('show');
         document.body.style.overflow = 'auto';
+
+        // If closing qibla modal, stop AR mode
+        if (modalId === 'qiblaModal' && arMode) {
+            stopARMode();
+        }
     }
 }
 
@@ -1265,7 +1270,8 @@ function getWidgetOrder() {
     const stored = localStorage.getItem(WIDGET_ORDER_KEY);
     return stored ? JSON.parse(stored) : [
         'qiblaBtn', 'tasbihBtn', 'trackBtn', 'notificationBtn',
-        'locationBtn', 'esmaBtn', 'prayerBookBtn', 'surahBtn'
+        'locationBtn', 'esmaBtn', 'prayerBookBtn', 'surahBtn',
+        'ramadanBtn', 'alarmBtn', 'adhanSettingsBtn'
     ];
 }
 
@@ -1556,7 +1562,10 @@ function loadWidgetCustomization() {
         'locationBtn': 'Konum',
         'esmaBtn': '99 İsim',
         'prayerBookBtn': 'Dualar',
-        'surahBtn': 'Sureler'
+        'surahBtn': 'Sureler',
+        'ramadanBtn': 'Ramazan',
+        'alarmBtn': 'Alarmlar',
+        'adhanSettingsBtn': 'Ezan'
     };
 
     widgetList.innerHTML = order.map(btnId => {
