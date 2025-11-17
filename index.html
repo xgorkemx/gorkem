@@ -2,68 +2,72 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Modern ve kullanıcı dostu namaz vakitleri uygulaması. Kıble, tesbih, dualar ve daha fazlası.">
-    <meta name="theme-color" content="#667eea">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="Modern ve şık namaz vakitleri uygulaması. Kıble, tesbih, dualar ve daha fazlası.">
+    <meta name="theme-color" content="#6366f1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Ezan Pro">
-    <title>Ezan Vakti Pro</title>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Prayer Times">
+    <title>Prayer Times - Modern Namaz Vakitleri</title>
 
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
 
-    <!-- Favicon and Apple Touch Icon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2L10 6H14L12 2Z' fill='%23667eea'/%3E%3Cpath d='M20 9C20 7.34315 18.6569 6 17 6C16.3439 6 15.7412 6.23093 15.2676 6.61803C15.0935 5.12369 13.8284 4 12.5 4C11.1716 4 9.90646 5.12369 9.73244 6.61803C9.25884 6.23093 8.65606 6 8 6C6.34315 6 5 7.34315 5 9V10H20V9Z' fill='%23667eea'/%3E%3Crect x='6' y='10' width='12' height='10' rx='1' fill='%23667eea'/%3E%3C/svg%3E">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='192' height='192' fill='url(%23grad)'/%3E%3Cpath d='M96 32L88 56H104L96 32Z' fill='white'/%3E%3Cpath d='M140 76C140 68.268 134.732 62 127 62C124.344 62 121.882 62.923 119.902 64.472C119.561 60.124 115.828 56 111.5 56C107.172 56 103.439 60.124 103.098 64.472C101.118 62.923 98.656 62 96 62C88.268 62 83 68.268 83 76V86H140V76Z' fill='white'/%3E%3Crect x='86' y='86' width='84' height='70' rx='7' fill='white'/%3E%3C/svg%3E">
-
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="style.css">
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2L10 6H14L12 2Z' fill='%236366f1'/%3E%3Cpath d='M20 9C20 7.34 18.66 6 17 6C16.34 6 15.74 6.23 15.27 6.62C15.09 5.12 13.83 4 12.5 4C11.17 4 9.91 5.12 9.73 6.62C9.26 6.23 8.66 6 8 6C6.34 6 5 7.34 5 9V10H20V9Z' fill='%236366f1'/%3E%3Crect x='6' y='10' width='12' height='10' rx='1' fill='%236366f1'/%3E%3C/svg%3E">
 </head>
 <body>
-    <div class="container">
+    <!-- App Container -->
+    <div class="app">
         <!-- Header -->
         <header class="header">
-            <div class="logo">
-                <svg class="mosque-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2L10 6H14L12 2Z" fill="currentColor"/>
-                    <path d="M20 9C20 7.34315 18.6569 6 17 6C16.3439 6 15.7412 6.23093 15.2676 6.61803C15.0935 5.12369 13.8284 4 12.5 4C11.1716 4 9.90646 5.12369 9.73244 6.61803C9.25884 6.23093 8.65606 6 8 6C6.34315 6 5 7.34315 5 9V10H20V9Z" fill="currentColor"/>
-                    <rect x="6" y="10" width="12" height="10" rx="1" fill="currentColor"/>
-                    <rect x="10" y="14" width="4" height="6" fill="white"/>
-                    <circle cx="8.5" cy="13" r="0.5" fill="white"/>
-                    <circle cx="15.5" cy="13" r="0.5" fill="white"/>
-                </svg>
-                <h1>Ezan Vakti Pro</h1>
+            <div class="header-top">
+                <div class="logo">
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L10 6H14L12 2Z" fill="currentColor"/>
+                        <path d="M20 9C20 7.34 18.66 6 17 6C16.34 6 15.74 6.23 15.27 6.62C15.09 5.12 13.83 4 12.5 4C11.17 4 9.91 5.12 9.73 6.62C9.26 6.23 8.66 6 8 6C6.34 6 5 7.34 5 9V10H20V9Z" fill="currentColor"/>
+                        <rect x="6" y="10" width="12" height="10" rx="1" fill="currentColor"/>
+                    </svg>
+                    <h1 class="logo-text">Prayer Times</h1>
+                </div>
+                <div class="header-actions">
+                    <button class="icon-btn" id="settingsBtn" title="Ayarlar">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M12 1v6m0 6v6M4.93 4.93l4.24 4.24m5.66 5.66l4.24 4.24M1 12h6m6 0h6M4.93 19.07l4.24-4.24m5.66-5.66l4.24-4.24"/>
+                        </svg>
+                    </button>
+                    <button class="icon-btn" id="themeToggle" title="Tema">
+                        <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
-            <div class="date-time">
-                <div class="current-date" id="currentDate"></div>
-                <div class="hijri-date" id="hijriDate">Hicri: --</div>
-                <div class="current-time" id="currentTime"></div>
-            </div>
-            <div class="header-controls">
-                <button class="control-btn" id="settingsBtn" title="Ayarlar">
-                    <span>⚙️</span>
-                </button>
-                <button class="control-btn" id="themeToggle" title="Tema Değiştir">
-                    <span id="themeIcon">🌙</span>
-                </button>
-                <button class="control-btn" id="widgetToggle" title="Widget Modu">
-                    <span>📱</span>
-                </button>
-                <button class="control-btn" id="prayerTrackBtn" title="Namaz Takibi">
-                    <span>✅</span>
-                </button>
+
+            <div class="header-date">
+                <div class="date-display">
+                    <div class="date-primary" id="currentDate"></div>
+                    <div class="date-secondary" id="hijriDate"></div>
+                </div>
+                <div class="time-display" id="currentTime"></div>
             </div>
         </header>
 
-        <!-- City Selection -->
-        <div class="city-selection">
-            <div class="select-wrapper">
-                <svg class="location-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" fill="currentColor"/>
+        <!-- City Selector -->
+        <div class="city-selector">
+            <div class="city-selector-wrapper">
+                <svg class="city-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
                 </svg>
                 <select id="citySelect" class="city-select">
                     <option value="">Şehir Seçiniz...</option>
@@ -152,133 +156,141 @@
             </div>
         </div>
 
-        <!-- Next Prayer -->
-        <div class="next-prayer-card" id="nextPrayerCard">
-            <div class="next-prayer-label">Bir Sonraki Namaz</div>
+        <!-- Next Prayer Card -->
+        <div class="next-prayer" id="nextPrayerCard">
+            <div class="next-prayer-badge">BİR SONRAKİ NAMAZ</div>
             <div class="next-prayer-name" id="nextPrayerName">-</div>
-            <div class="countdown" id="countdown">--:--:--</div>
-            <div class="next-prayer-time" id="nextPrayerTime">--:--</div>
+            <div class="next-prayer-countdown" id="countdown">--:--:--</div>
+            <div class="next-prayer-time">
+                <svg class="clock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                <span id="nextPrayerTime">--:--</span>
+            </div>
         </div>
 
-        <!-- Feature Buttons -->
-        <div class="feature-buttons">
-            <button class="feature-btn" id="qiblaBtn" title="Kıble Yönü">
-                <span class="feature-icon">🧭</span>
-                <span class="feature-text">Kıble</span>
-            </button>
-            <button class="feature-btn" id="tasbihBtn" title="Tesbih">
-                <span class="feature-icon">📿</span>
-                <span class="feature-text">Tesbih</span>
-            </button>
-            <button class="feature-btn" id="notificationBtn" title="Bildirimler">
-                <span class="feature-icon">🔔</span>
-                <span class="feature-text">Bildirim</span>
-            </button>
-            <button class="feature-btn" id="locationBtn" title="Konumumu Bul">
-                <span class="feature-icon">📍</span>
-                <span class="feature-text">Konum</span>
-            </button>
-            <button class="feature-btn" id="esmaBtn" title="Esmâ-ül Hüsnâ">
-                <span class="feature-icon">📖</span>
-                <span class="feature-text">99 İsim</span>
-            </button>
-            <button class="feature-btn" id="prayerBookBtn" title="Dua Kitabı">
-                <span class="feature-icon">🤲</span>
-                <span class="feature-text">Dualar</span>
-            </button>
-            <button class="feature-btn" id="surahBtn" title="Kısa Sureler">
-                <span class="feature-icon">📜</span>
-                <span class="feature-text">Sureler</span>
-            </button>
-            <button class="feature-btn" id="ramadanBtn" title="Ramazan İmsakiyesi">
-                <span class="feature-icon">🌙</span>
-                <span class="feature-text">Ramazan</span>
-            </button>
-            <button class="feature-btn" id="alarmBtn" title="Namaz Vakti Alarmları">
-                <span class="feature-icon">⏰</span>
-                <span class="feature-text">Alarmlar</span>
-            </button>
-            <button class="feature-btn" id="adhanSettingsBtn" title="Ezan Ayarları">
-                <span class="feature-icon">🕌</span>
-                <span class="feature-text">Ezan</span>
-            </button>
-            <button class="feature-btn" id="hadithBtn" title="Günün Hadisi">
-                <span class="feature-icon">📖</span>
-                <span class="feature-text">Günlük Hadis</span>
-            </button>
-            <button class="feature-btn" id="fortyHadithBtn" title="40 Hadis">
-                <span class="feature-icon">📚</span>
-                <span class="feature-text">40 Hadis</span>
-            </button>
-            <button class="feature-btn" id="storiesBtn" title="Peygamber Kıssaları">
-                <span class="feature-icon">👳</span>
-                <span class="feature-text">Kıssalar</span>
-            </button>
-            <button class="feature-btn" id="eventsBtn" title="Dini Günler">
-                <span class="feature-icon">📅</span>
-                <span class="feature-text">Dini Günler</span>
-            </button>
-            <button class="feature-btn" id="juzBtn" title="Cüz Takibi">
-                <span class="feature-icon">📗</span>
-                <span class="feature-text">Cüz Takibi</span>
-            </button>
-        </div>
-
-        <!-- Prayer Times -->
-        <div class="prayer-times" id="prayerTimes">
+        <!-- Prayer Times Grid -->
+        <div class="prayer-grid" id="prayerTimes">
             <div class="prayer-card" data-prayer="imsak">
-                <div class="prayer-icon">🌙</div>
-                <div class="prayer-info">
-                    <div class="prayer-name">İmsak</div>
-                    <div class="prayer-time" id="imsak">--:--</div>
+                <div class="prayer-card-icon">🌙</div>
+                <div class="prayer-card-content">
+                    <div class="prayer-card-name">İmsak</div>
+                    <div class="prayer-card-time" id="imsak">--:--</div>
                 </div>
             </div>
-
             <div class="prayer-card" data-prayer="gunes">
-                <div class="prayer-icon">🌅</div>
-                <div class="prayer-info">
-                    <div class="prayer-name">Güneş</div>
-                    <div class="prayer-time" id="gunes">--:--</div>
+                <div class="prayer-card-icon">🌅</div>
+                <div class="prayer-card-content">
+                    <div class="prayer-card-name">Güneş</div>
+                    <div class="prayer-card-time" id="gunes">--:--</div>
                 </div>
             </div>
-
             <div class="prayer-card" data-prayer="ogle">
-                <div class="prayer-icon">☀️</div>
-                <div class="prayer-info">
-                    <div class="prayer-name">Öğle</div>
-                    <div class="prayer-time" id="ogle">--:--</div>
+                <div class="prayer-card-icon">☀️</div>
+                <div class="prayer-card-content">
+                    <div class="prayer-card-name">Öğle</div>
+                    <div class="prayer-card-time" id="ogle">--:--</div>
                 </div>
             </div>
-
             <div class="prayer-card" data-prayer="ikindi">
-                <div class="prayer-icon">🌤️</div>
-                <div class="prayer-info">
-                    <div class="prayer-name">İkindi</div>
-                    <div class="prayer-time" id="ikindi">--:--</div>
+                <div class="prayer-card-icon">🌤️</div>
+                <div class="prayer-card-content">
+                    <div class="prayer-card-name">İkindi</div>
+                    <div class="prayer-card-time" id="ikindi">--:--</div>
                 </div>
             </div>
-
             <div class="prayer-card" data-prayer="aksam">
-                <div class="prayer-icon">🌆</div>
-                <div class="prayer-info">
-                    <div class="prayer-name">Akşam</div>
-                    <div class="prayer-time" id="aksam">--:--</div>
+                <div class="prayer-card-icon">🌆</div>
+                <div class="prayer-card-content">
+                    <div class="prayer-card-name">Akşam</div>
+                    <div class="prayer-card-time" id="aksam">--:--</div>
                 </div>
             </div>
-
             <div class="prayer-card" data-prayer="yatsi">
-                <div class="prayer-icon">🌃</div>
-                <div class="prayer-info">
-                    <div class="prayer-name">Yatsı</div>
-                    <div class="prayer-time" id="yatsi">--:--</div>
+                <div class="prayer-card-icon">🌃</div>
+                <div class="prayer-card-content">
+                    <div class="prayer-card-name">Yatsı</div>
+                    <div class="prayer-card-time" id="yatsi">--:--</div>
                 </div>
             </div>
         </div>
 
-        <!-- Loading -->
+        <!-- Features Grid -->
+        <div class="features-section">
+            <h2 class="section-title">Özellikler</h2>
+            <div class="features-grid">
+                <button class="feature-card" id="qiblaBtn">
+                    <span class="feature-card-icon">🧭</span>
+                    <span class="feature-card-text">Kıble</span>
+                </button>
+                <button class="feature-card" id="tasbihBtn">
+                    <span class="feature-card-icon">📿</span>
+                    <span class="feature-card-text">Tesbih</span>
+                </button>
+                <button class="feature-card" id="prayerTrackBtn">
+                    <span class="feature-card-icon">✅</span>
+                    <span class="feature-card-text">Takip</span>
+                </button>
+                <button class="feature-card" id="notificationBtn">
+                    <span class="feature-card-icon">🔔</span>
+                    <span class="feature-card-text">Bildirim</span>
+                </button>
+                <button class="feature-card" id="esmaBtn">
+                    <span class="feature-card-icon">📖</span>
+                    <span class="feature-card-text">99 İsim</span>
+                </button>
+                <button class="feature-card" id="prayerBookBtn">
+                    <span class="feature-card-icon">🤲</span>
+                    <span class="feature-card-text">Dualar</span>
+                </button>
+                <button class="feature-card" id="surahBtn">
+                    <span class="feature-card-icon">📜</span>
+                    <span class="feature-card-text">Sureler</span>
+                </button>
+                <button class="feature-card" id="ramadanBtn">
+                    <span class="feature-card-icon">🌙</span>
+                    <span class="feature-card-text">Ramazan</span>
+                </button>
+                <button class="feature-card" id="alarmBtn">
+                    <span class="feature-card-icon">⏰</span>
+                    <span class="feature-card-text">Alarmlar</span>
+                </button>
+                <button class="feature-card" id="adhanSettingsBtn">
+                    <span class="feature-card-icon">🕌</span>
+                    <span class="feature-card-text">Ezan</span>
+                </button>
+                <button class="feature-card" id="hadithBtn">
+                    <span class="feature-card-icon">📖</span>
+                    <span class="feature-card-text">Hadis</span>
+                </button>
+                <button class="feature-card" id="fortyHadithBtn">
+                    <span class="feature-card-icon">📚</span>
+                    <span class="feature-card-text">40 Hadis</span>
+                </button>
+                <button class="feature-card" id="storiesBtn">
+                    <span class="feature-card-icon">👳</span>
+                    <span class="feature-card-text">Kıssalar</span>
+                </button>
+                <button class="feature-card" id="eventsBtn">
+                    <span class="feature-card-icon">📅</span>
+                    <span class="feature-card-text">Kandiller</span>
+                </button>
+                <button class="feature-card" id="juzBtn">
+                    <span class="feature-card-icon">📗</span>
+                    <span class="feature-card-text">Cüz Takibi</span>
+                </button>
+                <button class="feature-card" id="locationBtn">
+                    <span class="feature-card-icon">📍</span>
+                    <span class="feature-card-text">Konum</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Loading State -->
         <div class="loading" id="loading">
-            <div class="spinner"></div>
-            <p>Namaz vakitleri yükleniyor...</p>
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Yükleniyor...</p>
         </div>
 
         <!-- Error Message -->
@@ -290,667 +302,66 @@
         </footer>
     </div>
 
-    <!-- Qibla Modal -->
-    <div class="modal" id="qiblaModal">
-        <div class="modal-content qibla-content">
-            <div class="modal-header">
-                <h2>🧭 Kıble Yönü</h2>
-                <button class="close-btn" onclick="closeModal('qiblaModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="qibla-compass" id="qiblaCompass">
-                    <div class="compass-outer">
-                        <div class="compass-needle" id="compassNeedle">
-                            <div class="needle-north"></div>
-                        </div>
-                        <div class="compass-direction qibla-direction" id="qiblaDirection">
-                            <div class="kaaba-icon">🕋</div>
-                        </div>
-                        <div class="compass-label north">K</div>
-                        <div class="compass-label east">D</div>
-                        <div class="compass-label south">G</div>
-                        <div class="compass-label west">B</div>
-                    </div>
-                </div>
-                <div class="qibla-info">
-                    <p class="qibla-angle" id="qiblaAngle">Kıble Açısı: <strong>--°</strong></p>
-                    <p class="qibla-distance" id="qiblaDistance">Kabe'ye Uzaklık: <strong>-- km</strong></p>
-                    <p class="qibla-note">📱 Cihazınızı yatay tutun ve pusulanın kırmızı oku Kabe ikonuna gelecek şekilde yönlendirin.</p>
-                    <button class="primary-btn" id="arToggleBtn" onclick="toggleARQibla()">📷 AR Modunu Aç</button>
-                </div>
-                <div class="ar-container" id="arContainer">
-                    <video id="arVideo" autoplay playsinline></video>
-                    <div class="ar-overlay">
-                        <div class="ar-compass" id="arCompassNeedle"></div>
-                        <div class="ar-qibla-indicator">
-                            <div class="ar-kaaba">🕋</div>
-                            <div class="ar-arrow">↓</div>
-                        </div>
-                    </div>
-                </div>
-                <button class="btn-primary" id="calibrateBtn">🔄 Pusulayı Kalibre Et</button>
-            </div>
-        </div>
-    </div>
+    <!-- Modal Container (will be dynamically populated) -->
+    <div id="modalContainer"></div>
 
-    <!-- Tasbih Modal -->
-    <div class="modal" id="tasbihModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>📿 Dijital Tesbih</h2>
-                <button class="close-btn" onclick="closeModal('tasbihModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="tasbih-counter">
-                    <div class="count-display" id="tasbihCount">0</div>
-                    <div class="count-label">/ 33</div>
-                </div>
-                <button class="tasbih-btn" id="tasbihClickBtn">
-                    <span class="tasbih-btn-icon">📿</span>
-                    <span>Zikir</span>
-                </button>
-                <div class="tasbih-controls">
-                    <button class="btn-secondary" id="tasbihReset">🔄 Sıfırla</button>
-                    <button class="btn-secondary" id="tasbihTarget">🎯 Hedef: 33</button>
-                </div>
-                <div class="tasbih-prayers">
-                    <h3>Namaz Sonrası Zikirler</h3>
-                    <div class="prayer-text-card">
-                        <p class="arabic">سُبْحَانَ اللهِ</p>
-                        <p class="turkish">Subhanallah (33 defa)</p>
-                    </div>
-                    <div class="prayer-text-card">
-                        <p class="arabic">اَلْحَمْدُ لِلّٰهِ</p>
-                        <p class="turkish">Elhamdülillah (33 defa)</p>
-                    </div>
-                    <div class="prayer-text-card">
-                        <p class="arabic">اَللّٰهُ اَكْبَرُ</p>
-                        <p class="turkish">Allahu Ekber (33 defa)</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Notification Settings Modal -->
-    <div class="modal" id="notificationModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>🔔 Bildirim Ayarları</h2>
-                <button class="close-btn" onclick="closeModal('notificationModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="notification-status" id="notificationStatus">
-                    <p>Bildirim izni bekleniyor...</p>
-                </div>
-
-                <div class="settings-section">
-                    <h3>Ezan Vakti Bildirimleri</h3>
-                    <div class="setting-item">
-                        <label class="switch">
-                            <input type="checkbox" id="notifyImsak">
-                            <span class="slider"></span>
-                        </label>
-                        <span>İmsak</span>
-                    </div>
-                    <div class="setting-item">
-                        <label class="switch">
-                            <input type="checkbox" id="notifyOgle" checked>
-                            <span class="slider"></span>
-                        </label>
-                        <span>Öğle</span>
-                    </div>
-                    <div class="setting-item">
-                        <label class="switch">
-                            <input type="checkbox" id="notifyIkindi" checked>
-                            <span class="slider"></span>
-                        </label>
-                        <span>İkindi</span>
-                    </div>
-                    <div class="setting-item">
-                        <label class="switch">
-                            <input type="checkbox" id="notifyAksam" checked>
-                            <span class="slider"></span>
-                        </label>
-                        <span>Akşam</span>
-                    </div>
-                    <div class="setting-item">
-                        <label class="switch">
-                            <input type="checkbox" id="notifyYatsi" checked>
-                            <span class="slider"></span>
-                        </label>
-                        <span>Yatsı</span>
-                    </div>
-                </div>
-
-                <div class="settings-section">
-                    <h3>Ezan Sesi</h3>
-                    <div class="setting-item">
-                        <label class="switch">
-                            <input type="checkbox" id="playAdhan" checked>
-                            <span class="slider"></span>
-                        </label>
-                        <span>Ezan sesini çal</span>
-                    </div>
-                    <div class="volume-control">
-                        <label>Ses Seviyesi</label>
-                        <input type="range" id="volumeSlider" min="0" max="100" value="70">
-                        <span id="volumeValue">70%</span>
-                    </div>
-                    <button class="btn-secondary" id="testAdhanBtn">🔊 Ezan Sesini Dene</button>
-                </div>
-
-                <div class="settings-section">
-                    <h3>Erken Uyarı</h3>
-                    <div class="setting-item">
-                        <label>Namaz vaktinden önce bildir:</label>
-                        <select id="earlyWarning">
-                            <option value="0">Vakti geldiğinde</option>
-                            <option value="5">5 dakika önce</option>
-                            <option value="10">10 dakika önce</option>
-                            <option value="15">15 dakika önce</option>
-                        </select>
-                    </div>
-                </div>
-
-                <button class="btn-primary" id="requestNotificationBtn">🔔 Bildirimleri Etkinleştir</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Prayer Tracking Modal -->
-    <div class="modal" id="prayerTrackModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>✅ Namaz Takibi</h2>
-                <button class="close-btn" onclick="closeModal('prayerTrackModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="track-stats">
-                    <div class="stat-card">
-                        <div class="stat-value" id="todayCount">0/5</div>
-                        <div class="stat-label">Bugün</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="weekCount">0/35</div>
-                        <div class="stat-label">Bu Hafta</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="monthCount">0</div>
-                        <div class="stat-label">Bu Ay</div>
-                    </div>
-                </div>
-
-                <div class="track-section">
-                    <h3>Bugünkü Namazlar</h3>
-                    <div class="prayer-track-list" id="prayerTrackList">
-                        <div class="prayer-track-item" data-prayer="imsak">
-                            <div class="prayer-track-info">
-                                <span class="prayer-track-icon">🌙</span>
-                                <div>
-                                    <div class="prayer-track-name">İmsak</div>
-                                    <div class="prayer-track-time" id="trackImsakTime">--:--</div>
-                                </div>
-                            </div>
-                            <button class="check-btn" data-prayer="imsak">
-                                <span class="check-icon">⭕</span>
-                            </button>
-                        </div>
-                        <div class="prayer-track-item" data-prayer="ogle">
-                            <div class="prayer-track-info">
-                                <span class="prayer-track-icon">☀️</span>
-                                <div>
-                                    <div class="prayer-track-name">Öğle</div>
-                                    <div class="prayer-track-time" id="trackOgleTime">--:--</div>
-                                </div>
-                            </div>
-                            <button class="check-btn" data-prayer="ogle">
-                                <span class="check-icon">⭕</span>
-                            </button>
-                        </div>
-                        <div class="prayer-track-item" data-prayer="ikindi">
-                            <div class="prayer-track-info">
-                                <span class="prayer-track-icon">🌤️</span>
-                                <div>
-                                    <div class="prayer-track-name">İkindi</div>
-                                    <div class="prayer-track-time" id="trackIkindiTime">--:--</div>
-                                </div>
-                            </div>
-                            <button class="check-btn" data-prayer="ikindi">
-                                <span class="check-icon">⭕</span>
-                            </button>
-                        </div>
-                        <div class="prayer-track-item" data-prayer="aksam">
-                            <div class="prayer-track-info">
-                                <span class="prayer-track-icon">🌆</span>
-                                <div>
-                                    <div class="prayer-track-name">Akşam</div>
-                                    <div class="prayer-track-time" id="trackAksamTime">--:--</div>
-                                </div>
-                            </div>
-                            <button class="check-btn" data-prayer="aksam">
-                                <span class="check-icon">⭕</span>
-                            </button>
-                        </div>
-                        <div class="prayer-track-item" data-prayer="yatsi">
-                            <div class="prayer-track-info">
-                                <span class="prayer-track-icon">🌃</span>
-                                <div>
-                                    <div class="prayer-track-name">Yatsı</div>
-                                    <div class="prayer-track-time" id="trackYatsiTime">--:--</div>
-                                </div>
-                            </div>
-                            <button class="check-btn" data-prayer="yatsi">
-                                <span class="check-icon">⭕</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="motivation-message" id="motivationMessage">
-                    💪 Allah kabul etsin! Namazlarınızı işaretleyerek takip edin.
-                </div>
-
-                <div class="track-section">
-                    <h3>Haftalık Geçmiş</h3>
-                    <div class="weekly-calendar" id="weeklyCalendar"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Esma-ul Husna Modal -->
-    <div class="modal" id="esmaModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>📖 Esmâ-ül Hüsnâ (99 İsim)</h2>
-                <button class="close-btn" onclick="closeModal('esmaModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="search-box">
-                    <input type="text" id="esmaSearch" placeholder="🔍 İsim ara...">
-                </div>
-                <div class="esma-list" id="esmaList"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Prayer Book Modal -->
-    <div class="modal" id="prayerBookModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>🤲 Dua Kitabı</h2>
-                <button class="close-btn" onclick="closeModal('prayerBookModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="prayer-tabs">
-                    <button class="prayer-tab active" data-category="daily">Günlük</button>
-                    <button class="prayer-tab" data-category="namaz">Namaz</button>
-                    <button class="prayer-tab" data-category="travel">Yolculuk</button>
-                    <button class="prayer-tab" data-category="other">Çeşitli</button>
-                </div>
-                <div class="prayer-book-list" id="prayerBookList"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Short Surahs Modal -->
-    <div class="modal" id="surahModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>📜 Kısa Sureler</h2>
-                <button class="close-btn" onclick="closeModal('surahModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="surah-list" id="surahList"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Settings Modal -->
-    <div class="modal" id="settingsModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>⚙️ Ayarlar</h2>
-                <button class="close-btn" onclick="closeModal('settingsModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="settings-section">
-                    <h3>🔊 Titreşim Ayarları</h3>
-                    <div class="setting-item">
-                        <div class="setting-label">
-                            <span>Titreşimi Etkinleştir</span>
-                            <p class="setting-description">Buton tıklamalarında titreşim</p>
-                        </div>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="vibrationToggle" checked>
-                            <span class="toggle-slider"></span>
-                        </label>
-                    </div>
-                    <div class="setting-item">
-                        <div class="setting-label">
-                            <span>Titreşim Deseni</span>
-                            <p class="setting-description">Titreşim türünü seçin</p>
-                        </div>
-                        <select id="vibrationPattern" class="setting-select">
-                            <option value="short">Kısa</option>
-                            <option value="double">Çift</option>
-                            <option value="triple">Üçlü</option>
-                            <option value="long">Uzun</option>
-                            <option value="pulse">Nabız</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="settings-section">
-                    <h3>📱 Widget Özelleştirme</h3>
-                    <p class="section-description">Hangi özelliklerin gösterileceğini seçin</p>
-                    <div class="widget-list" id="widgetList"></div>
-                </div>
-
-                <div class="settings-section">
-                    <h3>ℹ️ Bilgi</h3>
-                    <div class="info-item">
-                        <p><strong>Favoriler:</strong> ⭐ butonuna basarak içerikleri favorilerinize ekleyin</p>
-                        <p><strong>Sesli Okuma:</strong> 🔊 butonuna basarak Arapça metinleri dinleyin</p>
-                        <p><strong>Paylaşım:</strong> 📤 butonuna basarak içerikleri paylaşın</p>
-                    </div>
-                </div>
-
-                <div class="settings-section">
-                    <h3>🌍 Dil Ayarları</h3>
-                    <div class="setting-item">
-                        <div class="setting-label">
-                            <span>Uygulama Dili</span>
-                        </div>
-                        <select id="languageSelect" class="setting-select" onchange="setLanguage(this.value)">
-                            <option value="tr">Türkçe</option>
-                            <option value="en">English</option>
-                            <option value="ar">العربية</option>
-                        </select>
-                    </div>
-                    <div class="setting-item">
-                        <div class="setting-label">
-                            <span>Arapça Font Boyutu</span>
-                        </div>
-                        <select id="fontSizeSelect" class="setting-select" onchange="setFontSize(this.value)">
-                            <option value="small">Küçük</option>
-                            <option value="medium">Orta</option>
-                            <option value="large">Büyük</option>
-                            <option value="xlarge">Çok Büyük</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="settings-section">
-                    <h3>💾 Veri Yönetimi</h3>
-                    <div class="setting-item">
-                        <button class="primary-btn" onclick="exportData()">📤 Verileri Dışa Aktar</button>
-                        <button class="primary-btn" onclick="importData()">📥 Verileri İçe Aktar</button>
-                    </div>
-                </div>
-
-                <div class="settings-actions">
-                    <button class="primary-btn" onclick="saveSettings()">💾 Ayarları Kaydet</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Ramadan Calendar Modal -->
-    <div class="modal" id="ramadanModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>🌙 Ramazan İmsakiyesi</h2>
-                <button class="close-btn" onclick="closeModal('ramadanModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div id="ramadanCalendar"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Prayer Alarms Modal -->
-    <div class="modal" id="alarmModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>⏰ Namaz Vakti Alarmları</h2>
-                <button class="close-btn" onclick="closeModal('alarmModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="alarm-description">
-                    <p>Her namaz için alarm ayarlayabilir ve vakit girmeden önce hatırlatma alabilirsiniz.</p>
-                </div>
-                <div id="alarmSettings"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Adhan Settings Modal -->
-    <div class="modal" id="adhanModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>🕌 Ezan Ayarları</h2>
-                <button class="close-btn" onclick="closeModal('adhanModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div id="adhanSettingsContainer"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Daily Hadith Modal -->
-    <div class="modal" id="hadithModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>📖 Günün Hadisi</h2>
-                <button class="close-btn" onclick="closeModal('hadithModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div id="dailyHadithContainer"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 40 Hadith Modal -->
-    <div class="modal" id="fortyHadithModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>📚 40 Hadis (İmam Nevevi)</h2>
-                <button class="close-btn" onclick="closeModal('fortyHadithModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div id="fortyHadithsList"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Prophet Stories Modal -->
-    <div class="modal" id="storiesModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>👳 Peygamber Kıssaları</h2>
-                <button class="close-btn" onclick="closeModal('storiesModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div id="prophetStoriesList"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Islamic Events Modal -->
-    <div class="modal" id="eventsModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>📅 Dini Günler Takvimi</h2>
-                <button class="close-btn" onclick="closeModal('eventsModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div id="islamicEventsList"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Juz Tracker Modal -->
-    <div class="modal" id="juzModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>📗 Kur'an Cüz Takibi</h2>
-                <button class="close-btn" onclick="closeModal('juzModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="juz-stats">
-                    <div class="stat-item">
-                        <div class="stat-label">Tamamlanan</div>
-                        <div class="stat-value" id="juzCompleted">0</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">Kalan</div>
-                        <div class="stat-value" id="juzRemaining">30</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">İlerleme</div>
-                        <div class="stat-value" id="juzPercentage">0%</div>
-                    </div>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="juzProgressBar" style="width: 0%"></div>
-                </div>
-                <div id="juzTrackerGrid" class="juz-grid"></div>
-                <div class="juz-actions">
-                    <button class="primary-btn" onclick="resetJuzTracker()">🔄 Sıfırla</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Audio element for Adhan -->
+    <!-- Audio -->
     <audio id="adhanAudio" preload="none">
         <source src="https://www.islamcan.com/audio/ezan/ezan-1.mp3" type="audio/mpeg">
     </audio>
 
+    <!-- Scripts -->
     <script src="data.js"></script>
     <script src="script.js"></script>
 
-    <!-- Service Worker Registration -->
+    <!-- PWA Install Prompt -->
     <script>
-        // Register Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/service-worker.js')
-                    .then((registration) => {
-                        console.log('✅ Service Worker registered successfully:', registration.scope);
-
-                        // Check for updates
-                        registration.addEventListener('updatefound', () => {
-                            const newWorker = registration.installing;
-                            console.log('🔄 Service Worker update found');
-
-                            newWorker.addEventListener('statechange', () => {
-                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                    // New service worker available, show update notification
-                                    if (confirm('Yeni bir güncelleme mevcut! Uygulamayı yenilemek ister misiniz?')) {
-                                        newWorker.postMessage({ type: 'SKIP_WAITING' });
-                                        window.location.reload();
-                                    }
-                                }
-                            });
-                        });
-                    })
-                    .catch((error) => {
-                        console.error('❌ Service Worker registration failed:', error);
-                    });
-
-                // Handle service worker updates
-                let refreshing = false;
-                navigator.serviceWorker.addEventListener('controllerchange', () => {
-                    if (!refreshing) {
-                        refreshing = true;
-                        window.location.reload();
-                    }
-                });
+                    .then(reg => console.log('✅ Service Worker registered'))
+                    .catch(err => console.error('❌ SW registration failed:', err));
             });
         }
 
-        // Install prompt
         let deferredPrompt;
-        const installButton = document.createElement('button');
-        installButton.id = 'installBtn';
-        installButton.innerHTML = '📱 Ana Ekrana Ekle';
-        installButton.style.cssText = `
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 15px 25px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
-            z-index: 1000;
-            display: none;
-            font-family: 'Poppins', sans-serif;
-            transition: all 0.3s ease;
-        `;
-
-        installButton.addEventListener('mouseenter', () => {
-            installButton.style.transform = 'translateY(-2px)';
-            installButton.style.boxShadow = '0 12px 40px rgba(102, 126, 234, 0.5)';
-        });
-
-        installButton.addEventListener('mouseleave', () => {
-            installButton.style.transform = 'translateY(0)';
-            installButton.style.boxShadow = '0 8px 32px rgba(102, 126, 234, 0.4)';
-        });
-
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
 
-            // Show install button
-            document.body.appendChild(installButton);
-            installButton.style.display = 'block';
+            const installBtn = document.createElement('button');
+            installBtn.className = 'install-prompt';
+            installBtn.innerHTML = `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                <span>Ana Ekrana Ekle</span>
+            `;
 
-            installButton.addEventListener('click', async () => {
+            installBtn.addEventListener('click', async () => {
                 if (!deferredPrompt) return;
-
                 deferredPrompt.prompt();
                 const { outcome } = await deferredPrompt.userChoice;
-
-                console.log(`User response to install prompt: ${outcome}`);
-
                 if (outcome === 'accepted') {
-                    console.log('✅ PWA installed');
-                    installButton.style.display = 'none';
+                    installBtn.remove();
                 }
-
                 deferredPrompt = null;
             });
+
+            document.body.appendChild(installBtn);
         });
 
-        // Hide install button if already installed
-        window.addEventListener('appinstalled', () => {
-            console.log('✅ PWA was installed');
-            installButton.style.display = 'none';
-            deferredPrompt = null;
-        });
-
-        // Online/Offline status
         window.addEventListener('online', () => {
-            console.log('✅ Back online');
-            const selectedCity = localStorage.getItem('selectedCity');
-            if (selectedCity) {
-                // Refresh prayer times when back online
-                fetchPrayerTimes(selectedCity);
-            }
+            const city = localStorage.getItem('selectedCity');
+            if (city && typeof fetchPrayerTimes === 'function') fetchPrayerTimes(city);
         });
 
         window.addEventListener('offline', () => {
-            console.log('⚠️ You are offline. Using cached data.');
-            showError('İnternet bağlantınız yok. Önbellekteki veriler gösteriliyor.');
+            if (typeof showError === 'function') {
+                showError('İnternet bağlantınız yok. Önbellekteki veriler gösteriliyor.');
+            }
         });
     </script>
 </body>
