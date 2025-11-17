@@ -2143,7 +2143,17 @@ function getTodaysHadith() {
 
 function loadDailyHadith() {
     const container = document.getElementById('dailyHadithContainer');
-    if (!container) return;
+    if (!container) {
+        console.error('dailyHadithContainer not found');
+        return;
+    }
+
+    // Check if dailyHadiths array exists
+    if (typeof dailyHadiths === 'undefined' || !dailyHadiths || dailyHadiths.length === 0) {
+        container.innerHTML = '<p style="padding: 20px; text-align: center;">Hadisler yüklenemedi.</p>';
+        console.error('dailyHadiths array not found');
+        return;
+    }
 
     const hadith = getTodaysHadith();
 
@@ -2177,7 +2187,16 @@ function loadDailyHadith() {
 // ========== 40 HADITH COLLECTION ==========
 function loadFortyHadiths() {
     const container = document.getElementById('fortyHadithsList');
-    if (!container) return;
+    if (!container) {
+        console.error('fortyHadithsList not found');
+        return;
+    }
+
+    if (typeof fortyHadiths === 'undefined' || !fortyHadiths || fortyHadiths.length === 0) {
+        container.innerHTML = '<p style="padding: 20px; text-align: center;">40 Hadis yüklenemedi.</p>';
+        console.error('fortyHadiths array not found');
+        return;
+    }
 
     container.innerHTML = fortyHadiths.map(hadith => {
         const favorited = isFavorited('fortyHadiths', hadith.id);
@@ -2214,7 +2233,16 @@ function loadFortyHadiths() {
 // ========== PROPHET STORIES ==========
 function loadProphetStories() {
     const container = document.getElementById('prophetStoriesList');
-    if (!container) return;
+    if (!container) {
+        console.error('prophetStoriesList not found');
+        return;
+    }
+
+    if (typeof prophetStories === 'undefined' || !prophetStories || prophetStories.length === 0) {
+        container.innerHTML = '<p style="padding: 20px; text-align: center;">Kıssalar yüklenemedi.</p>';
+        console.error('prophetStories array not found');
+        return;
+    }
 
     container.innerHTML = prophetStories.map(story => {
         const favorited = isFavorited('stories', story.id);
@@ -2249,7 +2277,16 @@ function loadProphetStories() {
 // ========== ISLAMIC EVENTS CALENDAR ==========
 function loadIslamicEvents() {
     const container = document.getElementById('islamicEventsList');
-    if (!container) return;
+    if (!container) {
+        console.error('islamicEventsList not found');
+        return;
+    }
+
+    if (typeof islamicEvents === 'undefined' || !islamicEvents || islamicEvents.length === 0) {
+        container.innerHTML = '<p style="padding: 20px; text-align: center;">Dini günler yüklenemedi.</p>';
+        console.error('islamicEvents array not found');
+        return;
+    }
 
     const hijriDate = getCurrentHijriDate();
 
@@ -2645,37 +2682,55 @@ function saveAutoTheme() {
     showMessage('Otomatik tema ayarları kaydedildi', 'success');
 }
 
-// Button handlers for new features
-document.getElementById('hadithBtn')?.addEventListener('click', () => {
-    openModal('hadithModal');
-    loadDailyHadith();
-});
-
-document.getElementById('fortyHadithBtn')?.addEventListener('click', () => {
-    openModal('fortyHadithModal');
-    loadFortyHadiths();
-});
-
-document.getElementById('storiesBtn')?.addEventListener('click', () => {
-    openModal('storiesModal');
-    loadProphetStories();
-});
-
-document.getElementById('eventsBtn')?.addEventListener('click', () => {
-    openModal('eventsModal');
-    loadIslamicEvents();
-});
-
-document.getElementById('juzBtn')?.addEventListener('click', () => {
-    openModal('juzModal');
-    loadJuzTracker();
-});
-
+// Button handlers for new features - Moved to DOMContentLoaded
 // Apply saved settings on load
 document.addEventListener('DOMContentLoaded', () => {
+    // Apply language and font size
     const lang = getCurrentLanguage();
     applyLanguage(lang);
-
     const fontSize = getFontSize();
     applyFontSize(fontSize);
+
+    // Add event listeners for new buttons
+    const hadithBtn = document.getElementById('hadithBtn');
+    if (hadithBtn) {
+        hadithBtn.addEventListener('click', () => {
+            openModal('hadithModal');
+            loadDailyHadith();
+        });
+    }
+
+    const fortyHadithBtn = document.getElementById('fortyHadithBtn');
+    if (fortyHadithBtn) {
+        fortyHadithBtn.addEventListener('click', () => {
+            openModal('fortyHadithModal');
+            loadFortyHadiths();
+        });
+    }
+
+    const storiesBtn = document.getElementById('storiesBtn');
+    if (storiesBtn) {
+        storiesBtn.addEventListener('click', () => {
+            openModal('storiesModal');
+            loadProphetStories();
+        });
+    }
+
+    const eventsBtn = document.getElementById('eventsBtn');
+    if (eventsBtn) {
+        eventsBtn.addEventListener('click', () => {
+            openModal('eventsModal');
+            loadIslamicEvents();
+        });
+    }
+
+    const juzBtn = document.getElementById('juzBtn');
+    if (juzBtn) {
+        juzBtn.addEventListener('click', () => {
+            openModal('juzModal');
+            loadJuzTracker();
+        });
+    }
+
+    console.log('B+E features initialized successfully');
 });

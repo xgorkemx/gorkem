@@ -2564,7 +2564,21 @@ input:checked + .slider:before {
     background: rgba(102, 126, 234, 0.1);
 }
 
+/* Mobile Optimization for B+E Features */
 @media (max-width: 768px) {
+    .hadith-card, .hadith-item, .story-item, .event-item {
+        padding: 15px;
+    }
+
+    .hadith-arabic, .story-content {
+        font-size: 1.3rem;
+        padding: 12px;
+    }
+
+    .hadith-header h3 {
+        font-size: 1.2rem;
+    }
+
     .juz-grid {
         grid-template-columns: repeat(5, 1fr);
     }
@@ -2572,11 +2586,87 @@ input:checked + .slider:before {
     .juz-stats {
         grid-template-columns: 1fr;
     }
+
+    .stat-value {
+        font-size: 1.8rem;
+    }
+
+    .setting-item {
+        flex-direction: column;
+        align-items: stretch !important;
+        gap: 10px;
+    }
+
+    .setting-select {
+        width: 100%;
+    }
 }
 
 @media (max-width: 480px) {
+    .hadith-card, .hadith-item, .story-item, .event-item {
+        padding: 12px;
+        margin-bottom: 12px;
+    }
+
+    .hadith-arabic, .story-content {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        padding: 10px;
+    }
+
+    .hadith-turkish, .story-lesson {
+        font-size: 0.9rem;
+    }
+
+    .hadith-source, .hadith-explanation {
+        font-size: 0.85rem;
+    }
+
+    .event-badge {
+        font-size: 0.75rem;
+        padding: 3px 6px;
+    }
+
     .juz-grid {
         grid-template-columns: repeat(4, 1fr);
-        gap: 8px;
+        gap: 6px;
+    }
+
+    .juz-item {
+        font-size: 0.9rem;
+    }
+
+    .juz-number {
+        font-size: 1rem;
+    }
+
+    .juz-check {
+        font-size: 1.2rem;
+    }
+
+    .stat-label {
+        font-size: 0.8rem;
+    }
+
+    .stat-value {
+        font-size: 1.5rem;
+    }
+
+    .item-actions {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .action-btn {
+        flex: 1 1 30%;
+        min-width: 60px;
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+
+    .primary-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 0.95rem;
     }
 }
